@@ -4,6 +4,7 @@ import 'package:tarccaring_app/utils/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AuthMain extends StatelessWidget {
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
@@ -59,7 +60,7 @@ class AuthMain extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               onPressed: () {
-                                Navigator.of(context).pushNamed(LoginRoute);
+                                Navigator.of(context).pushReplacementNamed(HomepageRoute);
                               }),
                         ),
                       ])))
