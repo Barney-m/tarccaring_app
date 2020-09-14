@@ -60,7 +60,8 @@ class AuthMain extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(ServiceAttitudeRoute);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(LoginRoute);
                               }),
                         ),
                       ])))

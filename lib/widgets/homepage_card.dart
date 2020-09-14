@@ -54,7 +54,7 @@ class HomepageCard extends StatelessWidget {
                       height: 160,
                       width: 200,
                       child: Image.asset(
-                        'campus facilities.svg',
+                        'campusfacilities.svg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -79,6 +79,19 @@ class HomepageCard extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding * 1.5,
+                            vertical: defaultPadding / 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: thirdColor,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(22),
+                              topRight: Radius.circular(22),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -125,7 +138,7 @@ class HomepageCard extends StatelessWidget {
                       height: 160,
                       width: 200,
                       child: Image.asset(
-                        'campus facilities.svg',
+                        'canteenfood.svg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -150,6 +163,19 @@ class HomepageCard extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding * 1.5,
+                            vertical: defaultPadding / 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: thirdColor,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(22),
+                              topRight: Radius.circular(22),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -196,7 +222,7 @@ class HomepageCard extends StatelessWidget {
                       height: 160,
                       width: 200,
                       child: Image.asset(
-                        'campus facilities.svg',
+                        'educationquality.svg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -221,6 +247,19 @@ class HomepageCard extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding * 1.5,
+                            vertical: defaultPadding / 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: thirdColor,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(22),
+                              topRight: Radius.circular(22),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -267,7 +306,7 @@ class HomepageCard extends StatelessWidget {
                       height: 160,
                       width: 200,
                       child: Image.asset(
-                        'campus facilities.svg',
+                        'serviceattitude.svg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -292,6 +331,19 @@ class HomepageCard extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding * 1.5,
+                            vertical: defaultPadding / 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: thirdColor,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(22),
+                              topRight: Radius.circular(22),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
