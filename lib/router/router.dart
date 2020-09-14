@@ -3,6 +3,7 @@ import 'package:tarccaring_app/pages/campusfacilities.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
 import 'package:tarccaring_app/pages/login.dart';
 import 'package:tarccaring_app/pages/registration.dart';
+import 'package:tarccaring_app/pages/serviceattitude.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
 import 'package:tarccaring_app/pages/intro.dart';
@@ -23,6 +24,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (BuildContext context) => CampusFacilities());
     case CanteenFoodRoute:
       return MaterialPageRoute(builder: (BuildContext context) => CanteenFood());
+    case ServiceAttitudeRoute:
+      return MaterialPageRoute(builder: (BuildContext context) => ServiceAttitude());
     case HomepageRoute:
       return MaterialPageRoute(builder: (BuildContext context) => Homepage());
     default:
