@@ -24,9 +24,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (BuildContext context) => CampusFacilities());
     case CanteenFoodRoute:
-      return MaterialPageRoute(builder: (BuildContext context) => CanteenFood());
+      return MaterialPageRoute(
+          builder: (BuildContext context) => CanteenFood());
     case ServiceAttitudeRoute:
-      return MaterialPageRoute(builder: (BuildContext context) => ServiceAttitude());
+      return MaterialPageRoute(
+          builder: (BuildContext context) => ServiceAttitude());
     case HomepageRoute:
       return MaterialPageRoute(builder: (BuildContext context) => Homepage());
     default:
