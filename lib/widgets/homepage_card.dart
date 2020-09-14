@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomepageCard extends StatelessWidget {
   const HomepageCard({
@@ -53,7 +54,7 @@ class HomepageCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: defaultPadding),
                       height: 160,
                       width: 200,
-                      child: Image.asset(
+                      child: SvgPicture.asset(
                         'campusfacilities.svg',
                         fit: BoxFit.cover,
                       ),
@@ -137,7 +138,7 @@ class HomepageCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: defaultPadding),
                       height: 160,
                       width: 200,
-                      child: Image.asset(
+                      child: SvgPicture.asset(
                         'canteenfood.svg',
                         fit: BoxFit.cover,
                       ),
@@ -221,7 +222,7 @@ class HomepageCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: defaultPadding),
                       height: 160,
                       width: 200,
-                      child: Image.asset(
+                      child: SvgPicture.asset(
                         'educationquality.svg',
                         fit: BoxFit.cover,
                       ),
@@ -305,7 +306,7 @@ class HomepageCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: defaultPadding),
                       height: 160,
                       width: 200,
-                      child: Image.asset(
+                      child: SvgPicture.asset(
                         'serviceattitude.svg',
                         fit: BoxFit.cover,
                       ),
