@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/widgets/homepage_card.dart';
 import 'package:tarccaring_app/widgets/search_box.dart';
-import 'package:tarccaring_app/model/feedback_types.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class Homepage extends StatelessWidget {
   @override
@@ -41,6 +41,17 @@ class Homepage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CurvedNavigationBar(
+          animationCurve: Curves.easeInOutBack,
+          animationDuration: Duration(milliseconds: 300),
+          buttonBackgroundColor: secondaryColor,
+          backgroundColor: Colors.white,
+          color: secondaryColor,
+          items: <Widget>[
+            Icon(Icons.home, size: 20, color: Colors.black),
+            Icon(Icons.list, size: 20, color: Colors.black),
+            Icon(Icons.settings, size: 20, color: Colors.black),
+          ]),
     );
   }
 }
