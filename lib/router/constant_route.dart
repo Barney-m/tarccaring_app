@@ -1,4 +1,4 @@
-const String HomepageRoute = '/homepage';
+const String HomepageRoute = 'users/homepage';
 const String LoginRoute = '/login';
 const String RegistrationRoute = '/registration';
 const String AuthMainRoute = '/authmain';
