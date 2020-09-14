@@ -222,7 +222,7 @@ class HomepageCard extends StatelessWidget {
                       height: 160,
                       width: 200,
                       child: Image.asset(
-                        'education quality.svg',
+                        'educationquality.svg',
                         fit: BoxFit.cover,
                       ),
                     ),
