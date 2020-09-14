@@ -18,7 +18,7 @@ class _CanteenFood extends State<CanteenFood> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: false,
-        title: Text('Service Attitude'),
+        title: Text('Canteen Food'),
         backgroundColor: primaryColor,
       ),
       backgroundColor: primaryColor,

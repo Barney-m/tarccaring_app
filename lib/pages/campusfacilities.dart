@@ -18,7 +18,7 @@ class _CampusFacilities extends State<CampusFacilities> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: false,
-        title: Text('Service Attitude'),
+        title: Text('Campus Facilities'),
         backgroundColor: primaryColor,
       ),
       backgroundColor: primaryColor,
