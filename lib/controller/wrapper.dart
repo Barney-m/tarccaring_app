@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/shared_prefs.dart';
-import 'package:tarccaring_app/utils/constants.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -23,7 +22,7 @@ class _Wrapper extends State {
 
     if (firstTimeState != null) {
       if (loginState != null) {
-        Navigator.pushReplacementNamed(context, HomepageRoute);
+        Navigator.pushReplacementNamed(context, UserNavigationRoute);
       } else {
         Navigator.pushReplacementNamed(context, AuthMainRoute);
       }

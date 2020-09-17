@@ -32,7 +32,7 @@ class _Login extends State {
   }
 
   Future<void> _loginUser(BuildContext context) async {
-    Navigator.of(context).pushReplacementNamed(HomepageRoute);
+    Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
     toggleLoadingState();
     _authService.signIn(formData).then((dynamic res) {
       toggleLoadingState();

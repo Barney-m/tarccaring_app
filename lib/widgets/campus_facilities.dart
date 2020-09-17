@@ -38,7 +38,7 @@ class CampusFacilitiesForm extends StatelessWidget {
                 hintText: "Block H",
                 fillColor: primaryColor),
           ),
-          ),
+        ),
         //Campus Facilities
         //Canteen Food
         Container(
