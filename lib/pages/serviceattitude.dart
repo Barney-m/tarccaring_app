@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/widgets/campus_facilities.dart';
-import 'package:tarccaring_app/widgets/homepage_card.dart';
-import 'package:tarccaring_app/widgets/search_box.dart';
-import 'package:tarccaring_app/model/feedback_types.dart';
 
-class ServiceAttitude extends StatefulWidget{
+class ServiceAttitude extends StatefulWidget {
   @override
   _ServiceAttitude createState() => _ServiceAttitude();
 }
 
 class _ServiceAttitude extends State<ServiceAttitude> {
-   bool isSwitched = false;
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,18 +39,16 @@ class _ServiceAttitude extends State<ServiceAttitude> {
                   ),
                   Switch(
                     value: isSwitched,
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
-                        isSwitched=value;
+                        isSwitched = value;
                         print(isSwitched);
                       });
                     },
                     activeTrackColor: Colors.lightGreenAccent,
                     activeColor: Colors.green,
                   ),
-
                   CampusFacilitiesForm(itemIndex: 1),
-
                 ],
               ),
             ),

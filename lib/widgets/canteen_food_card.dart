@@ -47,8 +47,8 @@ class CanteenFoodCard extends StatelessWidget {
                 tag: 2,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                  height: 160,
-                  width: 200,
+                  height: 120,
+                  width: 160,
                   child: SvgPicture.asset(
                     'assets/images/svg/canteenfood.svg',
                     fit: BoxFit.cover,

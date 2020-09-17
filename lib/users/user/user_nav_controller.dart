@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/users/user/pages/homepage.dart';
 import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
@@ -26,15 +27,22 @@ class _UserNavController extends State<UserNavController> {
         elevation: 0,
         centerTitle: false,
         title: Text('Homepage'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {},
+          )
+        ],
+        backgroundColor: primaryColor,
       ),
       backgroundColor: primaryColor,
       body: _navBarOption[_optionIndex],
       bottomNavigationBar: CurvedNavigationBar(
           animationCurve: Curves.easeInOutBack,
-          animationDuration: Duration(milliseconds: 300),
-          buttonBackgroundColor: secondaryColor,
-          backgroundColor: Colors.white,
-          color: secondaryColor,
+          animationDuration: Duration(milliseconds: 200),
+          buttonBackgroundColor: Colors.white,
+          backgroundColor: secondaryColor,
+          color: Colors.white,
           onTap: (index) {
             setState(() {
               _optionIndex = index;

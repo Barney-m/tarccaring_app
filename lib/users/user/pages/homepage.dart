@@ -18,7 +18,10 @@ class _Homepage extends State<Homepage> {
       bottom: false,
       child: Column(
         children: <Widget>[
-          SearchBox(onChanged: (value) {}),
+          Container(
+              child: Text(
+            'Welcome, User',
+          )),
           SizedBox(height: defaultPadding / 2),
           Expanded(
             child: Stack(

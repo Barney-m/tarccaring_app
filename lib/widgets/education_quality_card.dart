@@ -47,8 +47,8 @@ class EducationQualityCard extends StatelessWidget {
                 tag: 3,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                  height: 160,
-                  width: 200,
+                  height: 120,
+                  width: 160,
                   child: SvgPicture.asset(
                     'assets/images/svg/educationquality.svg',
                     fit: BoxFit.cover,
