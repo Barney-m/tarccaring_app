@@ -58,7 +58,8 @@ class _IntroPages extends State<Intro> {
                     ),
                     onTap: () {
                       setFirstTimeState().then((res) {
-                        Navigator.of(context).pushNamed(AuthMainRoute);
+                        Navigator.of(context)
+                            .pushReplacementNamed(AuthMainRoute);
                       });
                     },
                   ),

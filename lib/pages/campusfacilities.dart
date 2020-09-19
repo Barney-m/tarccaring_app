@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/widgets/campus_facilities.dart';
-import 'package:tarccaring_app/widgets/homepage_card.dart';
-import 'package:tarccaring_app/widgets/search_box.dart';
-import 'package:tarccaring_app/model/feedback_types.dart';
 
-class CampusFacilities extends StatefulWidget{
+class CampusFacilities extends StatefulWidget {
   @override
   _CampusFacilities createState() => _CampusFacilities();
 }
@@ -42,18 +39,16 @@ class _CampusFacilities extends State<CampusFacilities> {
                   ),
                   Switch(
                     value: isSwitched,
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
-                        isSwitched=value;
+                        isSwitched = value;
                         print(isSwitched);
                       });
                     },
                     activeTrackColor: Colors.lightGreenAccent,
                     activeColor: Colors.green,
                   ),
-
                   CampusFacilitiesForm(itemIndex: 1),
-
                 ],
               ),
             ),

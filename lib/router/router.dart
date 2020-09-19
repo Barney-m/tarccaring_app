@@ -7,7 +7,7 @@ import 'package:tarccaring_app/pages/serviceattitude.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
 import 'package:tarccaring_app/pages/intro.dart';
-import 'package:tarccaring_app/users/homepage.dart';
+import 'package:tarccaring_app/users/user/user_nav_controller.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -29,8 +29,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ServiceAttitudeRoute:
       return MaterialPageRoute(
           builder: (BuildContext context) => ServiceAttitude());
-    case HomepageRoute:
-      return MaterialPageRoute(builder: (BuildContext context) => Homepage());
+    case UserNavigationRoute:
+      return MaterialPageRoute(
+          builder: (BuildContext context) => UserNavController());
     default:
       return MaterialPageRoute(builder: (BuildContext context) => Login());
   }

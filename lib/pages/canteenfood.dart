@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/widgets/campus_facilities.dart';
-import 'package:tarccaring_app/widgets/homepage_card.dart';
-import 'package:tarccaring_app/widgets/search_box.dart';
-import 'package:tarccaring_app/model/feedback_types.dart';
 
-class CanteenFood extends StatefulWidget{
+class CanteenFood extends StatefulWidget {
   @override
   _CanteenFood createState() => _CanteenFood();
 }
@@ -42,18 +39,16 @@ class _CanteenFood extends State<CanteenFood> {
                   ),
                   Switch(
                     value: isSwitched,
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
-                        isSwitched=value;
+                        isSwitched = value;
                         print(isSwitched);
                       });
                     },
                     activeTrackColor: Colors.lightGreenAccent,
                     activeColor: Colors.green,
                   ),
-
                   CampusFacilitiesForm(itemIndex: 1),
-
                 ],
               ),
             ),
