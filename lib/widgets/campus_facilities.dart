@@ -34,7 +34,7 @@ class CampusFacilitiesForm extends StatelessWidget {
                   ),
                 ),
                 filled: true,
-                hintStyle: new TextStyle(color: Colors.grey[800]),
+                hintStyle: new TextStyle(color: Colors.white),
                 hintText: "Block H",
                 fillColor: primaryColor),
           ),
