@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:tarccaring_app/users/user/pages/homepage.dart';
+import 'package:tarccaring_app/users/public/pages/homepage.dart';
 import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
 import 'package:tarccaring_app/users/user/pages/user_setting.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -16,13 +15,11 @@ class _UserNavController extends State<UserNavController> {
 
   final _title = [
     Text('Homepage'),
-    Text('History'),
     Text('Setting'),
   ];
 
   final _navBarOption = [
     Homepage(),
-    FeedbackHistory(),
     UserSetting(),
   ];
 
@@ -33,12 +30,6 @@ class _UserNavController extends State<UserNavController> {
         elevation: 0,
         centerTitle: false,
         title: _title[_optionIndex],
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
-          )
-        ],
         backgroundColor: primaryColor,
       ),
       backgroundColor: primaryColor,
@@ -56,7 +47,6 @@ class _UserNavController extends State<UserNavController> {
           },
           items: <Widget>[
             Icon(Icons.home, size: 20, color: Colors.black),
-            Icon(Icons.list, size: 20, color: Colors.black),
             Icon(Icons.settings, size: 20, color: Colors.black),
           ]),
     );
