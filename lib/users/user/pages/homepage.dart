@@ -19,9 +19,16 @@ class _Homepage extends State<Homepage> {
       child: Column(
         children: <Widget>[
           Container(
-              child: Text(
-            'Welcome, User',
-          )),
+            margin: EdgeInsets.only(top: defaultPadding),
+            child: Text(
+              'Welcome, User',
+              style: TextStyle(
+                fontSize: 36,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           SizedBox(height: defaultPadding / 2),
           Expanded(
             child: Stack(

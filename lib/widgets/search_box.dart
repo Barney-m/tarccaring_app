@@ -13,10 +13,10 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(defaultPadding),
+      margin: EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(
         horizontal: defaultPadding,
-        vertical: defaultPadding / 8, //5 top and bottom
+        vertical: 1, //5 top and bottom
       ),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.4),
