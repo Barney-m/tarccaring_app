@@ -44,11 +44,11 @@ class _UserNavController extends State<UserNavController> {
       backgroundColor: primaryColor,
       body: _navBarOption[_optionIndex],
       bottomNavigationBar: CurvedNavigationBar(
-          animationCurve: Curves.easeInOutBack,
-          animationDuration: Duration(milliseconds: 200),
+          animationDuration: Duration(milliseconds: 300),
           buttonBackgroundColor: Colors.white,
           backgroundColor: secondaryColor,
           color: Colors.white,
+          height: 50,
           onTap: (index) {
             setState(() {
               _optionIndex = index;

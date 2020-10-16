@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:tarccaring_app/widgets/campus_facilities_card.dart';
-import 'package:tarccaring_app/widgets/search_box.dart';
 
 class UserSetting extends StatefulWidget {
   @override
@@ -9,19 +7,22 @@ class UserSetting extends StatefulWidget {
 }
 
 class _UserSetting extends State<UserSetting> {
+
+  Future<void> _logoutUser(BuildContext context){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       bottom: false,
       child: Column(
         children: <Widget>[
-          SearchBox(onChanged: (value) {}),
-          SizedBox(height: defaultPadding / 2),
           Expanded(
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: 70),
+                  margin: EdgeInsets.only(top: defaultPadding),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -30,8 +31,75 @@ class _UserSetting extends State<UserSetting> {
                     ),
                   ),
                 ),
-                ListView(
-                  children: <Widget>[],
+                Container(
+                  margin: EdgeInsets.fromLTRB(defaultPadding * 1.5, defaultPadding * 2, defaultPadding * 1.5, 0),
+                  decoration: BoxDecoration(
+                    color: secondaryColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(left: defaultPadding * 1.5, top: defaultPadding / 3),
+                        child: Text(
+                          'About Us',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: defaultPadding / 2, right: defaultPadding / 2, top: defaultPadding / 2),
+                        margin: EdgeInsets.only(top: defaultPadding * 2),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(defaultPadding / 2),
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                              child: Image.asset('assets/images/logo/TARC_Logo.png'),
+                            ),
+                            Expanded(
+                              child: Text(
+                                'TARC Caring is an application that offers services to users to provide feedback anywhere and anytime.'
+                                'This application developed and managed by Tunku Abdul Rahman Univercity College (TARUC).'
+                              ),
+                            ),
+                          ]
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 30.0,
+                        left: 10.0,
+                        right: 10.0,
+                        child: FlatButton(
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          color: primaryColor,
+                          onPressed: () {
+                            _logoutUser(context);
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                        )
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
