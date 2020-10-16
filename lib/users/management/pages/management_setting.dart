@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 
-class PublicSetting extends StatefulWidget {
+class ManagementSetting extends StatefulWidget {
   @override
-  _PublicSetting createState() => _PublicSetting();
+  _ManagementSetting createState() => _ManagementSetting();
 }
 
-class _PublicSetting extends State<PublicSetting> {
+class _ManagementSetting extends State<ManagementSetting> {
 
   Future<void> _logoutUser(BuildContext context){
 
