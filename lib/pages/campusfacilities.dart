@@ -210,8 +210,8 @@ class _CampusFacilities extends State<CampusFacilities> {
                         ),
                         Positioned(
                           top: SizeConfig.blockSizeVertical * 70,
-                          left: SizeConfig.blockSizeVertical * 3,
-                          right: SizeConfig.blockSizeVertical * 3,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
                           child: FlatButton(
                             child: Text(
                               'SUBMIT',
