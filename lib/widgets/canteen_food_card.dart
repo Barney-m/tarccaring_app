@@ -41,7 +41,7 @@ class CanteenFoodCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 0,
+              top: 30,
               right: 0,
               child: Hero(
                 tag: 2,

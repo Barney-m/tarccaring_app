@@ -2,23 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 
-class CampusFacilitiesForm extends StatelessWidget {
-  const CampusFacilitiesForm({
-    Key key,
-    this.itemIndex,
-  }) : super(key: key);
+class CampusFacilitiesForm extends StatefulWidget {
+  @override
+  _CampusFacilitiesFormState createState() => _CampusFacilitiesFormState();
+}
 
-  final int itemIndex;
-
-  int indexIncrement() => this.itemIndex + 1;
-
+class _CampusFacilitiesFormState extends State<CampusFacilitiesForm> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return ListView(
       children: <Widget>[
-        //Campus Facilities
-
         Container(
           margin: EdgeInsets.symmetric(
             horizontal: defaultPadding,
@@ -39,8 +32,6 @@ class CampusFacilitiesForm extends StatelessWidget {
                 fillColor: primaryColor),
           ),
         ),
-        //Campus Facilities
-        //Canteen Food
         Container(
           margin: EdgeInsets.symmetric(
             horizontal: 45,
@@ -56,8 +47,6 @@ class CampusFacilitiesForm extends StatelessWidget {
                 fillColor: Colors.grey),
           ),
         ),
-        //Canteen Food
-        //Education Quality
         Container(
           margin: EdgeInsets.symmetric(
             horizontal: defaultPadding,
@@ -68,8 +57,6 @@ class CampusFacilitiesForm extends StatelessWidget {
             decoration: InputDecoration(labelText: 'Upload Image'),
           ),
         ),
-        //Education Qaulity
-        //Service Attitude
         Container(
           margin: EdgeInsets.symmetric(
             horizontal: defaultPadding,
@@ -102,8 +89,8 @@ class CampusFacilitiesForm extends StatelessWidget {
             ),
           ),
         ),
-        //Service Attitude
       ],
     );
   }
 }
+

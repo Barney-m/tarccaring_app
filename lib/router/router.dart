@@ -4,6 +4,7 @@ import 'package:tarccaring_app/pages/canteenfood.dart';
 import 'package:tarccaring_app/pages/login.dart';
 import 'package:tarccaring_app/pages/registration.dart';
 import 'package:tarccaring_app/pages/serviceattitude.dart';
+import 'package:tarccaring_app/pages/educationquality.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
 import 'package:tarccaring_app/pages/intro.dart';
@@ -32,6 +33,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case UserNavigationRoute:
       return MaterialPageRoute(
           builder: (BuildContext context) => UserNavController());
+    case EducationQualityRoute:
+        return MaterialPageRoute(
+          builder: (BuildContext context) =>  EducationQuality());
     default:
       return MaterialPageRoute(builder: (BuildContext context) => Login());
   }
