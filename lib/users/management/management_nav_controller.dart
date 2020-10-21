@@ -62,6 +62,7 @@ class _ManagementNavController extends State<ManagementNavController> {
           },
           items: <Widget>[
             Icon(Icons.home, size: 20, color: Colors.black),
+            Icon(Icons.library_add_check_outlined, size: 20, color: Colors.black),
             Icon(Icons.list, size: 20, color: Colors.black),
             Icon(Icons.settings, size: 20, color: Colors.black),
           ]),

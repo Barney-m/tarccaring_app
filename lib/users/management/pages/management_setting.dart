@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
+import 'package:tarccaring_app/shared_prefs.dart';
 
 class ManagementSetting extends StatefulWidget {
   @override
@@ -7,10 +8,6 @@ class ManagementSetting extends StatefulWidget {
 }
 
 class _ManagementSetting extends State<ManagementSetting> {
-
-  Future<void> _logoutUser(BuildContext context){
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +88,12 @@ class _ManagementSetting extends State<ManagementSetting> {
                           ),
                           color: primaryColor,
                           onPressed: () {
-                            _logoutUser(context);
+                            setLoginState(false).then((_) {
+                              setID(null);
+                              setRoleID(null);
+                              setAPIToken(null);
+                              Navigator.of(context).pushReplacementNamed(AuthMainRoute);
+                            });
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.0),

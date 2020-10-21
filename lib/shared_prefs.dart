@@ -27,7 +27,7 @@ Future<int> getRoleID() async{
 
 Future<void> setRoleID(int _role) async{
   final prefs = await SharedPreferences.getInstance();
-  prefs.setInt("firstTimeState", _role);
+  prefs.setInt("roleId", _role);
 }
 
 Future<String> getID() async{
@@ -49,7 +49,7 @@ Future<String> getAPIToken(String token) async{
 
 Future<void> setAPIToken(String token) async{
   final prefs = await SharedPreferences.getInstance();
-  prefs.setString("token", token);
+  prefs.setString("api_token", token);
 }
 
 Future<bool> getFirstTimeState() async{

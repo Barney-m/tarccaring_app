@@ -38,13 +38,22 @@ class _Login extends State {
       toggleLoadingState();
       if(res['success']) {
         int role = res['role_id'];
-        if(role > 1 && role < 5)
+        if(role > 1 && role < 5){
           setLoginState(true).then((_) {
             setID(res['id']);
             setRoleID(res['role_id']);
             setAPIToken(res['api_token']);
             Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
           });
+        }
+        else if(role == 5){
+          setLoginState(true).then((_) {
+            setID(res['id']);
+            setRoleID(res['role_id']);
+            setAPIToken(res['api_token']);
+            Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
+          });
+        }
         else if(role == 1){
           setLoginState(true).then((_) {
             Navigator.of(context).pushReplacementNamed(PublicNavigationRoute);

@@ -11,22 +11,21 @@ class CanteenFood extends StatefulWidget {
 }
 
 class _CanteenFood extends State<CanteenFood> {
-  Future<void> _logoutUser(BuildContext context) {}
-
   bool isSwitched = false;
 
   File _image;
 
   Future getImage(bool isCamera) async {
-    File image;
+    var image;
+
     if (isCamera) {
-      image = await ImagePicker.pickImage(source: ImageSource.camera);
+      image = await ImagePicker().getImage(source: ImageSource.camera);
     } else {
-      image = await ImagePicker.pickImage(source: ImageSource.gallery);
+      image = await ImagePicker().getImage(source: ImageSource.gallery);
     }
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
@@ -217,7 +216,7 @@ class _CanteenFood extends State<CanteenFood> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _logoutUser(context);
+                              
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
