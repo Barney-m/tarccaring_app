@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
+import 'package:tarccaring_app/router/constant_route.dart';
+import 'package:tarccaring_app/shared_prefs.dart';
 
 class UserSetting extends StatefulWidget {
   @override
@@ -91,7 +93,12 @@ class _UserSetting extends State<UserSetting> {
                           ),
                           color: primaryColor,
                           onPressed: () {
-                            _logoutUser(context);
+                            setLoginState(false).then((_) {
+                              setID(null);
+                              setRoleID(null);
+                              setAPIToken(null);
+                              Navigator.of(context).pushReplacementNamed(AuthMainRoute);
+                            });
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.0),
