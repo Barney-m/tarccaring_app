@@ -18,20 +18,22 @@ class _CanteenFood extends State<CanteenFood> {
   File _image;
 
   Future getImage(bool isCamera) async {
-    File image;
+    var image;
     if (isCamera) {
-      image = await ImagePicker.pickImage(source: ImageSource.camera);
+      image = await ImagePicker().getImage(source: ImageSource.camera);
     } else {
-      image = await ImagePicker.pickImage(source: ImageSource.gallery);
+      image = await ImagePicker().getImage(source: ImageSource.gallery);
     }
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size deviceSize = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
