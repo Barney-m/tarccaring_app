@@ -19,6 +19,39 @@ Future<void> setLoginState(bool loginState) async{
   }
 }
 
+Future<int> getRoleID() async{
+  final prefs = await SharedPreferences.getInstance();
+
+  return prefs.getInt("roleId");
+}
+
+Future<void> setRoleID(int _role) async{
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setInt("roleId", _role);
+}
+
+Future<String> getID() async{
+  final prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString("id");
+}
+
+Future<void> setID(String id) async{
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString("id", id);
+}
+
+Future<String> getAPIToken(String token) async{
+  final prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString("api_token");
+}
+
+Future<void> setAPIToken(String token) async{
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString("api_token", token);
+}
+
 Future<bool> getFirstTimeState() async{
   final prefs = await SharedPreferences.getInstance();
 
