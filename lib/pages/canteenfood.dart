@@ -17,7 +17,7 @@ class _CanteenFood extends State<CanteenFood> {
 
   Future getImage(bool isCamera) async {
     var image;
-
+    
     if (isCamera) {
       image = await ImagePicker().getImage(source: ImageSource.camera);
     } else {
@@ -31,6 +31,8 @@ class _CanteenFood extends State<CanteenFood> {
 
   @override
   Widget build(BuildContext context) {
+    final Size deviceSize = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
