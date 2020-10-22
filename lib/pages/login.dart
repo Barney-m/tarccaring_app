@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
+import 'dart:convert';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/shared_prefs.dart';
 import 'package:tarccaring_app/utils/constants.dart';
@@ -32,10 +33,44 @@ class _Login extends State {
   }
 
   Future<void> _loginUser(BuildContext context) async {
-    Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
     toggleLoadingState();
     _authService.signIn(formData).then((dynamic res) {
       toggleLoadingState();
+      if(res['success']) {
+        int role = res['role_id'];
+        if(role > 1 && role < 5){
+          setLoginState(true).then((_) {
+            setID(res['id']);
+            setRoleID(res['role_id']);
+            setAPIToken(res['api_token']);
+            Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+          });
+        }
+        else if(role == 5){
+          setLoginState(true).then((_) {
+            setID(res['id']);
+            setRoleID(res['role_id']);
+            setAPIToken(res['api_token']);
+            Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
+          });
+        }
+        else if(role == 1){
+          setLoginState(true).then((_) {
+            Navigator.of(context).pushReplacementNamed(PublicNavigationRoute);
+          });
+        }
+      } 
+      else {
+        showDialog(
+          context: context,
+          builder: (BuildContext  context) {
+            return AlertDialog(
+              title: Text("Invalid Credentials."),
+              content: Text(res['message']),
+            );
+          },
+        );
+      }
     });
   }
 

@@ -1,4 +1,6 @@
-const String UserNavigationRoute = 'users/user_nav';
+const String UserNavigationRoute = 'user/user_nav';
+const String PublicNavigationRoute = 'user/public_nav';
+const String ManagementNavigationRoute = 'user/management_nav';
 const String LoginRoute = '/login';
 const String RegistrationRoute = '/registration';
 const String AuthMainRoute = '/authmain';

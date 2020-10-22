@@ -12,14 +12,13 @@ class CanteenFood extends StatefulWidget {
 }
 
 class _CanteenFood extends State<CanteenFood> {
-  Future<void> _logoutUser(BuildContext context) {}
-
   bool isSwitched = false;
 
   File _image;
 
   Future getImage(bool isCamera) async {
     var image;
+    
     if (isCamera) {
       image = await ImagePicker().getImage(source: ImageSource.camera);
     } else {
@@ -220,7 +219,7 @@ class _CanteenFood extends State<CanteenFood> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _logoutUser(context);
+                              
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/pages/campusfacilities.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
-import 'package:tarccaring_app/pages/lecturerlist.dart';
 import 'package:tarccaring_app/pages/login.dart';
 import 'package:tarccaring_app/pages/registration.dart';
 import 'package:tarccaring_app/pages/serviceattitude.dart';
@@ -9,7 +8,6 @@ import 'package:tarccaring_app/pages/educationquality.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
 import 'package:tarccaring_app/pages/intro.dart';
-import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
 import 'package:tarccaring_app/users/user/user_nav_controller.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -38,9 +36,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case EducationQualityRoute:
         return MaterialPageRoute(
           builder: (BuildContext context) =>  EducationQuality());
-    case LecturerListRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) =>  LecturerList());
     default:
       return MaterialPageRoute(builder: (BuildContext context) => Login());
   }
