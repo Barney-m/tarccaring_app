@@ -4,6 +4,7 @@ import 'package:tarccaring_app/utils/constants.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:tarccaring_app/widgets/size_config.dart';
 
 class CanteenFood extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _CanteenFood extends State<CanteenFood> {
 
   @override
   Widget build(BuildContext context) {
-    final Size deviceSize = MediaQuery.of(context).size;
+    SizeConfig().init(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -49,7 +50,7 @@ class _CanteenFood extends State<CanteenFood> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 5),
+                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 0.5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -59,7 +60,7 @@ class _CanteenFood extends State<CanteenFood> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1),
                     child: Row(
                       children: [
                         Expanded(
@@ -97,7 +98,7 @@ class _CanteenFood extends State<CanteenFood> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        defaultPadding * 1.5, 50, defaultPadding * 1.5, 0),
+                        defaultPadding * 1.5, SizeConfig.blockSizeVertical * 6, defaultPadding * 1.5, 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(),
                     ),
@@ -105,7 +106,7 @@ class _CanteenFood extends State<CanteenFood> {
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.fromLTRB(
-                              defaultPadding / 2, 150, defaultPadding / 2, 100),
+                              defaultPadding / 2, SizeConfig.blockSizeVertical * 19, defaultPadding / 2, 0),
                           //margin: EdgeInsets.all(defaultPadding / 2),
                           child: Column(children: <Widget>[
                             Expanded(
@@ -132,9 +133,9 @@ class _CanteenFood extends State<CanteenFood> {
                           ]),
                         ),
                         Positioned(
-                          top: 30.0,
-                          left: 10.0,
-                          right: 10.0,
+                          top: SizeConfig.blockSizeVertical * 3,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
                           child: DropDownField(
                             itemsVisibleInDropdown: 3,
                             required: true,
@@ -150,9 +151,33 @@ class _CanteenFood extends State<CanteenFood> {
                           ),
                         ),
                         Positioned(
-                            top: 470.0,
-                            left: 20.0,
-                            right: 80.0,
+                          top: SizeConfig.blockSizeVertical * 15.5,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
+                          child: Text('Comment:'),
+                        ),
+                        Positioned(
+                          top: SizeConfig.blockSizeVertical * 43,
+                          left: SizeConfig.blockSizeVertical * 5,
+                          right: SizeConfig.blockSizeVertical * 5,
+                          child: _image == null
+                              ? Container(
+                            height: 120,
+                            width: 500.0,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                            ),
+                          )
+                              : Image.file(
+                            _image,
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                          ),
+                        ),
+                        Positioned(
+                            top: SizeConfig.blockSizeVertical * 60,
+                            left: SizeConfig.blockSizeVertical * 4,
+                            right: SizeConfig.blockSizeVertical * 8,
                             child: FlatButton(
                               child: Text(
                                 'UPLOAD PHOTO',
@@ -170,9 +195,9 @@ class _CanteenFood extends State<CanteenFood> {
                               ),
                             )),
                         Positioned(
-                          top: 470.0,
-                          left: 270.0,
-                          right: 20.0,
+                          top: SizeConfig.blockSizeVertical * 60,
+                          left: SizeConfig.blockSizeVertical * 35,
+                          right: SizeConfig.blockSizeVertical * 3,
                           child: IconButton(
                             icon: Icon(Icons.camera_alt),
                             onPressed: () {
@@ -181,33 +206,9 @@ class _CanteenFood extends State<CanteenFood> {
                           ),
                         ),
                         Positioned(
-                          top: 120.0,
-                          left: 10.0,
-                          right: 10.0,
-                          child: Text('Comment:'),
-                        ),
-                        Positioned(
-                          top: 330.0,
-                          left: 50.0,
-                          right: 50.0,
-                          child: _image == null
-                              ? Container(
-                            height: 120,
-                            width: 500.0,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                            ),
-                          )
-                              : Image.file(
-                            _image,
-                            height: 120,
-                            width: 500.0,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 50.0,
-                          left: 10.0,
-                          right: 10.0,
+                          top: SizeConfig.blockSizeVertical * 70,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
                           child: FlatButton(
                             child: Text(
                               'SUBMIT',

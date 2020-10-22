@@ -9,3 +9,4 @@ const String CampusFacilitiesRoute = '/campusfacilities';
 const String CanteenFoodRoute = '/canteenfood';
 const String EducationQualityRoute = '/educationquality';
 const String ServiceAttitudeRoute = '/serviceattitude';
+const String LecturerListRoute = '/lecturerlist';

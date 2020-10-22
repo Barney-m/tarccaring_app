@@ -19,7 +19,7 @@ class _CampusFacilities extends State<CampusFacilities> {
 
   File _image;
 
-  @override
+  
 
   Future getImage(bool isCamera) async {
     var image;
@@ -37,7 +37,6 @@ class _CampusFacilities extends State<CampusFacilities> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
@@ -54,7 +53,7 @@ class _CampusFacilities extends State<CampusFacilities> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top:SizeConfig.blockSizeVertical * 2,),
+                    margin: EdgeInsets.only(top:SizeConfig.blockSizeVertical * 0.5,),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -64,7 +63,7 @@ class _CampusFacilities extends State<CampusFacilities> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 2),
+                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1),
                     child: Row(
                       children: [
                         Expanded(
@@ -102,7 +101,7 @@ class _CampusFacilities extends State<CampusFacilities> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        defaultPadding * 1.5, 50, defaultPadding * 1.5, 0),
+                        defaultPadding * 1.5, SizeConfig.blockSizeVertical * 6, defaultPadding * 1.5, 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(),
                     ),
@@ -136,9 +135,9 @@ class _CampusFacilities extends State<CampusFacilities> {
                           ]),
                         ),
                         Positioned(
-                          top: SizeConfig.blockSizeVertical * 2,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
+                            top: SizeConfig.blockSizeVertical * 3,
+                            left: SizeConfig.blockSizeVertical * 2,
+                            right: SizeConfig.blockSizeVertical * 2,
                           child: DropDownField(
                             itemsVisibleInDropdown: 3,
                             required: true,
@@ -154,27 +153,27 @@ class _CampusFacilities extends State<CampusFacilities> {
                           ),
                         ),
                         Positioned(
-                          top: SizeConfig.blockSizeVertical * 16,
+                          top: SizeConfig.blockSizeVertical * 15.5,
                           left: SizeConfig.blockSizeVertical * 2,
                           right: SizeConfig.blockSizeVertical * 2,
                           child: Text('Comment:'),
                         ),
                         Positioned(
                           top: SizeConfig.blockSizeVertical * 43,
-                          left: SizeConfig.blockSizeVertical * 3,
-                          right: SizeConfig.blockSizeVertical * 3,
+                          left: SizeConfig.blockSizeVertical * 5,
+                          right: SizeConfig.blockSizeVertical * 5,
                           child: _image == null
                               ? Container(
-                            height: 120,
-                            width: 500.0,
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 5,
                             decoration: BoxDecoration(
                               color: Colors.grey[100],
                             ),
                           )
                               : Image.file(
                             _image,
-                            height: 120,
-                            width: 500.0,
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
                           ),
                         ),
                         Positioned(
@@ -210,8 +209,8 @@ class _CampusFacilities extends State<CampusFacilities> {
                         ),
                         Positioned(
                           top: SizeConfig.blockSizeVertical * 70,
-                          left: SizeConfig.blockSizeVertical * 3,
-                          right: SizeConfig.blockSizeVertical * 3,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
                           child: FlatButton(
                             child: Text(
                               'SUBMIT',
