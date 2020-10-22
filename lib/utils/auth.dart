@@ -28,20 +28,4 @@ class AuthService {
       return null;
     }
   }
-
-  Future signInGuest(String uuid) async {
-    try{
-      print(jsonEncode(uuid));
-      var res = await http.post(
-        _endpoint,
-        body: jsonEncode(uuid),
-        headers: {
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-        }
-      );
-    } catch (e) {
-      return null;
-    }
-  }
 }

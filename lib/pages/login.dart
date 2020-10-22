@@ -51,8 +51,11 @@ class _Login extends State {
     } on PlatformException {
       print('Failed to get platform version');
     }
-    
-    _authService.signInGuest(identifier);
+
+    setLoginState(true).then((_){
+      setUUID(identifier);
+      Navigator.of(context).pushReplacementNamed(PublicNavigationRoute);
+    });
   }
 
   Future<void> _loginUser(BuildContext context) async {
