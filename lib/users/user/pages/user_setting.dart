@@ -94,9 +94,7 @@ class _UserSetting extends State<UserSetting> {
                           color: primaryColor,
                           onPressed: () {
                             setLoginState(false).then((_) {
-                              setID(null);
-                              setRoleID(null);
-                              setAPIToken(null);
+                              removeUserState();
                               Navigator.of(context).pushReplacementNamed(AuthMainRoute);
                             });
                           },

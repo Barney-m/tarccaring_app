@@ -5,12 +5,12 @@ import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
 import 'package:tarccaring_app/users/user/pages/user_setting.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-class UserNavController extends StatefulWidget {
+class PublicNavController extends StatefulWidget {
   @override
-  _UserNavController createState() => _UserNavController();
+  _PublicNavController createState() => _PublicNavController();
 }
 
-class _UserNavController extends State<UserNavController> {
+class _PublicNavController extends State<PublicNavController> {
   int _optionIndex = 0;
 
   final _title = [
@@ -40,6 +40,7 @@ class _UserNavController extends State<UserNavController> {
           buttonBackgroundColor: Colors.white,
           backgroundColor: secondaryColor,
           color: Colors.white,
+          height: 50,
           onTap: (index) {
             setState(() {
               _optionIndex = index;

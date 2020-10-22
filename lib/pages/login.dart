@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
 import 'dart:convert';
+import 'package:device_info/device_info.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/shared_prefs.dart';
 import 'package:tarccaring_app/utils/constants.dart';
@@ -29,6 +33,28 @@ class _Login extends State {
   void toggleLoadingState() {
     this.setState(() {
       loaders["login"] = loaders["login"] == null ? true : !loaders["login"];
+    });
+  }
+
+  Future<void> _loginPublic(BuildContext context) async{
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    String identifier;
+
+    try {
+      if (Platform.isAndroid) {
+        var build = await deviceInfoPlugin.androidInfo;
+        identifier = build.androidId;  //UUID for Android
+      } else if (Platform.isIOS) {
+        var data = await deviceInfoPlugin.iosInfo;
+        identifier = data.identifierForVendor;  //UUID for iOS
+      }
+    } on PlatformException {
+      print('Failed to get platform version');
+    }
+
+    setLoginState(true).then((_){
+      setUUID(identifier);
+      Navigator.of(context).pushReplacementNamed(PublicNavigationRoute);
     });
   }
 
@@ -133,14 +159,19 @@ class _Login extends State {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
-                            child: Text(
-                              "Login as Guest",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: primaryColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18.0,
+                            child: GestureDetector(
+                              child: Text(
+                                "Login as Guest",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18.0,
+                                ),
                               ),
+                              onTap: (){
+                                _loginPublic(context);
+                              },
                             ),
                           )
                         ],

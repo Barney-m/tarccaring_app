@@ -41,7 +41,7 @@ Future<void> setID(String id) async{
   prefs.setString("id", id);
 }
 
-Future<String> getAPIToken(String token) async{
+Future<String> getAPIToken() async{
   final prefs = await SharedPreferences.getInstance();
 
   return prefs.getString("api_token");
@@ -52,6 +52,18 @@ Future<void> setAPIToken(String token) async{
   prefs.setString("api_token", token);
 }
 
+Future<String> getUUID() async{
+  final prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString("uuid");
+}
+
+Future<void> setUUID(String uuid) async{
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString("uuid", uuid);
+}
+
+
 Future<bool> getFirstTimeState() async{
   final prefs = await SharedPreferences.getInstance();
 
@@ -61,4 +73,18 @@ Future<bool> getFirstTimeState() async{
 Future<void> setFirstTimeState() async{
   final prefs = await SharedPreferences.getInstance();
   prefs.setBool("firstTimeState", false);
+}
+
+Future<void> removeUserState() async{
+  final prefs = await SharedPreferences.getInstance();
+
+  prefs.remove("roleId");
+  prefs.remove("id");
+  prefs.remove("api_token");
+}
+
+Future<void> removePublicState() async{
+  final prefs = await SharedPreferences.getInstance();
+
+  prefs.remove("uuid");
 }
