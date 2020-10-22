@@ -90,7 +90,7 @@ class _PublicSetting extends State<PublicSetting> {
                           color: primaryColor,
                           onPressed: () {
                             setLoginState(false).then((_) {
-                              setUUID(null);
+                              removePublicState();
                               Navigator.of(context).pushReplacementNamed(AuthMainRoute);
                             });
                           },

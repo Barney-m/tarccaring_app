@@ -90,9 +90,7 @@ class _ManagementSetting extends State<ManagementSetting> {
                           color: primaryColor,
                           onPressed: () {
                             setLoginState(false).then((_) {
-                              setID(null);
-                              setRoleID(null);
-                              setAPIToken(null);
+                              removeUserState();
                               Navigator.of(context).pushReplacementNamed(AuthMainRoute);
                             });
                           },

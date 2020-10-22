@@ -41,7 +41,7 @@ Future<void> setID(String id) async{
   prefs.setString("id", id);
 }
 
-Future<String> getAPIToken(String token) async{
+Future<String> getAPIToken() async{
   final prefs = await SharedPreferences.getInstance();
 
   return prefs.getString("api_token");
