@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:tarccaring_app/widgets/feedback_categories.dart';
 import 'package:tarccaring_app/widgets/search_box.dart';
 import 'package:tarccaring_app/widgets/custom_dropdown.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';

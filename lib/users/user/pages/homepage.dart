@@ -13,19 +13,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _Homepage extends State<Homepage> {
-  String _id;
-
-  @override
-  void initState() {
-    super.initState();
-    getUserID();
-  }
-  
-  Future<void> getUserID() async{
-    _id = await getID();
-    print(_id);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +22,7 @@ class _Homepage extends State<Homepage> {
           Container(
             margin: EdgeInsets.only(top: defaultPadding),
             child: Text(
-              'Welcome, $_id',
+              'Welcome Back',
               style: TextStyle(
                 fontSize: 30,
                 color: Colors.white,
