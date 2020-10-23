@@ -108,7 +108,7 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                   child: FutureBuilder<List<dynamic>>(
                       future: fetchFeedbacks(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) { //TODO: Show Status
+                        if (snapshot.hasData) {
                           return ListView.builder(
                             padding: EdgeInsets.all(8),
                             itemCount: snapshot.data.length,
