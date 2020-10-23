@@ -24,9 +24,9 @@ TARC Caring is a mobile-based feedback system to provide a more easy way to **_m
    - PHP
 
 ## Commands
-```flutter doctor -v``` : This command is to get details information of the Flutter SDK.
-```flutter devices``` : This command is to show all the devices currently existing.
-```flutter run``` : This command is to run your flutter project.
+```flutter doctor -v``` : This command is to get details information of the Flutter SDK.\
+```flutter devices``` : This command is to show all the devices currently existing.\
+```flutter run``` : This command is to run your flutter project.\
 
 
 The link to [TARC Caring Backend](https://github.com/Barney-m/tarc_caring_backend).
