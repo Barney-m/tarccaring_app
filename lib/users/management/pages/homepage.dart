@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:tarccaring_app/utils/constants.dart';
+import 'package:tarccaring_app/model/feedbacks.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:tarccaring_app/widgets/feedback_categories.dart';
 import 'package:tarccaring_app/widgets/search_box.dart';
 
 class ManagementHomepage extends StatefulWidget {
@@ -12,23 +12,32 @@ class ManagementHomepage extends StatefulWidget {
 }
 
 class _ManagementHomepage extends State<ManagementHomepage> {
+  int _selectedIndex = 0;
+  List categories = ['All', 'Facilities', 'Foods', 'Educations', 'Services'];
+
   Future<List<dynamic>> fetchFeedbacks() async {
-    var result = await APIService().getMethod('feedbacks');
-    print (json.decode(result.body));
-    return json.decode(result.body);
+    switch (_selectedIndex) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+        var result = await APIService().getMethod('feedbacks/' + categories[_selectedIndex].toString().toLowerCase());
+        print (json.decode(result.body));
+        return json.decode(result.body);
+        break;
+      default:
+        var result = await APIService().getMethod('feedbacks');
+        print (json.decode(result.body));
+        return json.decode(result.body);
+    }
   }
 
-  String _type(dynamic feedback) {
-    return '';
-  }
-
-  String _content(dynamic feedback) {
-    return '';
-  }
-
-  String _status(dynamic feedback) {
-    return '';
-  }
+  final _type = [
+    Icons.event_seat_rounded,
+    Icons.fastfood_rounded,
+    Icons.menu_book_rounded,
+    Icons.headset_mic_rounded,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,42 @@ class _ManagementHomepage extends State<ManagementHomepage> {
       child: Column(
         children: <Widget>[
           SearchBox(onChanged: (value) {}),
-          FeedbackCategories(),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
+            height: 30,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                  fetchFeedbacks();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(
+                    left: defaultPadding,
+                    right: index == categories.length - 1
+                        ? defaultPadding
+                        : 0, // Add extra padding when reach last item
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                  decoration: BoxDecoration(
+                    color: index == _selectedIndex
+                        ? Colors.white.withOpacity(0.4)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    categories[index],
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ),
           SizedBox(height: defaultPadding / 2),
           Expanded(
             child: Stack(
@@ -59,10 +103,11 @@ class _ManagementHomepage extends State<ManagementHomepage> {
                               return Card(
                                   child: Column(children: <Widget>[
                                 ListTile(
-                                  title: Text(_type(snapshot.data[index])), //TODO: Feedback Type
-                                  subtitle:Text(_content(snapshot.data[index])),
+                                  leading: Icon(_type[snapshot.data[index]['feedbackType_id'] - 1], size: 40.0),
+                                  title: Text(snapshot.data[index]['type']),
+                                  subtitle:Text(snapshot.data[index]['comment']),
                                   isThreeLine: true,
-                                  trailing: Text(_status(snapshot.data[index])), //TODO: status
+                                  trailing: Text(snapshot.data[index]['status'].toString().toUpperCase()),
                                 )
                               ]));
                             },

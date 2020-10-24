@@ -9,11 +9,6 @@ class UserSetting extends StatefulWidget {
 }
 
 class _UserSetting extends State<UserSetting> {
-
-  Future<void> _logoutUser(BuildContext context){
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -61,7 +61,7 @@ class AuthMain extends StatelessWidget {
                               ),
                               onPressed: () {
                                 Navigator.of(context)
-                                    .pushReplacementNamed(UserNavigationRoute);
+                                    .pushReplacementNamed(LoginRoute);
                               }),
                         ),
                       ])))
