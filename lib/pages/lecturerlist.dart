@@ -53,7 +53,7 @@ class _LecturerList extends State {
         child: Column(
           children: <Widget>[
             SearchBox(onChanged: (value) {}),
-            custom_dropdown(),
+            FeedbackCategories(),
             SizedBox(height: defaultPadding / 2),
             Expanded(
               child: Stack(
