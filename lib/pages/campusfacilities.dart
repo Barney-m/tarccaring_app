@@ -19,7 +19,6 @@ class _CampusFacilities extends State<CampusFacilities> {
 
   File _image;
 
-  
 
   Future getImage(bool isCamera) async {
     var image;
