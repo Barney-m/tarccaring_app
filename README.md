@@ -1,5 +1,5 @@
-![alt text](https://github.com/Barney-m/tarccaring_app/blob/master/assets/images/logo/TARC_Logo.png?raw=true)
-# ![#1589F0]**TARC Caring** `#1589F0`
+![alt text](https://github.com/Barney-m/tarccaring_app/blob/master/assets/images/logo/TARC_Logo.png?raw=true | width = 50)
+# **TARC Caring** 
 
 TARC Caring is a mobile-based feedback system to provide a more easy way to **_make feedback_** to **_TARUC_**. This is a final year project which is contributed by:
 
