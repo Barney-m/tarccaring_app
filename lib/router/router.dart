@@ -9,6 +9,9 @@ import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/pages/auth_main.dart';
 import 'package:tarccaring_app/pages/intro.dart';
 import 'package:tarccaring_app/users/user/user_nav_controller.dart';
+import 'package:tarccaring_app/users/management/management_nav_controller.dart';	
+import 'package:tarccaring_app/users/public/public_nav_controller.dart';
+import 'package:tarccaring_app/pages/lecturerlist.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -33,11 +36,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case PublicNavigationRoute:
       return MaterialPageRoute(builder: (BuildContext context) => PublicNavController());
     case EducationQualityRoute:
-        return MaterialPageRoute(
-          builder: (BuildContext context) =>  EducationQuality());
+        return MaterialPageRoute(builder: (BuildContext context) =>  EducationQuality());
     case LecturerListRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) =>  LecturerList());
+      return MaterialPageRoute(builder: (BuildContext context) =>  LecturerList());
     default:
       return MaterialPageRoute(builder: (BuildContext context) => Login());
   }
