@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarccaring_app/shared_prefs.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/widgets/campus_facilities_card.dart';
 import 'package:tarccaring_app/widgets/canteen_food_card.dart';
@@ -12,6 +13,19 @@ class Homepage extends StatefulWidget {
 }
 
 class _Homepage extends State<Homepage> {
+  String _id;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserID();
+  }
+  
+  Future<void> getUserID() async{
+    _id = await getID();
+    print(_id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,9 +35,9 @@ class _Homepage extends State<Homepage> {
           Container(
             margin: EdgeInsets.only(top: defaultPadding),
             child: Text(
-              'Welcome, User',
+              'Welcome, $_id',
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 30,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),

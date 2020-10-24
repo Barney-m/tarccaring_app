@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/pages/campusfacilities.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
-import 'package:tarccaring_app/pages/lecturerlist.dart';
 import 'package:tarccaring_app/pages/login.dart';
 import 'package:tarccaring_app/pages/registration.dart';
 import 'package:tarccaring_app/pages/serviceattitude.dart';
@@ -16,24 +15,23 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LoginRoute:
       return MaterialPageRoute(builder: (BuildContext context) => Login());
     case RegistrationRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) => Registration());
+      return MaterialPageRoute(builder: (BuildContext context) => Registration());
     case AuthMainRoute:
       return MaterialPageRoute(builder: (BuildContext context) => AuthMain());
     case IntroPageRoute:
       return MaterialPageRoute(builder: (BuildContext context) => Intro());
     case CampusFacilitiesRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) => CampusFacilities());
+      return MaterialPageRoute(builder: (BuildContext context) => CampusFacilities());
     case CanteenFoodRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) => CanteenFood());
+      return MaterialPageRoute(builder: (BuildContext context) => CanteenFood());
     case ServiceAttitudeRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) => ServiceAttitude());
+      return MaterialPageRoute(builder: (BuildContext context) => ServiceAttitude());
     case UserNavigationRoute:
-      return MaterialPageRoute(
-          builder: (BuildContext context) => UserNavController());
+      return MaterialPageRoute(builder: (BuildContext context) => UserNavController());
+    case ManagementNavigationRoute:
+      return MaterialPageRoute(builder: (BuildContext context) => ManagementNavController());
+    case PublicNavigationRoute:
+      return MaterialPageRoute(builder: (BuildContext context) => PublicNavController());
     case EducationQualityRoute:
         return MaterialPageRoute(
           builder: (BuildContext context) =>  EducationQuality());
