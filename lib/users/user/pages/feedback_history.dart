@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tarccaring_app/pages/feedbackdetailspage.dart';
+import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:http/http.dart' as http;
@@ -22,9 +24,9 @@ class _FeedbackHistory extends State<FeedbackHistory> {
     getID();
   }
 
-  getID() async{
+  getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState((){
+    setState(() {
       _user = prefs.getString('id') ?? '';
     });
   }
@@ -35,22 +37,25 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       case 2:
       case 3:
       case 4:
-        var result = await APIService().getMethod('feedbacks/user_history?id=$_user&feedback=' + _selectedIndex.toString());
-        print (json.decode(result.body));
+        var result = await APIService().getMethod(
+            'feedbacks/user_history?id=$_user&feedback=' +
+                _selectedIndex.toString());
+        print(json.decode(result.body));
         return json.decode(result.body);
         break;
       default:
-        var result = await APIService().getMethod('feedbacks/user_history?id=$_user');
-        print (json.decode(result.body));
+        var result =
+        await APIService().getMethod('feedbacks/user_history?id=$_user');
+        print(json.decode(result.body));
         return json.decode(result.body);
     }
   }
 
   final _type = [
-    Icons.event_seat_rounded,
-    Icons.fastfood_rounded,
-    Icons.menu_book_rounded,
-    Icons.headset_mic_rounded,
+    Icons.home,
+    Icons.home,
+    Icons.home,
+    Icons.home,
   ];
 
   @override
@@ -66,33 +71,34 @@ class _FeedbackHistory extends State<FeedbackHistory> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(
-                    left: defaultPadding,
-                    right: index == categories.length - 1
-                        ? defaultPadding
-                        : 0, // Add extra padding when reach last item
+              itemBuilder: (context, index) =>
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(
+                        left: defaultPadding,
+                        right: index == categories.length - 1
+                            ? defaultPadding
+                            : 0, // Add extra padding when reach last item
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                      decoration: BoxDecoration(
+                        color: index == _selectedIndex
+                            ? Colors.white.withOpacity(0.4)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        categories[index],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                  decoration: BoxDecoration(
-                    color: index == _selectedIndex
-                        ? Colors.white.withOpacity(0.4)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    categories[index],
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
             ),
           ),
           SizedBox(height: defaultPadding / 2),
@@ -112,17 +118,38 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                           return ListView.builder(
                             padding: EdgeInsets.all(8),
                             itemCount: snapshot.data.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Card(
-                                  child: Column(children: <Widget>[
-                                ListTile(
-                                  leading: Icon(_type[snapshot.data[index]['feedbackType_id'] - 1], size: 40.0),
-                                  title: Text(snapshot.data[index]['type']),
-                                  subtitle:Text(snapshot.data[index]['comment']),
-                                  isThreeLine: true,
-                                  trailing: Text(snapshot.data[index]['status'].toString().toUpperCase()),
-                                )
-                              ]));
+                              itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            FeedbackDetailPage(),
+                                        settings: RouteSettings(
+                                          arguments: snapshot.data[index]['type']),
+                                        ),
+                                      );
+                                  },
+                                  child: Card(
+                                      child: Column(children: <Widget>[
+                                        ListTile(
+                                          leading: Icon(
+                                              _type[snapshot.data[index]
+                                              ['feedbackType_id'] -
+                                                  1],
+                                              size: 40.0),
+                                          title: Text(
+                                              snapshot.data[index]['type']),
+                                          subtitle:
+                                          Text(snapshot.data[index]['comment']),
+                                          isThreeLine: true,
+                                          trailing: Text(snapshot.data[index]
+                                          ['status']
+                                              .toString()
+                                              .toUpperCase()),
+                                        )
+                                      ])));
                             },
                           );
                         } else {
