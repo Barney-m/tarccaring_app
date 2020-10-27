@@ -7,6 +7,10 @@ import 'package:tarccaring_app/utils/constants.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:tarccaring_app/widgets/campus_feedback_details_card.dart';
+import 'package:tarccaring_app/widgets/canteen_food_details_card.dart';
+import 'package:tarccaring_app/widgets/service_attitude_details_card.dart';
+import 'package:tarccaring_app/widgets/education_quality_details_card.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
 
 class FeedbackDetailPage extends StatefulWidget {
@@ -17,13 +21,49 @@ class FeedbackDetailPage extends StatefulWidget {
 class _FeedbackDetailPage extends State<FeedbackDetailPage> {
   Future<void> _logoutUser(BuildContext context) {}
 
+
   bool isSwitched = false;
 
+  String todo = '';
+
+  /*void _cardType(){
+    switch(todo){
+      case 'Canteen Food Feedback' :
+        CampusFeedbackDetailsCard();
+        break;
+      case 'Canteen Food Feedback' :
+        CampusFeedbackDetailsCard();
+        break;
+      default:
+        print('failed');
+    }
+  }*/
+
+  _cardType(){
+    switch(todo){
+      case 'Campus Facility Feedback' :
+        return CampusFeedbackDetailsCard();
+        break;
+      case 'Canteen Food Feedback' :
+        return CanteenFeedbackDetailsCard();
+        break;
+      case 'Service Attitude Feedback' :
+        return ServiceAttitudeDetailsCard();
+        break;
+      case 'Education Quality Feedback' :
+        return EducationQualityDetailsCard();
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
 
+
+
+    todo = ModalRoute.of(context).settings.arguments;
+
+    SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
@@ -150,7 +190,8 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                             ),
 
                             Expanded(
-                              child: Row(
+                              child: _cardType(),
+                              /*child: Row(
                                 children: <Widget>[
                                   Expanded(flex: 1, child: SizedBox(),),
                                   Container(
@@ -162,10 +203,10 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                     ),
                                   ),
                                   Expanded(flex: 1, child: SizedBox(),),
-                                  Text('Campus Facilities'),
+                                  Text(todo),
                                   Expanded(flex: 1, child: SizedBox(),),
                                 ],
-                              ),
+                              ),*/
                             ),
                             Expanded(
                               child: Row(
@@ -180,6 +221,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                             ),
                             Expanded(
                               child: TextField(
+                                enabled: false,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: null,
                                 decoration: new InputDecoration(
@@ -307,3 +349,4 @@ List<String> services = [
   "Security Guard",
   "Management",
 ];
+
