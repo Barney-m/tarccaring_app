@@ -12,6 +12,7 @@ class CanteenFood extends StatefulWidget {
 }
 
 class _CanteenFood extends State<CanteenFood> {
+  @override
   bool isSwitched = false;
 
   File _image;
@@ -30,7 +31,7 @@ class _CanteenFood extends State<CanteenFood> {
     });
   }
 
-  @override
+
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
@@ -112,10 +113,12 @@ class _CanteenFood extends State<CanteenFood> {
                             Expanded(
                               child: TextField(
                                 keyboardType: TextInputType.multiline,
-                                maxLines: null,
-
+                                maxLines: 7,
+                                style: TextStyle(fontSize: 15),
                                 decoration: new InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 60,horizontal: 10),
+                                    hintText: "Type your comment here....",
+                                    hintStyle: TextStyle(fontSize: 15),
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                                     border: new OutlineInputBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(20),

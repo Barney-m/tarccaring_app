@@ -1,6 +1,7 @@
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
+import 'package:tarccaring_app/pages/feedbackdetailspage.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 
 import 'dart:io';
@@ -15,8 +16,15 @@ class ServiceAttitude extends StatefulWidget {
 class _ServicesAttitude extends State<ServiceAttitude> {
   Future<void> _logoutUser(BuildContext context) {}
 
+  final myController = TextEditingController();
   bool isSwitched = false;
 
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +107,15 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                           child: Column(children: <Widget>[
                             Expanded(
                               child: TextField(
+                                onChanged: (text){print(text);},
                                 keyboardType: TextInputType.multiline,
-                                maxLines: null,
+                                maxLines: 18,
+                                controller: myController,
+                                style: TextStyle(fontSize: 15),
                                 decoration: new InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 170,horizontal: 10),
+                                    hintText: "Type your comment here....",
+                                    hintStyle: TextStyle(fontSize: 15),
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                                     border: new OutlineInputBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(20),
@@ -157,7 +170,31 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _logoutUser(context);
+                              return showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(20))
+                                    ),
+                                    title: Text('Feedback Confirmation',textAlign: TextAlign.center,),
+                                    titleTextStyle: TextStyle(fontSize: 20, color: Colors.white,fontWeight: FontWeight.bold),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: <Widget>[
+                                          Text('Service Type:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
+                                          Text('    '+selectService,style: TextStyle(fontSize: 17,color: Colors.white,),),
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                          Text('Comment:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
+                                          Text('    '+myController.text,style: TextStyle(fontSize: 17,color: Colors.white),),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
