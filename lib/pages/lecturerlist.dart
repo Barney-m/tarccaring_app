@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
 import 'package:tarccaring_app/widgets/custom_dropdown.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
+import 'package:random_user/random_user.dart';
 
 class LecturerList extends StatefulWidget {
   @override
@@ -15,7 +16,9 @@ class LecturerList extends StatefulWidget {
 
 class _LecturerList extends State {
   int _selectedIndex = 0;
-  List categories = ['All', 'Facilities', 'Foods', 'Educations', 'Services'];
+  List categories = ['All', 'FOCS', 'FAFB', 'FBCC', 'FEFC'];
+
+  final api = RandomUser();
 
   Future<List<dynamic>> fetchFeedbacks() async {
     switch (_selectedIndex) {
@@ -35,10 +38,10 @@ class _LecturerList extends State {
   }
 
   final _type = [
-    Icons.event_seat_rounded,
-    Icons.fastfood_rounded,
-    Icons.menu_book_rounded,
-    Icons.headset_mic_rounded,
+    Icons.home,
+    Icons.home,
+    Icons.home,
+    Icons.home,
   ];
 
   @override

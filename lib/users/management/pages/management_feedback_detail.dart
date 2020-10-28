@@ -14,12 +14,12 @@ import 'package:tarccaring_app/widgets/service_attitude_details_card.dart';
 import 'package:tarccaring_app/widgets/education_quality_details_card.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
 
-class FeedbackDetailPage extends StatefulWidget {
+class ManagementFeedbackDetailPage extends StatefulWidget {
   @override
-  _FeedbackDetailPage createState() => _FeedbackDetailPage();
+  _ManagementFeedbackDetailPage createState() => _ManagementFeedbackDetailPage();
 }
 
-class _FeedbackDetailPage extends State<FeedbackDetailPage> {
+class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> {
   Future<void> _logoutUser(BuildContext context) {}
 
   @override
@@ -253,10 +253,73 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                           left: SizeConfig.blockSizeVertical * 10,
                           right: SizeConfig.blockSizeVertical * 10,
                           child: Container(
-                              height: SizeConfig.blockSizeVertical * 15,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[100],
-                              ),
+                            height: SizeConfig.blockSizeVertical * 15,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: SizeConfig.blockSizeVertical * 63,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
+                          child: FlatButton(
+                            child: Text(
+                              'Dismiss',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            color: Colors.blue[100],
+                            onPressed: () {
+                              _logoutUser(context);
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: SizeConfig.blockSizeVertical * 69,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
+                          child: FlatButton(
+                            child: Text(
+                              'Approve',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            color: Colors.blue[200],
+                            onPressed: () {
+                              _logoutUser(context);
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: SizeConfig.blockSizeVertical * 75,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
+                          child: FlatButton(
+                            child: Text(
+                              'Urgent',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            color: primaryColor,
+                            onPressed: () {
+                              _logoutUser(context);
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
                           ),
                         ),
                       ],
