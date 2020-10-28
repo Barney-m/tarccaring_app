@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
 import 'package:tarccaring_app/widgets/custom_dropdown.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
-import 'package:random_user/random_user.dart';
 
 class LecturerList extends StatefulWidget {
   @override
@@ -18,23 +17,10 @@ class _LecturerList extends State {
   int _selectedIndex = 0;
   List categories = ['All', 'FOCS', 'FAFB', 'FBCC', 'FEFC'];
 
-  final api = RandomUser();
 
   Future<List<dynamic>> fetchFeedbacks() async {
-    switch (_selectedIndex) {
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-        var result = await APIService().getMethod('');
-        print (json.decode(result.body));
-        return json.decode(result.body);
-        break;
-      default:
-        var result = await APIService().getMethod('');
-        print (json.decode(result.body));
-        return json.decode(result.body);
-    }
+      var result = await APIService().getMethod('lecturer?faculty=' + categories[_selectedIndex].toString());
+      return json.decode(result.body);
   }
 
   final _type = [
@@ -117,11 +103,13 @@ class _LecturerList extends State {
                               return Card(
                                   child: Column(children: <Widget>[
                                 ListTile(
-                                  leading: Icon(_type[snapshot.data[index]['feedbackType_id'] - 1], size: 40.0),
-                                  title: Text(snapshot.data[index]['type']),
-                                  subtitle:Text(snapshot.data[index]['comment']),
+                                  leading: CircleAvatar(
+                                            radius:30,
+                                            backgroundImage: NetworkImage('http://10.0.2.2:8000/images/user/' + snapshot.data[index]['image']),),
+                                  title: Text(snapshot.data[index]['name']),
+                                  subtitle:Text(snapshot.data[index]['email']),
                                   isThreeLine: true,
-                                  trailing: Text(snapshot.data[index]['status'].toString().toUpperCase()),
+                                  trailing: Text(snapshot.data[index]['gender'].toString().toUpperCase()),
                                 )
                               ]));
                             },

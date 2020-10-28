@@ -21,7 +21,6 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  random_user: ^0.3.0
   material_design_icons_flutter: ^4.0.5345
   http: ^0.12.2
   flutter_svg: ^0.18.0
