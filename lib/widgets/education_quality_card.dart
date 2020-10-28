@@ -21,7 +21,7 @@ class EducationQualityCard extends StatelessWidget {
       ),
       height: 160,
       child: InkWell(
-        onTap: () => Navigator.of(context).pushNamed(EducationQualityRoute),
+        onTap: () => Navigator.of(context).pushNamed(LecturerListRoute),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[

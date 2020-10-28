@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
 import 'package:tarccaring_app/pages/feedbackdetailspage.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
