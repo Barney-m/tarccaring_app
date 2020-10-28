@@ -8,15 +8,18 @@ import 'package:tarccaring_app/widgets/search_box.dart';
 import 'package:tarccaring_app/widgets/custom_dropdown.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
 
+import 'educationquality.dart';
+
 class LecturerList extends StatefulWidget {
   @override
   _LecturerList createState() => _LecturerList();
 }
 
+
+
 class _LecturerList extends State {
   int _selectedIndex = 0;
   List categories = ['All', 'FOCS', 'FAFB', 'FBCC', 'FEFC'];
-
 
   Future<List<dynamic>> fetchFeedbacks() async {
       var result = await APIService().getMethod('lecturer?faculty=' + categories[_selectedIndex].toString());
@@ -40,7 +43,7 @@ class _LecturerList extends State {
       backgroundColor: primaryColor,
       appBar: AppBar(
         elevation: 0,
-        title: Text('Lecturer List'),
+        title: Text('Choose a lecturer...'),
         backgroundColor: primaryColor,
       ),
       body: SafeArea(
@@ -95,7 +98,7 @@ class _LecturerList extends State {
                     child: FutureBuilder<List<dynamic>>(
                       future: fetchFeedbacks(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {//TODO: Show Status
+                        if (snapshot.hasData) { //TODO: Show Status
                           return ListView.builder(
                             padding: EdgeInsets.all(8),
                             itemCount: snapshot.data.length,
@@ -105,12 +108,21 @@ class _LecturerList extends State {
                                 ListTile(
                                   leading: CircleAvatar(
                                             radius:30,
-                                            backgroundImage: NetworkImage('http://10.0.2.2:8000/images/user/' + snapshot.data[index]['image']),
+                                            backgroundImage: NetworkImage('http://192.168.43.203:8000/images/user/' + snapshot.data[index]['image']),
                                           ),
                                   title: Text(snapshot.data[index]['name']),
                                   subtitle:Text(snapshot.data[index]['email']),
                                   isThreeLine: true,
                                   trailing: Text(snapshot.data[index]['gender'].toString().toUpperCase()),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            new EducationQuality(name: snapshot.data[index]['name'],image: snapshot.data[index]['image']),
+                                      ),
+                                    );
+                                  },
                                 )
                               ]));
                             },
@@ -130,13 +142,3 @@ class _LecturerList extends State {
   }
 }
 
-final serviceSelected = TextEditingController();
-String selectService = "";
-
-List<String> services = [
-  "DSA",
-  "SRC",
-  "Bangunan TSS",
-  "Security Guard",
-  "Management",
-];

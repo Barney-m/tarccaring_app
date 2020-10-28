@@ -9,8 +9,11 @@ import 'package:tarccaring_app/widgets/size_config.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 
 class EducationQuality extends StatefulWidget {
+  EducationQuality({this.name, this.image,});
+  final String name;
+  final String image;
   @override
-  _EducationQuality createState() => _EducationQuality();
+  State<StatefulWidget> createState() { return new _EducationQuality();}
 }
 
 class _EducationQuality extends State<EducationQuality> {
@@ -28,6 +31,8 @@ class _EducationQuality extends State<EducationQuality> {
 
   @override
   Widget build(BuildContext context) {
+    String todo = ModalRoute.of(context).settings.arguments;
+
     SizeConfig().init(context);
 
     return Scaffold(
@@ -108,7 +113,7 @@ class _EducationQuality extends State<EducationQuality> {
                             Expanded(
                               child: TextField(
                                 keyboardType: TextInputType.multiline,
-                                maxLines: 7,
+                                maxLines: 12,
                                 style: TextStyle(fontSize: 15),
                                 decoration: new InputDecoration(
                                     hintText: "Type your comment here....",
@@ -150,7 +155,7 @@ class _EducationQuality extends State<EducationQuality> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
+                                            'http://192.168.43.203:8000/images/user/'+ widget.image),
                                       ),
                                     ),
                                   ),
@@ -162,7 +167,7 @@ class _EducationQuality extends State<EducationQuality> {
                               Expanded(
                                   flex: 5,
                                   child: Text(
-                                    'Lecturer Name',
+                                    widget.name,
                                     style: new TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.black,
@@ -178,7 +183,7 @@ class _EducationQuality extends State<EducationQuality> {
                           right: SizeConfig.blockSizeVertical * 2,
                           child: Text('Comment:'),
                         ),
-                        Positioned(
+                        /*Positioned(
                           top: SizeConfig.blockSizeVertical * 42.5,
                           left: SizeConfig.blockSizeVertical * 2,
                           right: SizeConfig.blockSizeVertical * 2,
@@ -210,7 +215,7 @@ class _EducationQuality extends State<EducationQuality> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                            )),
+                            )),*/
                         Positioned(
                           bottom: 50.0,
                           left: 10.0,
