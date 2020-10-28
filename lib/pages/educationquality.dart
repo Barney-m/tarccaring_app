@@ -7,9 +7,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:tarccaring_app/widgets/size_config.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
+import 'package:tarccaring_app/utils/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EducationQuality extends StatefulWidget {
-  EducationQuality({this.name, this.image,});
+  EducationQuality({this.lecturer_id, this.name, this.image,});
+  final String lecturer_id;
   final String name;
   final String image;
   @override
@@ -17,16 +20,84 @@ class EducationQuality extends StatefulWidget {
 }
 
 class _EducationQuality extends State<EducationQuality> {
-  Future<void> _logoutUser(BuildContext context) {}
+  String _user;
 
-  Future<List<dynamic>> fetchFeedbacks() async {
-    var result = await http
-        .get('https://randomuser.me/api/?results=10'); //TODO: Complete API
-    return json.decode(result.body)['results'];
+  @override
+  void initState() {
+    super.initState();
+    getID();
+  }
+
+  getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _user = prefs.getString('id') ?? '';
+    });
+  }
+
+  Future<void> _submit(BuildContext context) async{
+    print(isSwitched);
+    print(_comment.text.toString());
+    print(_user);
+    if(_comment.text.toString().trim() != null){
+      var data = {
+        'user_id' : _user,
+        'lecturer_id' : widget.lecturer_id,
+        'anonymous' : isSwitched,
+        'comment' : _comment.text.toString(),
+        'feedback_type' : 3,
+      };
+      var result = await APIService().postMethod(data, 'submit');
+      var message = json.decode(result.body);
+      if(message['success'] == true){
+        showDialog(
+          context: context,
+          builder: (BuildContext  context) {
+            return SimpleDialog(
+              title: Text("Submit Successful!"),
+              children: <Widget>[
+                SimpleDialogOption(
+                  onPressed: (){
+                    Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
+                  },
+                  child: const Text('OK')
+                ),
+              ],
+            );
+          },
+        );
+      } else{
+        showDialog(
+          context: context,
+          builder: (BuildContext  context) {
+            return AlertDialog(
+              title: Text("Submit Failed!"),
+              content: Text("Something goes wrong...."),
+            );
+          },
+        );
+      }
+    } else{
+      showDialog(
+        context: context,
+        builder: (BuildContext  context) {
+          return AlertDialog(
+            title: Text("Invalid Action."),
+            content: Text("Please fill the comment."),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  void dispose(){
+    _comment.dispose();
+    super.dispose();
   }
 
   bool isSwitched = false;
-
+  final _comment = TextEditingController();
   File _image;
 
   @override
@@ -112,6 +183,7 @@ class _EducationQuality extends State<EducationQuality> {
                           child: Column(children: <Widget>[
                             Expanded(
                               child: TextField(
+                                controller: _comment,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 12,
                                 style: TextStyle(fontSize: 15),
@@ -155,7 +227,7 @@ class _EducationQuality extends State<EducationQuality> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://192.168.43.203:8000/images/user/'+ widget.image),
+                                            'http://10.0.2.2:8000/images/user/'+ widget.image),
                                       ),
                                     ),
                                   ),
@@ -230,7 +302,7 @@ class _EducationQuality extends State<EducationQuality> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _logoutUser(context);
+                              _submit(context);
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),

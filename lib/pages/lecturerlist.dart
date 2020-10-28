@@ -108,7 +108,7 @@ class _LecturerList extends State {
                                 ListTile(
                                   leading: CircleAvatar(
                                             radius:30,
-                                            backgroundImage: NetworkImage('http://192.168.43.203:8000/images/user/' + snapshot.data[index]['image']),
+                                            backgroundImage: NetworkImage('http://10.0.2.2:8000/images/user/' + snapshot.data[index]['image']),
                                           ),
                                   title: Text(snapshot.data[index]['name']),
                                   subtitle:Text(snapshot.data[index]['email']),
@@ -119,7 +119,7 @@ class _LecturerList extends State {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            new EducationQuality(name: snapshot.data[index]['name'],image: snapshot.data[index]['image']),
+                                            new EducationQuality(lecturer_id: snapshot.data[index]['user_id'], name: snapshot.data[index]['name'],image: snapshot.data[index]['image']),
                                       ),
                                     );
                                   },
