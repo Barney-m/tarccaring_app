@@ -15,17 +15,31 @@ import 'package:tarccaring_app/widgets/education_quality_details_card.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
 
 class ManagementFeedbackDetailPage extends StatefulWidget {
+  ManagementFeedbackDetailPage({
+    this.name,
+    this.comment,
+    this.type,
+    this.attachment,
+    //this.date
+  });
+
+  final String name;
+  final String comment;
+  final String type;
+  final String attachment;
+
+  //final String date;
   @override
-  _ManagementFeedbackDetailPage createState() => _ManagementFeedbackDetailPage();
+  State<StatefulWidget> createState() {
+    return new _ManagementFeedbackDetailPage();
+  }
 }
 
-class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> {
+class _ManagementFeedbackDetailPage
+    extends State<ManagementFeedbackDetailPage> {
   Future<void> _logoutUser(BuildContext context) {}
 
   @override
-
-  bool isSwitched = false;
-
   String todo = '';
 
   int id;
@@ -37,25 +51,24 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
     return json.decode(result.body);
   }*/
 
-  _cardType(){
-    switch(todo){
-      case 'Campus Facility Feedback' :
+  _cardType() {
+    switch (widget.type) {
+      case 'Campus Facility Feedback':
         return CampusFeedbackDetailsCard();
         break;
-      case 'Canteen Food Feedback' :
+      case 'Canteen Food Feedback':
         return CanteenFeedbackDetailsCard();
         break;
-      case 'Service Attitude Feedback' :
+      case 'Service Attitude Feedback':
         return ServiceAttitudeDetailsCard();
         break;
-      case 'Education Quality Feedback' :
+      case 'Education Quality Feedback':
         return EducationQualityDetailsCard();
         break;
     }
   }
 
   Widget build(BuildContext context) {
-
     todo = ModalRoute.of(context).settings.arguments;
     //todo = ModalRoute.of(context).settings.arguments;
 
@@ -71,8 +84,8 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
               child: Stack(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(
-                        top: SizeConfig.blockSizeVertical * 19),
+                    margin:
+                        EdgeInsets.only(top: SizeConfig.blockSizeVertical * 19),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -86,15 +99,19 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                     left: 0.0,
                     right: 0.0,
                     child: AppBar(
-                      title: Text(''),// You can add title here
+                      title: Text(''),
+                      // You can add title here
                       leading: new IconButton(
-                        icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () =>  Navigator.of(context)
-                            .pushReplacementNamed(UserNavigationRoute),
+                        icon:
+                            new Icon(Icons.arrow_back_ios, color: Colors.white),
+                        onPressed: () => Navigator.of(context)
+                            .pushReplacementNamed(ManagementNavigationRoute),
                       ),
-                      backgroundColor: primaryColor.withOpacity(0.3), //You can make this transparent
+                      backgroundColor: primaryColor.withOpacity(0.3),
+                      //You can make this transparent
                       elevation: 0.0, //No shadow
-                    ),),
+                    ),
+                  ),
                   Positioned(
                     top: SizeConfig.blockSizeVertical * 5,
                     left: SizeConfig.blockSizeVertical * 7,
@@ -124,7 +141,7 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                           child: Column(
                             children: [
                               Text(
-                                'Student Name',
+                                widget.name,
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -132,7 +149,7 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                                 textAlign: TextAlign.left,
                               ),
                               Text(
-                                'Student ID',
+                                widget.name,
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -147,8 +164,10 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        defaultPadding * 1.5, SizeConfig.blockSizeVertical * 13,
-                        defaultPadding * 1.5, 0),
+                        defaultPadding * 1.5,
+                        SizeConfig.blockSizeVertical * 13,
+                        defaultPadding * 1.5,
+                        0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(),
                     ),
@@ -161,14 +180,17 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(
-                              defaultPadding / 2, SizeConfig.blockSizeVertical * 5, defaultPadding / 2, 0),
+                              defaultPadding / 2,
+                              SizeConfig.blockSizeVertical * 5,
+                              defaultPadding / 2,
+                              0),
                           height: SizeConfig.blockSizeVertical * 42,
                           child: Column(children: <Widget>[
                             Expanded(
                               child: Row(
                                 children: <Widget>[
                                   Text(
-                                    'Example Title 1',
+                                    'Feedback',
                                     style: new TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.black,
@@ -180,11 +202,10 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                                     flex: 5,
                                     child: SizedBox(),
                                   ),
-                                  Text('27/9/2020'),
+                                  //Text(widget.date),
                                 ],
                               ),
                             ),
-
                             Expanded(
                               child: _cardType(),
                               /*child: Row(
@@ -219,8 +240,11 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                               child: TextField(
                                 enabled: false,
                                 keyboardType: TextInputType.multiline,
-                                maxLines: null,
+                                maxLines: 2,
                                 decoration: new InputDecoration(
+                                    hintText: widget.comment,
+                                    hintStyle: TextStyle(
+                                        color: Colors.black, fontSize: 15),
                                     border: new OutlineInputBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(20),
@@ -253,9 +277,14 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                           left: SizeConfig.blockSizeVertical * 10,
                           right: SizeConfig.blockSizeVertical * 10,
                           child: Container(
-                            height: SizeConfig.blockSizeVertical * 15,
                             decoration: BoxDecoration(
-                              color: Colors.grey[100],
+                              shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                fit: BoxFit.cover,
+                                image: new NetworkImage(
+                                    'http://192.168.43.203:8000/images/user/' +
+                                        widget.attachment),
+                              ),
                             ),
                           ),
                         ),
@@ -334,15 +363,3 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
     );
   }
 }
-
-final serviceSelected = TextEditingController();
-String selectService = "";
-
-List<String> services = [
-  "DSA",
-  "SRC",
-  "Bangunan TSS",
-  "Security Guard",
-  "Management",
-];
-

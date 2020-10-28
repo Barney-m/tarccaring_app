@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
 
+import 'management_feedback_detail.dart';
+
 class ManagementHomepage extends StatefulWidget {
   @override
   _ManagementHomepage createState() => _ManagementHomepage();
@@ -33,10 +35,10 @@ class _ManagementHomepage extends State<ManagementHomepage> {
   }
 
   final _type = [
-    Icons.event_seat_rounded,
-    Icons.fastfood_rounded,
-    Icons.menu_book_rounded,
-    Icons.headset_mic_rounded,
+    Icons.home,
+    Icons.home,
+    Icons.home,
+    Icons.home,
   ];
 
   @override
@@ -108,6 +110,21 @@ class _ManagementHomepage extends State<ManagementHomepage> {
                                   subtitle:Text(snapshot.data[index]['comment']),
                                   isThreeLine: true,
                                   trailing: Text(snapshot.data[index]['status'].toString().toUpperCase()),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                        new ManagementFeedbackDetailPage(
+                                            name: snapshot.data[index]['creator_id'],
+                                            comment: snapshot.data[index]['comment'],
+                                            type: snapshot.data[index]['type'],
+                                            attachment: snapshot.data[index]['attachment'],
+                                            //date: snapshot.data[index]['created_at']
+                                          ),
+                                      ),
+                                    );
+                                  },
                                 )
                               ]));
                             },
