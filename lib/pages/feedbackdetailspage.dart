@@ -20,8 +20,6 @@ class FeedbackDetailPage extends StatefulWidget {
 }
 
 class _FeedbackDetailPage extends State<FeedbackDetailPage> {
-  Future<void> _logoutUser(BuildContext context) {}
-
   @override
 
   bool isSwitched = false;

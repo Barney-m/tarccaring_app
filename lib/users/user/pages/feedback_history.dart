@@ -37,9 +37,7 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       case 2:
       case 3:
       case 4:
-        var result = await APIService().getMethod(
-            'feedbacks/user_history?id=$_user&feedback=' +
-                _selectedIndex.toString());
+        var result = await APIService().getMethod('feedbacks/user_history?id=$_user&feedback=' + _selectedIndex.toString());
         print(json.decode(result.body));
         return json.decode(result.body);
         break;
@@ -52,10 +50,10 @@ class _FeedbackHistory extends State<FeedbackHistory> {
   }
 
   final _type = [
-    Icons.home,
-    Icons.home,
-    Icons.home,
-    Icons.home,
+    Icons.event_seat_rounded,
+    Icons.fastfood_rounded,
+    Icons.menu_book_rounded,
+    Icons.headset_mic_rounded,
   ];
 
   @override
