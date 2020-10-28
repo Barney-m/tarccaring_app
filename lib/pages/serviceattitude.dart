@@ -1,9 +1,12 @@
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
 import 'package:tarccaring_app/pages/feedbackdetailspage.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:tarccaring_app/utils/api.dart';
+import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
@@ -14,19 +17,40 @@ class ServiceAttitude extends StatefulWidget {
 }
 
 class _ServicesAttitude extends State<ServiceAttitude> {
+
   Future<void> _logoutUser(BuildContext context) {}
 
   final myController = TextEditingController();
   bool isSwitched = false;
+  String _user;
 
-  @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
   }
 
+  anonymous(bool isSwitched) {
+    if (isSwitched == false) {
+      return Text('    $_user', style: TextStyle(fontSize: 17, color: Colors.white,),);
+    }else if(isSwitched == true){
+      return Text('    '+'ANONYMOUSLY',style: TextStyle(fontSize: 17,color: Colors.white,),);}
+  }
+
   @override
+  void initState() {
+    super.initState();
+    getID();
+  }
+
+  getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _user = prefs.getString('id') ?? '';
+    });
+  }
+
+
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
@@ -66,7 +90,6 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                             onChanged: (value) {
                               setState(() {
                                 isSwitched = value;
-                                print(isSwitched);
                               });
                             },
                             activeTrackColor: Colors.lightGreenAccent,
@@ -76,7 +99,7 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                         Expanded(
                             flex: 3,
                             child: Text(
-                              'ANONYMOUSLY',
+                              '$isSwitched',
                               style: new TextStyle(
                                 fontSize: 13.0,
                                 color: Colors.grey,
@@ -184,6 +207,9 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                                     content: SingleChildScrollView(
                                       child: ListBody(
                                         children: <Widget>[
+                                          Text('By:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
+                                          anonymous(isSwitched),
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                           Text('Service Type:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
                                           Text('    '+selectService,style: TextStyle(fontSize: 17,color: Colors.white,),),
                                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
