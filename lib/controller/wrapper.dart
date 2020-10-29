@@ -18,6 +18,8 @@ class _Wrapper extends State {
 
   Future<void> getRenderPage() async {
     bool loginState = await getLoginState();
+    int role = await getRoleID();
+    String uuid = await getUUID(); 
     bool firstTimeState = await getFirstTimeState();
 
     if (firstTimeState != null) {

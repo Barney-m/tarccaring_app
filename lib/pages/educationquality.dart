@@ -47,20 +47,28 @@ class _EducationQuality extends State<EducationQuality> {
         'comment' : _comment.text.toString(),
         'feedback_type' : 3,
       };
-      var result = await APIService().postMethod(data, 'submit');
+      var result = await APIService().postMethod(data,'submit');
       var message = json.decode(result.body);
       if(message['success'] == true){
         showDialog(
+          barrierDismissible: false,
           context: context,
           builder: (BuildContext  context) {
             return SimpleDialog(
-              title: Text("Submit Successful!"),
+              title: Text("Submit Successful!",
+                        style: new TextStyle(
+                                fontSize: 20.0,
+                              ),
+                        ),
               children: <Widget>[
-                SimpleDialogOption(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
-                  },
-                  child: const Text('OK')
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SimpleDialogOption(
+                    onPressed: (){
+                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                    },
+                    child: const Text('OK')
+                  ),
                 ),
               ],
             );

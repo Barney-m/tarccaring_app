@@ -49,6 +49,21 @@ class _FeedbackHistory extends State<FeedbackHistory> {
     }
   }
 
+  Color statusColor(String status){
+    if(status == 'APPROVED'){
+      return Colors.green;
+    }
+    else if(status == 'DISMISSED'){
+      return Colors.red;
+    }
+    else if(status == 'URGENT'){
+      return Colors.green[700];
+    }
+    else{
+      return Colors.grey;
+    }
+  }
+
   final _type = [
     Icons.home,
     Icons.home,
@@ -146,10 +161,11 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                                           subtitle:
                                           Text(snapshot.data[index]['comment']),
                                           isThreeLine: true,
-                                          trailing: Text(snapshot.data[index]
-                                          ['status']
-                                              .toString()
-                                              .toUpperCase()),
+                                          trailing: Text(snapshot.data[index]['status'].toString().toUpperCase(),
+                                                      style: TextStyle(
+                                                        color: statusColor(snapshot.data[index]['status'].toString().toUpperCase()),
+                                                      ),
+                                                    ),
                                         )
                                       ])));
                             },

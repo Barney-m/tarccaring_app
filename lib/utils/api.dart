@@ -22,7 +22,6 @@ class APIService{
   getMethod(endpoint) async{
     var fullUrl = _url + endpoint;
     String token = await getAPIToken();
-    print('Token : $token');
     return http.get(
       fullUrl,
       headers: {
