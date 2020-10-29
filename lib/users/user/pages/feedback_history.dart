@@ -37,29 +37,28 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       case 2:
       case 3:
       case 4:
-        var result = await APIService().getMethod('feedbacks/user_history?id=$_user&feedback=' + _selectedIndex.toString());
+        var result = await APIService().getMethod(
+            'feedbacks/user_history?id=$_user&feedback=' +
+                _selectedIndex.toString());
         print(json.decode(result.body));
         return json.decode(result.body);
         break;
       default:
         var result =
-        await APIService().getMethod('feedbacks/user_history?id=$_user');
+            await APIService().getMethod('feedbacks/user_history?id=$_user');
         print(json.decode(result.body));
         return json.decode(result.body);
     }
   }
 
-  Color statusColor(String status){
-    if(status == 'APPROVED'){
+  Color statusColor(String status) {
+    if (status == 'APPROVED') {
       return Colors.green;
-    }
-    else if(status == 'DISMISSED'){
+    } else if (status == 'DISMISSED') {
       return Colors.red;
-    }
-    else if(status == 'URGENT'){
+    } else if (status == 'URGENT') {
       return Colors.green[700];
-    }
-    else{
+    } else {
       return Colors.grey;
     }
   }
@@ -84,34 +83,33 @@ class _FeedbackHistory extends State<FeedbackHistory> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
-              itemBuilder: (context, index) =>
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedIndex = index;
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(
-                        left: defaultPadding,
-                        right: index == categories.length - 1
-                            ? defaultPadding
-                            : 0, // Add extra padding when reach last item
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                      decoration: BoxDecoration(
-                        color: index == _selectedIndex
-                            ? Colors.white.withOpacity(0.4)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        categories[index],
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(
+                    left: defaultPadding,
+                    right: index == categories.length - 1
+                        ? defaultPadding
+                        : 0, // Add extra padding when reach last item
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                  decoration: BoxDecoration(
+                    color: index == _selectedIndex
+                        ? Colors.white.withOpacity(0.4)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    categories[index],
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ),
           SizedBox(height: defaultPadding / 2),
@@ -131,43 +129,71 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                           return ListView.builder(
                             padding: EdgeInsets.all(8),
                             itemCount: snapshot.data.length,
-                              itemBuilder: (BuildContext context, int index) {
+                            itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            FeedbackDetailPage(
-                                              name: snapshot.data[index]['creator_id'],
-                                              comment: snapshot.data[index]['comment'],
-                                              type: snapshot.data[index]['type'],
-                                              attachment: snapshot.data[index]['attachment'],
-                                              //date: snapshot.data[index]['created_at']
-                                            ),
+                                    /*if (snapshot.data[index]['attachment'] !=
+                                        null) {
+                                     */ Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              FeedbackDetailPage(
+                                            name: snapshot.data[index]['creator_id'],
+                                            comment: snapshot.data[index]['comment'],
+                                            type: snapshot.data[index]['type'],
+                                            attachment: snapshot.data[index]['attachment'].toString(),
+                                            status: snapshot.data[index]['status'],
+                                            lecturer: '123',
+                                            pendingDate: snapshot.data[index]['timestamps'].toString(),
+                                                //date: snapshot.data[index]['created_at']
+                                          ),
+                                        ),
+                                      );/*
+                                    }*/ /*else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              FeedbackDetailPage(
+                                            name: snapshot.data[index]['creator_id'],
+                                            comment: snapshot.data[index]['comment'],
+                                            type: snapshot.data[index]['type'],
+                                            attachment: 'default.png',
+                                            status: snapshot.data[index]['status'],
+                                            lecturer: '123',
+                                            date: snapshot.data[index]['approved_date'].toString(),
+                                            //date: snapshot.data[index]['created_at']
+                                          ),
                                         ),
                                       );
+                                    }*/
                                   },
                                   child: Card(
                                       child: Column(children: <Widget>[
-                                        ListTile(
-                                          leading: Icon(
-                                              _type[snapshot.data[index]
-                                              ['feedbackType_id'] -
-                                                  1],
-                                              size: 40.0),
-                                          title: Text(
-                                              snapshot.data[index]['type']),
-                                          subtitle:
+                                    ListTile(
+                                      leading: Icon(
+                                          _type[snapshot.data[index]
+                                                  ['feedbackType_id'] -
+                                              1],
+                                          size: 40.0),
+                                      title: Text(snapshot.data[index]['type']),
+                                      subtitle:
                                           Text(snapshot.data[index]['comment']),
-                                          isThreeLine: true,
-                                          trailing: Text(snapshot.data[index]['status'].toString().toUpperCase(),
-                                                      style: TextStyle(
-                                                        color: statusColor(snapshot.data[index]['status'].toString().toUpperCase()),
-                                                      ),
-                                                    ),
-                                        )
-                                      ])));
+                                      isThreeLine: true,
+                                      trailing: Text(
+                                        snapshot.data[index]['status']
+                                            .toString()
+                                            .toUpperCase(),
+                                        style: TextStyle(
+                                          color: statusColor(snapshot
+                                              .data[index]['status']
+                                              .toString()
+                                              .toUpperCase()),
+                                        ),
+                                      ),
+                                    )
+                                  ])));
                             },
                           );
                         } else {

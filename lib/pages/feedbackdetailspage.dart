@@ -20,15 +20,18 @@ class FeedbackDetailPage extends StatefulWidget {
     this.comment,
     this.type,
     this.attachment,
-    //this.date
+    this.status,
+    this.lecturer,
+    this.pendingDate,
   });
 
   final String name;
   final String comment;
   final String type;
   final String attachment;
-
-  //final String date;
+  final String status;
+  final String lecturer;
+  final String pendingDate;
   @override
   State<StatefulWidget> createState() {
     return new _FeedbackDetailPage();
@@ -40,8 +43,6 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
 
   @override
   String todo = '';
-
-  int id;
 
   /*Future<List<dynamic>> fetchFeedbacks() async {
     var result =
@@ -67,8 +68,21 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
     }
   }
 
+
+
+  Color statusColor(String status) {
+    if (status == 'APPROVED') {
+      return Colors.green;
+    } else if (status == 'DISMISSED') {
+      return Colors.red;
+    } else if (status == 'URGENT') {
+      return Colors.green[700];
+    } else {
+      return Colors.grey;
+    }
+  }
+
   Widget build(BuildContext context) {
-    todo = ModalRoute.of(context).settings.arguments;
     //todo = ModalRoute.of(context).settings.arguments;
 
     SizeConfig().init(context);
@@ -83,8 +97,8 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    margin:
-                        EdgeInsets.only(top: SizeConfig.blockSizeVertical * 19),
+                    margin: EdgeInsets.only(
+                        top: SizeConfig.blockSizeVertical * 19),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -101,10 +115,11 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                       title: Text(''),
                       // You can add title here
                       leading: new IconButton(
-                        icon:
-                            new Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed(UserNavigationRoute),
+                        icon: new Icon(Icons.arrow_back_ios,
+                            color: Colors.white),
+                        onPressed: () =>
+                            Navigator.of(context)
+                                .pushNamed(UserNavigationRoute),
                       ),
                       backgroundColor: primaryColor.withOpacity(0.3),
                       //You can make this transparent
@@ -139,75 +154,85 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                           flex: 7,
                           child: Column(
                             children: [
-                              Text(
-                                widget.name,
-                                style: new TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                widget.name,
-                                style: new TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
+                            Text(
+                            widget.name,
+                            style: new TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                        ),
+                          Text(
+                            widget.name,
+                            style: new TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.left,
+                            ),
                       ],
                     ),
                   ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(
+                  defaultPadding * 1.5,
+                  SizeConfig.blockSizeVertical * 13,
+                  defaultPadding * 1.5,
+                  0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(),
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(defaultPadding / 2,
+                        0, defaultPadding / 2, 0),
+                    //margin: EdgeInsets.all(defaultPadding / 2),
+                  ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        defaultPadding * 1.5,
-                        SizeConfig.blockSizeVertical * 13,
-                        defaultPadding * 1.5,
+                        defaultPadding / 2,
+                        SizeConfig.blockSizeVertical * 5,
+                        defaultPadding / 2,
                         0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(),
-                    ),
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              defaultPadding / 2, 0, defaultPadding / 2, 0),
-                          //margin: EdgeInsets.all(defaultPadding / 2),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              defaultPadding / 2,
-                              SizeConfig.blockSizeVertical * 5,
-                              defaultPadding / 2,
-                              0),
-                          height: SizeConfig.blockSizeVertical * 42,
-                          child: Column(children: <Widget>[
-                            Expanded(
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    'Feedback',
-                                    style: new TextStyle(
-                                      fontSize: 20.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Expanded(
-                                    flex: 5,
-                                    child: SizedBox(),
-                                  ),
-                                  //Text(widget.date),
-                                ],
-                              ),
+                    height: SizeConfig.blockSizeVertical * 42,
+                    child: Column(children: <Widget>[
+                      Expanded(
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                                widget.status.toString().toUpperCase(),
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: statusColor(widget.status
+                                      .toString()
+                                      .toUpperCase()),
+                                ),
+                              textAlign: TextAlign.left,
                             ),
-                            Expanded(
-                              child: _cardType(),
-                              /*child: Row(
+                            Expanded(flex:5, child: SizedBox()),
+                            Text(
+                              widget.pendingDate.toString(),
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: statusColor(widget.status
+                                    .toString()
+                                    .toUpperCase()),
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                            //Text(widget.date),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: _cardType(),
+                        /*child: Row(
                                 children: <Widget>[
                                   Expanded(flex: 1, child: SizedBox(),),
                                   Container(
@@ -223,71 +248,72 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                   Expanded(flex: 1, child: SizedBox(),),
                                 ],
                               ),*/
-                            ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: <Widget>[
+                            Text('Comment: '),
                             Expanded(
-                              child: Row(
-                                children: <Widget>[
-                                  Text('Comment: '),
-                                  Expanded(
-                                    flex: 7,
-                                    child: SizedBox(),
-                                  ),
-                                ],
-                              ),
+                              flex: 7,
+                              child: SizedBox(),
                             ),
-                            Expanded(
-                              child: TextField(
-                                enabled: false,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 2,
-                                decoration: new InputDecoration(
-                                    hintText: widget.comment,
-                                    hintStyle: TextStyle(
-                                        color: Colors.black, fontSize: 15),
-                                    border: new OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20),
-                                        bottomLeft: Radius.circular(20),
-                                        bottomRight: Radius.circular(20),
-                                      ),
-                                      borderSide: new BorderSide(
-                                          color: Colors.grey[100]),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white),
-                              ),
-                            ),
-                            Expanded(
-                              child: Row(
-                                children: <Widget>[
-                                  Text('Attachment: '),
-                                  Expanded(
-                                    flex: 7,
-                                    child: SizedBox(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
+                          ],
                         ),
-                        Positioned(
-                          top: SizeConfig.blockSizeVertical * 45,
-                          left: SizeConfig.blockSizeVertical * 10,
-                          right: SizeConfig.blockSizeVertical * 10,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: new DecorationImage(
+                      ),
+                      Expanded(
+                        child: TextField(
+                          enabled: false,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 2,
+                          decoration: new InputDecoration(
+                              hintText: widget.comment,
+                              hintStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15),
+                              border: new OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                ),
+                                borderSide: new BorderSide(
+                                    color: Colors.grey[100]),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white),
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: <Widget>[
+                            Text('Attachment: '),
+                            Expanded(
+                              flex: 7,
+                              child: SizedBox(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
+                  Positioned(
+                    top: SizeConfig.blockSizeVertical * 45,
+                    left: SizeConfig.blockSizeVertical * 10,
+                    right: SizeConfig.blockSizeVertical * 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
                                     'http://192.168.43.203:8000/images/user/' +
                                         widget.attachment),
                               ),
-                            ),
-                          ),
-                        ),
-                        /*Positioned(
+                      ),
+                    ),
+                  ),
+                  /*Positioned(
                           top: SizeConfig.blockSizeVertical * 63,
                           left: SizeConfig.blockSizeVertical * 2,
                           right: SizeConfig.blockSizeVertical * 2,
@@ -350,15 +376,15 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                             ),
                           ),
                         ),*/
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
+      ],
+    ),)
+    ,
     );
   }
 }
