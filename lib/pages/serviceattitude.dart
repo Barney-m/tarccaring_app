@@ -2,43 +2,81 @@ import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tarccaring_app/pages/canteenfood.dart';
+import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
+import 'dart:math' as math;
 
 class ServiceAttitude extends StatefulWidget {
   @override
   _ServicesAttitude createState() => _ServicesAttitude();
 }
 
-class _ServicesAttitude extends State<ServiceAttitude> {
+class CustomTimerPainter extends CustomPainter {
+  CustomTimerPainter({
+    this.animation,
+    this.backgroundColor,
+    this.color,
+  }) : super(repaint: animation);
 
+  final Animation<double> animation;
+  final Color backgroundColor, color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+    ..color = backgroundColor
+    ..strokeWidth = 10.0
+    ..strokeCap = StrokeCap.butt
+    ..style = PaintingStyle.stroke;
+
+    //canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
+    paint.color = color;
+    double progress = (1.0 - animation.value) * 2 * math.pi;
+    canvas.drawArc(Offset.zero & size, math.pi * 1.5, -progress, false, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    var old;
+    return animation.value != old.animation.value ||
+        color != old.color ||
+        backgroundColor != old.backgroundColor;
+  }
+}
+
+class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateMixin {
+  @override
   Future<void> _logoutUser(BuildContext context) {}
-
   final myController = TextEditingController();
   bool isSwitched = false;
   String _user;
+
+  AnimationController controller;
+
+  void initState() {
+    super.initState();
+    getID();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 5),
+    );
+  }
 
   void dispose() {
     // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
   }
-
   anonymous(bool isSwitched) {
     if (isSwitched == false) {
       return Text('    $_user', style: TextStyle(fontSize: 17, color: Colors.white,),);
     }else if(isSwitched == true){
       return Text('    '+'ANONYMOUSLY',style: TextStyle(fontSize: 17,color: Colors.white,),);}
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getID();
   }
 
   getID() async {
@@ -47,7 +85,6 @@ class _ServicesAttitude extends State<ServiceAttitude> {
       _user = prefs.getString('id') ?? '';
     });
   }
-
 
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -191,11 +228,31 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                             ),
                             color: primaryColor,
                             onPressed: () {
+                              controller.reverse(
+                                  from: controller.value == 0.0
+                                      ? 1.0
+                                      : controller.value);
+                              Future.delayed(Duration(seconds: 5), () {
+                                // 5s over, navigate to a new page
+                                Navigator.pushReplacementNamed(context, UserNavigationRoute);
+                              });
                               return showDialog(
                                 context: context,
                                 barrierDismissible: false,
                                 builder: (context) {
-                                  return AlertDialog(
+                                  return AnimatedBuilder(
+                                    animation: controller,
+                                    builder:
+                                        (BuildContext context, Widget child) {
+                                      return CustomPaint(
+                                          painter: CustomTimerPainter(
+                                            animation: controller,
+                                            backgroundColor: Colors.white,
+                                            color: Colors.white,
+                                          ));
+                                    },
+                                  );
+                                  /*return AlertDialog(
                                     backgroundColor: primaryColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(20))
@@ -216,7 +273,7 @@ class _ServicesAttitude extends State<ServiceAttitude> {
                                         ],
                                       ),
                                     ),
-                                  );
+                                  );*/
                                 },
                               );
                             },
