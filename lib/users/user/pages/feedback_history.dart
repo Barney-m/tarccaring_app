@@ -50,10 +50,10 @@ class _FeedbackHistory extends State<FeedbackHistory> {
   }
 
   final _type = [
-    Icons.event_seat_rounded,
-    Icons.fastfood_rounded,
-    Icons.menu_book_rounded,
-    Icons.headset_mic_rounded,
+    Icons.home,
+    Icons.home,
+    Icons.home,
+    Icons.home,
   ];
 
   @override
@@ -123,9 +123,13 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            FeedbackDetailPage(),
-                                        settings: RouteSettings(
-                                          arguments: snapshot.data[index]['type']),
+                                            FeedbackDetailPage(
+                                              name: snapshot.data[index]['creator_id'],
+                                              comment: snapshot.data[index]['comment'],
+                                              type: snapshot.data[index]['type'],
+                                              attachment: snapshot.data[index]['attachment'],
+                                              //date: snapshot.data[index]['created_at']
+                                            ),
                                         ),
                                       );
                                   },
