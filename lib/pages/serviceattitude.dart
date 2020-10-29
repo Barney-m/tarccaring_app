@@ -16,55 +16,17 @@ class ServiceAttitude extends StatefulWidget {
   _ServicesAttitude createState() => _ServicesAttitude();
 }
 
-class CustomTimerPainter extends CustomPainter {
-  CustomTimerPainter({
-    this.animation,
-    this.backgroundColor,
-    this.color,
-  }) : super(repaint: animation);
-
-  final Animation<double> animation;
-  final Color backgroundColor, color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-    ..color = backgroundColor
-    ..strokeWidth = 10.0
-    ..strokeCap = StrokeCap.butt
-    ..style = PaintingStyle.stroke;
-
-    //canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
-    paint.color = color;
-    double progress = (1.0 - animation.value) * 2 * math.pi;
-    canvas.drawArc(Offset.zero & size, math.pi * 1.5, -progress, false, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    var old;
-    return animation.value != old.animation.value ||
-        color != old.color ||
-        backgroundColor != old.backgroundColor;
-  }
-}
-
-class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateMixin {
-  @override
+class _ServicesAttitude extends State<ServiceAttitude>
+    with TickerProviderStateMixin {
   Future<void> _logoutUser(BuildContext context) {}
   final myController = TextEditingController();
   bool isSwitched = false;
   String _user;
 
-  AnimationController controller;
-
+  @override
   void initState() {
     super.initState();
     getID();
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 5),
-    );
   }
 
   void dispose() {
@@ -72,11 +34,25 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
     myController.dispose();
     super.dispose();
   }
+
   anonymous(bool isSwitched) {
     if (isSwitched == false) {
-      return Text('    $_user', style: TextStyle(fontSize: 17, color: Colors.white,),);
-    }else if(isSwitched == true){
-      return Text('    '+'ANONYMOUSLY',style: TextStyle(fontSize: 17,color: Colors.white,),);}
+      return Text(
+        '    $_user',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      );
+    } else if (isSwitched == true) {
+      return Text(
+        '    ' + 'ANONYMOUSLY',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      );
+    }
   }
 
   getID() async {
@@ -105,7 +81,8 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
               child: Stack(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 0.5),
+                    margin: EdgeInsets.only(
+                        top: SizeConfig.blockSizeVertical * 0.5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -115,7 +92,8 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1),
+                    margin:
+                        EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1),
                     child: Row(
                       children: [
                         Expanded(
@@ -134,7 +112,7 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
                         Expanded(
                             flex: 3,
                             child: Text(
-                              '$isSwitched',
+                              'ANONYMOUSLY',
                               style: new TextStyle(
                                 fontSize: 13.0,
                                 color: Colors.grey,
@@ -152,7 +130,10 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        defaultPadding * 1.5, SizeConfig.blockSizeVertical * 6, defaultPadding * 1.5, 0),
+                        defaultPadding * 1.5,
+                        SizeConfig.blockSizeVertical * 6,
+                        defaultPadding * 1.5,
+                        0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(),
                     ),
@@ -160,12 +141,17 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.fromLTRB(
-                              defaultPadding / 2, SizeConfig.blockSizeVertical * 19, defaultPadding / 2, 100),
+                              defaultPadding / 2,
+                              SizeConfig.blockSizeVertical * 19,
+                              defaultPadding / 2,
+                              100),
                           //margin: EdgeInsets.all(defaultPadding / 2),
                           child: Column(children: <Widget>[
                             Expanded(
                               child: TextField(
-                                onChanged: (text){print(text);},
+                                onChanged: (text) {
+                                  print(text);
+                                },
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 18,
                                 controller: myController,
@@ -173,7 +159,8 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
                                 decoration: new InputDecoration(
                                     hintText: "Type your comment here....",
                                     hintStyle: TextStyle(fontSize: 15),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 15, horizontal: 10),
                                     border: new OutlineInputBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(20),
@@ -228,52 +215,118 @@ class _ServicesAttitude extends State<ServiceAttitude> with TickerProviderStateM
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              controller.reverse(
-                                  from: controller.value == 0.0
-                                      ? 1.0
-                                      : controller.value);
-                              Future.delayed(Duration(seconds: 5), () {
-                                // 5s over, navigate to a new page
-                                Navigator.pushReplacementNamed(context, UserNavigationRoute);
-                              });
                               return showDialog(
                                 context: context,
                                 barrierDismissible: false,
                                 builder: (context) {
-                                  return AnimatedBuilder(
-                                    animation: controller,
-                                    builder:
-                                        (BuildContext context, Widget child) {
-                                      return CustomPaint(
-                                          painter: CustomTimerPainter(
-                                            animation: controller,
-                                            backgroundColor: Colors.white,
-                                            color: Colors.white,
-                                          ));
-                                    },
-                                  );
-                                  /*return AlertDialog(
+                                  return AlertDialog(
                                     backgroundColor: primaryColor,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    title: Text(
+                                      'Feedback Confirmation',
+                                      textAlign: TextAlign.center,
                                     ),
-                                    title: Text('Feedback Confirmation',textAlign: TextAlign.center,),
-                                    titleTextStyle: TextStyle(fontSize: 20, color: Colors.white,fontWeight: FontWeight.bold),
+                                    titleTextStyle: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
                                     content: SingleChildScrollView(
                                       child: ListBody(
                                         children: <Widget>[
-                                          Text('By:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
+                                          Text(
+                                            'By:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                           anonymous(isSwitched),
-                                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-                                          Text('Service Type:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
-                                          Text('    '+selectService,style: TextStyle(fontSize: 17,color: Colors.white,),),
-                                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-                                          Text('Comment:',style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
-                                          Text('    '+myController.text,style: TextStyle(fontSize: 17,color: Colors.white),),
+                                          SizedBox(
+                                            height:
+                                                SizeConfig.blockSizeVertical *
+                                                    2,
+                                          ),
+                                          Text(
+                                            'Service Type:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '    ' + selectService,
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                SizeConfig.blockSizeVertical *
+                                                    2,
+                                          ),
+                                          Text(
+                                            'Comment:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '    ' + myController.text,
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Colors.white),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                SizeConfig.blockSizeVertical *
+                                                    4,
+                                          ),
+                                          FlatButton(
+                                              child: Text(
+                                                "CONFIRM",
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pushReplacementNamed(
+                                                    context,
+                                                    UserNavigationRoute);
+                                              }),
+                                          FlatButton(
+                                              child: Text(
+                                                "DISCARD",
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pushReplacementNamed(
+                                                    context,
+                                                    UserNavigationRoute);
+                                              })
                                         ],
                                       ),
                                     ),
-                                  );*/
+                                  );
                                 },
                               );
                             },
