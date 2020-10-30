@@ -116,11 +116,14 @@ class _ManagementHomepage extends State<ManagementHomepage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                         new ManagementFeedbackDetailPage(
-                                            name: snapshot.data[index]['creator_id'],
-                                            comment: snapshot.data[index]['comment'],
-                                            type: snapshot.data[index]['type'],
-                                            attachment: snapshot.data[index]['attachment'],
-                                            //date: snapshot.data[index]['created_at']
+                                          name: snapshot.data[index]['creator_id'].toString(),
+                                          comment: snapshot.data[index]['comment'],
+                                          type: snapshot.data[index]['type'],
+                                          attachment: snapshot.data[index]['attachment'].toString(),
+                                          status: snapshot.data[index]['status'],
+                                          lecturer: snapshot.data[index]['lecturer_id'].toString(),
+                                          pendingDate: snapshot.data[index]['created_at'].toString(),
+                                          choice: snapshot.data[index]['choice'].toString(),
                                           ),
                                       ),
                                     );

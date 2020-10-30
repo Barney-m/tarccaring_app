@@ -5,6 +5,8 @@ import 'package:tarccaring_app/utils/api.dart';
 import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
 
+import 'management_feedback_detail.dart';
+
 class PriorityPage extends StatefulWidget {
   @override
   _PriorityPage createState() => _PriorityPage();
@@ -31,10 +33,10 @@ class _PriorityPage extends State<PriorityPage> {
   }
 
   final _type = [
-    Icons.event_seat_rounded,
-    Icons.fastfood_rounded,
-    Icons.menu_book_rounded,
-    Icons.headset_mic_rounded,
+    Icons.home,
+    Icons.home,
+    Icons.home,
+    Icons.home,
   ];
 
   @override
@@ -115,6 +117,24 @@ class _PriorityPage extends State<PriorityPage> {
                                   subtitle:Text(snapshot.data[index]['comment']),
                                   isThreeLine: true,
                                   trailing: Text(snapshot.data[index]['status'].toString().toUpperCase()),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                        new ManagementFeedbackDetailPage(
+                                          name: snapshot.data[index]['creator_id'].toString(),
+                                          comment: snapshot.data[index]['comment'],
+                                          type: snapshot.data[index]['type'],
+                                          attachment: snapshot.data[index]['attachment'].toString(),
+                                          status: snapshot.data[index]['status'],
+                                          lecturer: snapshot.data[index]['lecturer_id'].toString(),
+                                          pendingDate: snapshot.data[index]['created_at'].toString(),
+                                          choice: snapshot.data[index]['choice'].toString(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 )
                               ]));
                             },

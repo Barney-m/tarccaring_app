@@ -20,13 +20,20 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
     this.comment,
     this.type,
     this.attachment,
-    //this.date
+    this.status,
+    this.lecturer,
+    this.pendingDate,
+    this.choice,
   });
 
   final String name;
   final String comment;
   final String type;
   final String attachment;
+  final String status;
+  final String lecturer;
+  final String pendingDate;
+  final String choice;
 
   //final String date;
   @override
@@ -43,13 +50,72 @@ class _ManagementFeedbackDetailPage
   String todo = '';
 
   int id;
-
+  Color statusColor(String status) {
+    if (status == 'APPROVED') {
+      return Colors.green;
+    } else if (status == 'DISMISSED') {
+      return Colors.red;
+    } else if (status == 'URGENT') {
+      return Colors.green[700];
+    } else {
+      return Colors.grey;
+    }
+  }
   /*Future<List<dynamic>> fetchFeedbacks() async {
     var result =
     await APIService().getMethod('feedbacks/user_history?id=$id');
     print(json.decode(result.body));
     return json.decode(result.body);
   }*/
+  _attachments() {
+    switch (widget.type) {
+      case 'Service Attitude Feedback':
+        return Row(
+          children: <Widget>[
+            Text('Service Type: ' + widget.choice),
+            Expanded(
+              flex: 7,
+              child: SizedBox(),
+            ),
+          ],
+        );
+        break;
+      case 'Education Quality Feedback':
+        return Row(
+          children: <Widget>[
+            Text('Lecturer: ' + widget.lecturer),
+            Expanded(
+              flex: 7,
+              child: SizedBox(),
+            ),
+          ],
+        );
+        break;
+      default:
+        return Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: SizedBox(),
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Text('Locations: ' + widget.choice),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Text('Attachment: '),
+                ],
+              ),
+            ),
+          ],
+        );
+    }
+  }
 
   _cardType() {
     switch (widget.type) {
@@ -190,17 +256,28 @@ class _ManagementFeedbackDetailPage
                               child: Row(
                                 children: <Widget>[
                                   Text(
-                                    'Feedback',
-                                    style: new TextStyle(
-                                      fontSize: 20.0,
-                                      color: Colors.black,
+                                    widget.status.toString().toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
+                                      color: statusColor(widget.status
+                                          .toString()
+                                          .toUpperCase()),
                                     ),
                                     textAlign: TextAlign.left,
                                   ),
                                   Expanded(
                                     flex: 5,
                                     child: SizedBox(),
+                                  ),
+                                  Text(
+                                    widget.pendingDate.toString(),
+                                    style: TextStyle(
+                                      fontSize: 11.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                    ),
+                                    textAlign: TextAlign.left,
                                   ),
                                   //Text(widget.date),
                                 ],
@@ -237,53 +314,50 @@ class _ManagementFeedbackDetailPage
                               ),
                             ),
                             Expanded(
-                              child: TextField(
-                                enabled: false,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 2,
-                                decoration: new InputDecoration(
-                                    hintText: widget.comment,
-                                    hintStyle: TextStyle(
-                                        color: Colors.black, fontSize: 15),
-                                    border: new OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20),
-                                        bottomLeft: Radius.circular(20),
-                                        bottomRight: Radius.circular(20),
+                              child: new SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: TextField(
+                                  enabled: false,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: 15,
+                                  decoration: new InputDecoration(
+                                      hintText: widget.comment,
+                                      hintStyle: TextStyle(
+                                          color: Colors.black, fontSize: 15),
+                                      border: new OutlineInputBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20),
+                                          bottomLeft: Radius.circular(20),
+                                          bottomRight: Radius.circular(20),
+                                        ),
+                                        borderSide: new BorderSide(
+                                            color: Colors.grey[100]),
                                       ),
-                                      borderSide: new BorderSide(
-                                          color: Colors.grey[100]),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white),
+                                      filled: true,
+                                      fillColor: Colors.white),
+                                ),
                               ),
                             ),
                             Expanded(
-                              child: Row(
-                                children: <Widget>[
-                                  Text('Attachment: '),
-                                  Expanded(
-                                    flex: 7,
-                                    child: SizedBox(),
-                                  ),
-                                ],
-                              ),
-                            ),
+                              child: _attachments())
                           ]),
                         ),
                         Positioned(
-                          top: SizeConfig.blockSizeVertical * 45,
+                          top: SizeConfig.blockSizeVertical * 50,
                           left: SizeConfig.blockSizeVertical * 10,
                           right: SizeConfig.blockSizeVertical * 10,
                           child: Container(
+                            width: SizeConfig.blockSizeVertical * 1,
+                            height: SizeConfig.blockSizeVertical * 12,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
+                              shape: BoxShape.rectangle,
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                    'http://192.168.43.203:8000/images/user/' +
-                                        widget.attachment),
+                                    'http://192.168.43.203:8000/images/user/' + widget.attachment
+                                  //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                                ),
                               ),
                             ),
                           ),
