@@ -58,6 +58,8 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       return Colors.red;
     } else if (status == 'URGENT') {
       return Colors.green[700];
+    } else if(status == 'RECALLED'){
+      return Colors.blue;
     } else {
       return Colors.grey;
     }
@@ -137,12 +139,12 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               FeedbackDetailPage(
+                                            id: snapshot.data[index]['id'],
                                             name: snapshot.data[index]['creator_id'].toString(),
                                             comment: snapshot.data[index]['comment'],
                                             type: snapshot.data[index]['type'],
                                             attachment: snapshot.data[index]['attachment'].toString(),
                                             status: snapshot.data[index]['status'],
-                                            lecturer: snapshot.data[index]['lecturer_id'].toString(),
                                             pendingDate: snapshot.data[index]['created_at'].toString(),
                                             choice: snapshot.data[index]['choice'].toString(),
                                                 //date: snapshot.data[index]['created_at']

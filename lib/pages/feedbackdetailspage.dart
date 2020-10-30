@@ -17,22 +17,21 @@ import 'package:tarccaring_app/widgets/size_config.dart';
 
 class FeedbackDetailPage extends StatefulWidget {
   FeedbackDetailPage({
+    this.id,
     this.name,
     this.comment,
     this.type,
     this.attachment,
     this.status,
-    this.lecturer,
     this.pendingDate,
     this.choice,
   });
-
+  final int id;
   final String name;
   final String comment;
   final String type;
   final String attachment;
   final String status;
-  final String lecturer;
   final String pendingDate;
   final String choice;
 
@@ -43,7 +42,53 @@ class FeedbackDetailPage extends StatefulWidget {
 }
 
 class _FeedbackDetailPage extends State<FeedbackDetailPage> {
-  Future<void> _logoutUser(BuildContext context) {}
+  Future<void> _recall(BuildContext context) async{
+    var data = {
+      'id' : widget.id.toInt(),
+      'action' : 'recall',
+    };
+
+    var result = await APIService().postMethod(data,'manage/action');
+    var message = json.decode(result.body);
+
+    if(message['message'] != null && message['success'] == true){
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext  context) {
+            return SimpleDialog(
+              title: Text("Recall Successful!",
+                        style: new TextStyle(
+                                fontSize: 20.0,
+                              ),
+                        ),
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SimpleDialogOption(
+                    onPressed: (){
+                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                    },
+                    child: const Text('OK')
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+    }
+    else{
+      showDialog(
+        context: context,
+        builder: (BuildContext  context) {
+          return AlertDialog(
+            title: Text("Recall Failed!"),
+            content: Text("Something went wrong...."),
+          );
+        },
+      );
+    }
+  }
   String _user;
   @override
   String todo = '';
@@ -67,7 +112,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
           ),
           color: Colors.red,
           onPressed: () {
-            _logoutUser(context);
+            _recall(context);
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6.0),
@@ -95,7 +140,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
       case 'Education Quality Feedback':
         return Row(
           children: <Widget>[
-            Text('Lecturer: ' + widget.lecturer),
+            Text('Lecturer: ' + widget.choice),
             Expanded(
               flex: 7,
               child: SizedBox(),
@@ -383,7 +428,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                    'http://192.168.43.203:8000/images/user/' + widget.attachment
+                                    'http://10.0.2.2:8000/images/user/' + widget.attachment
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                   ),
                               ),
