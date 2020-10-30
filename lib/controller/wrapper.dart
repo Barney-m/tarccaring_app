@@ -26,7 +26,6 @@ class _Wrapper extends State {
     var message = json.decode(result.body);
     int role = await getRoleID();
     bool firstTimeState = await getFirstTimeState();
-    print(message);
     if (firstTimeState != null) {
       if (loginState != null) {
         if(message['error'] != null || message['success'] == true){

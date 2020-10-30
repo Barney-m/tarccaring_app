@@ -18,20 +18,8 @@ class _ManagementHomepage extends State<ManagementHomepage> {
   List categories = ['All', 'Facilities', 'Foods', 'Educations', 'Services'];
 
   Future<List<dynamic>> fetchFeedbacks() async {
-    switch (_selectedIndex) {
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-        var result = await APIService().getMethod('feedbacks/' + categories[_selectedIndex].toString().toLowerCase());
-        print (json.decode(result.body));
-        return json.decode(result.body);
-        break;
-      default:
-        var result = await APIService().getMethod('feedbacks');
-        print (json.decode(result.body));
-        return json.decode(result.body);
-    }
+    var result = await APIService().getMethod('feedbacks?type=' + _selectedIndex.toString());
+    return json.decode(result.body);
   }
 
   final _type = [
@@ -116,14 +104,16 @@ class _ManagementHomepage extends State<ManagementHomepage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                         new ManagementFeedbackDetailPage(
-                                          name: snapshot.data[index]['creator_id'].toString(),
-                                          comment: snapshot.data[index]['comment'],
-                                          type: snapshot.data[index]['type'],
-                                          attachment: snapshot.data[index]['attachment'].toString(),
-                                          status: snapshot.data[index]['status'],
-                                          lecturer: snapshot.data[index]['lecturer_id'].toString(),
-                                          pendingDate: snapshot.data[index]['created_at'].toString(),
-                                          choice: snapshot.data[index]['choice'].toString(),
+                                            id: snapshot.data[index]['id'],
+                                            creator: snapshot.data[index]['creator_id'],
+                                            name: snapshot.data[index]['name'].toString(),
+                                            comment: snapshot.data[index]['comment'],
+                                            type: snapshot.data[index]['type'],
+                                            attachment: snapshot.data[index]['attachment'],
+                                            choice: snapshot.data[index]['choice'].toString(),
+                                            status: snapshot.data[index]['status'],
+                                            pendingDate: snapshot.data[index]['created_at'].toString(),
+                                            //date: snapshot.data[index]['created_at']
                                           ),
                                       ),
                                     );

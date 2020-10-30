@@ -37,6 +37,7 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       case 2:
       case 3:
       case 4:
+      print(_selectedIndex.toString());
         var result = await APIService().getMethod(
             'feedbacks/user_history?id=$_user&feedback=' +
                 _selectedIndex.toString());

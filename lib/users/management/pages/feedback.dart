@@ -17,17 +17,9 @@ class _ManagementFeedback extends State<ManagementFeedback> {
   List categories = ['Approved', 'Urgent'];
 
   Future<List<dynamic>> fetchFeedbacks() async {
-    switch (_selectedIndex) {
-      case 1:
-        var result = await APIService().getMethod('feedbacks/' + categories[_selectedIndex].toString().toLowerCase());
+        var result = await APIService().getMethod('feedbacks/accepted?action=' + categories[_selectedIndex].toString().toLowerCase());
         print (json.decode(result.body));
         return json.decode(result.body);
-        break;
-      default:
-        var result = await APIService().getMethod('feedbacks/' + categories[_selectedIndex].toString().toLowerCase());
-        print (json.decode(result.body));
-        return json.decode(result.body);
-    }
   }
 
   final _type = [
@@ -116,7 +108,6 @@ class _ManagementFeedback extends State<ManagementFeedback> {
                                           type: snapshot.data[index]['type'],
                                           attachment: snapshot.data[index]['attachment'].toString(),
                                           status: snapshot.data[index]['status'],
-                                          lecturer: snapshot.data[index]['lecturer_id'].toString(),
                                           pendingDate: snapshot.data[index]['created_at'].toString(),
                                           choice: snapshot.data[index]['choice'].toString(),
                                         ),

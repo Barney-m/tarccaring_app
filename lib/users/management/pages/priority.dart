@@ -128,7 +128,6 @@ class _PriorityPage extends State<PriorityPage> {
                                           type: snapshot.data[index]['type'],
                                           attachment: snapshot.data[index]['attachment'].toString(),
                                           status: snapshot.data[index]['status'],
-                                          lecturer: snapshot.data[index]['lecturer_id'].toString(),
                                           pendingDate: snapshot.data[index]['created_at'].toString(),
                                           choice: snapshot.data[index]['choice'].toString(),
                                         ),

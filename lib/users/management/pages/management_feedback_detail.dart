@@ -16,24 +16,26 @@ import 'package:tarccaring_app/widgets/size_config.dart';
 
 class ManagementFeedbackDetailPage extends StatefulWidget {
   ManagementFeedbackDetailPage({
+    this.id,
+    this.creator,
     this.name,
     this.comment,
     this.type,
     this.attachment,
-    this.status,
-    this.lecturer,
-    this.pendingDate,
     this.choice,
+    this.status,
+    this.pendingDate,
   });
-
+  final int id;
+  final String creator;
   final String name;
   final String comment;
   final String type;
   final String attachment;
-  final String status;
-  final String lecturer;
-  final String pendingDate;
   final String choice;
+  final String status;
+  final String pendingDate;
+  
 
   //final String date;
   @override
@@ -42,14 +44,61 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
   }
 }
 
-class _ManagementFeedbackDetailPage
-    extends State<ManagementFeedbackDetailPage> {
-  Future<void> _logoutUser(BuildContext context) {}
+class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> {
 
   @override
   String todo = '';
 
   int id;
+
+  Future<void> _action(BuildContext context, String action) async {
+    var data = {
+      'id' : widget.id.toInt(),
+      'action' : action,
+    };
+
+    var result = await APIService().postMethod(data, 'manage/action');
+    var message = json.decode(result.body);
+
+    if(message['message'] != null && message['success'] == true){
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext  context) {
+          return SimpleDialog(
+            title: Text(message['message'],
+                      style: new TextStyle(
+                              fontSize: 20.0,
+                            ),
+                      ),
+            children: <Widget>[
+              Align(
+                alignment: Alignment.centerRight,
+                child: SimpleDialogOption(
+                  onPressed: (){
+                    Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
+                  },
+                  child: const Text('OK')
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+    else{
+      showDialog(
+        context: context,
+        builder: (BuildContext  context) {
+          return AlertDialog(
+            title: Text("Failed!"),
+            content: Text("Something went wrong...."),
+          );
+        },
+      );
+    }
+  }
+
   Color statusColor(String status) {
     if (status == 'APPROVED') {
       return Colors.green;
@@ -83,7 +132,7 @@ class _ManagementFeedbackDetailPage
       case 'Education Quality Feedback':
         return Row(
           children: <Widget>[
-            Text('Lecturer: ' + widget.lecturer),
+            Text('Lecturer: ' + widget.choice),
             Expanded(
               flex: 7,
               child: SizedBox(),
@@ -116,6 +165,7 @@ class _ManagementFeedbackDetailPage
         );
     }
   }
+
 
   _cardType() {
     switch (widget.type) {
@@ -355,7 +405,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                    'http://192.168.43.203:8000/images/user/' + widget.attachment
+                                    'http://192.168.0.141:8000/images/user/' + widget.attachment
                                   //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                 ),
                               ),
@@ -376,7 +426,7 @@ class _ManagementFeedbackDetailPage
                             ),
                             color: Colors.blue[100],
                             onPressed: () {
-                              _logoutUser(context);
+                              _action(context, 'dismiss');
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
@@ -397,7 +447,7 @@ class _ManagementFeedbackDetailPage
                             ),
                             color: Colors.blue[200],
                             onPressed: () {
-                              _logoutUser(context);
+                              _action(context, 'approve');
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
@@ -418,7 +468,7 @@ class _ManagementFeedbackDetailPage
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _logoutUser(context);
+                              _action(context, 'urgent');
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
