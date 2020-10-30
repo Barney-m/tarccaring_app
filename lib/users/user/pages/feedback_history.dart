@@ -132,42 +132,23 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                   onTap: () {
-                                    /*if (snapshot.data[index]['attachment'] !=
-                                        null) {
-                                     */ Navigator.push(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               FeedbackDetailPage(
-                                            name: snapshot.data[index]['creator_id'],
+                                            name: snapshot.data[index]['creator_id'].toString(),
                                             comment: snapshot.data[index]['comment'],
                                             type: snapshot.data[index]['type'],
                                             attachment: snapshot.data[index]['attachment'].toString(),
                                             status: snapshot.data[index]['status'],
-                                            lecturer: '123',
-                                            pendingDate: snapshot.data[index]['timestamps'].toString(),
+                                            lecturer: snapshot.data[index]['lecturer_id'].toString(),
+                                            pendingDate: snapshot.data[index]['created_at'].toString(),
+                                            choice: snapshot.data[index]['choice'].toString(),
                                                 //date: snapshot.data[index]['created_at']
                                           ),
                                         ),
-                                      );/*
-                                    }*/ /*else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              FeedbackDetailPage(
-                                            name: snapshot.data[index]['creator_id'],
-                                            comment: snapshot.data[index]['comment'],
-                                            type: snapshot.data[index]['type'],
-                                            attachment: 'default.png',
-                                            status: snapshot.data[index]['status'],
-                                            lecturer: '123',
-                                            date: snapshot.data[index]['approved_date'].toString(),
-                                            //date: snapshot.data[index]['created_at']
-                                          ),
-                                        ),
                                       );
-                                    }*/
                                   },
                                   child: Card(
                                       child: Column(children: <Widget>[
