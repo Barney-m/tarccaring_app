@@ -80,7 +80,7 @@ class _EducationQuality extends State<EducationQuality> {
           builder: (BuildContext  context) {
             return AlertDialog(
               title: Text("Submit Failed!"),
-              content: Text("Something goes wrong...."),
+              content: Text("Something went wrong...."),
             );
           },
         );
