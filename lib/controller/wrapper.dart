@@ -29,7 +29,7 @@ class _Wrapper extends State {
     print(message);
     if (firstTimeState != null) {
       if (loginState != null) {
-        if(message['error'] != null){
+        if(message['error'] != null || message['success'] == true){
           switch(role){
             case 2:
             case 3:
@@ -40,6 +40,7 @@ class _Wrapper extends State {
               Navigator.pushReplacementNamed(context, ManagementNavigationRoute);
               break;
             default:
+              print('try 3');
               setLoginState(false).then((_) {
                               removePublicState();
                               removeUserState();
@@ -49,6 +50,7 @@ class _Wrapper extends State {
           }
         }
         else{
+          print('try 2');
           setLoginState(false).then((_) {
                               removePublicState();
                               removeUserState();
@@ -56,6 +58,7 @@ class _Wrapper extends State {
                             });
         }
       } else {
+        print('try 1');
         Navigator.pushReplacementNamed(context, AuthMainRoute);
       }
     } else {

@@ -1,10 +1,13 @@
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
+import 'dart:convert';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
-
+import 'package:tarccaring_app/router/constant_route.dart';
+import 'package:tarccaring_app/utils/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CampusFacilities extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class CampusFacilities extends StatefulWidget {
 
 class _CampusFacilities extends State<CampusFacilities> {
 
-  Future<void> _logoutUser(BuildContext context) {}
+  String _user;
 
   bool isSwitched = false;
 
@@ -32,6 +35,103 @@ class _CampusFacilities extends State<CampusFacilities> {
       _image = File(image.path);
     });
   }
+
+  @override
+  void initState() {
+    super.initState();
+    getID();
+  }
+
+
+  getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _user = prefs.getString('id') ?? '';
+    });
+  }
+
+  Future<void> _submit(BuildContext context) async{
+    if(_comment.text.toString().trim() != null && selectLocation != ''){
+      var data = {};
+      if(_image != null){
+        List<int> imageBytes = _image.readAsBytesSync();
+        String base64Image = base64.encode(imageBytes);
+        data = {
+          'user_id' : _user,
+          'action' : selectLocation,
+          'anonymous' : isSwitched,
+          'comment' : _comment.text.toString(),
+          'attachment' : base64Image,
+          'feedback_type' : 1,
+        };
+      }
+      else{
+        data = {
+          'user_id' : _user,
+          'action' : selectLocation,
+          'anonymous' : isSwitched,
+          'comment' : _comment.text.toString(),
+          'feedback_type' : 1,
+        };
+      }
+      var result = await APIService().postMethod(data,'submit');
+      var message = json.decode(result.body);
+      if(message['success'] == true){
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext  context) {
+            return SimpleDialog(
+              title: Text("Submit Successful!",
+                        style: new TextStyle(
+                                fontSize: 20.0,
+                              ),
+                        ),
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SimpleDialogOption(
+                    onPressed: (){
+                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                    },
+                    child: const Text('OK')
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      } else{
+        showDialog(
+          context: context,
+          builder: (BuildContext  context) {
+            return AlertDialog(
+              title: Text("Submit Failed!"),
+              content: Text("Something went wrong...."),
+            );
+          },
+        );
+      }
+    } else{
+      showDialog(
+        context: context,
+        builder: (BuildContext  context) {
+          return AlertDialog(
+            title: Text("Invalid Action."),
+            content: Text("Please fill up the form."),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  void dispose(){
+    _comment.dispose();
+    super.dispose();
+  }
+
+  final _comment = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +213,7 @@ class _CampusFacilities extends State<CampusFacilities> {
                           child: Column(children: <Widget>[
                             Expanded(
                               child: TextField(
+                                controller: _comment,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 7,
                                 style: TextStyle(fontSize: 15),
@@ -223,7 +324,7 @@ class _CampusFacilities extends State<CampusFacilities> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _logoutUser(context);
+                              _submit(context);
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),

@@ -36,9 +36,6 @@ class _EducationQuality extends State<EducationQuality> {
   }
 
   Future<void> _submit(BuildContext context) async{
-    print(isSwitched);
-    print(_comment.text.toString());
-    print(_user);
     if(_comment.text.toString().trim() != null){
       var data = {
         'user_id' : _user,
