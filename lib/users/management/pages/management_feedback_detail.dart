@@ -26,6 +26,7 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
     this.status,
     this.pendingDate,
   });
+
   final int id;
   final String creator;
   final String name;
@@ -35,7 +36,6 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
   final String choice;
   final String status;
   final String pendingDate;
-  
 
   //final String date;
   @override
@@ -44,8 +44,8 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
   }
 }
 
-class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> {
-
+class _ManagementFeedbackDetailPage
+    extends State<ManagementFeedbackDetailPage> {
   @override
   String todo = '';
 
@@ -53,43 +53,51 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
 
   Future<void> _action(BuildContext context, String action) async {
     var data = {
-      'id' : widget.id.toInt(),
-      'action' : action,
+      'id': widget.id.toInt(),
+      'action': action,
     };
 
     var result = await APIService().postMethod(data, 'manage/action');
     var message = json.decode(result.body);
 
-    if(message['message'] != null && message['success'] == true){
+    if (message['message'] != null && message['success'] == true) {
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext  context) {
+        builder: (BuildContext context) {
           return SimpleDialog(
-            title: Text(message['message'],
-                      style: new TextStyle(
-                              fontSize: 20.0,
-                            ),
-                      ),
+            backgroundColor: primaryColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(20))),
+            titleTextStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+            title: Text(
+              message['message'],
+              style: new TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
             children: <Widget>[
               Align(
                 alignment: Alignment.centerRight,
                 child: SimpleDialogOption(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
-                  },
-                  child: const Text('OK')
-                ),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(ManagementNavigationRoute);
+                    },
+                    child: const Text('OK')),
               ),
             ],
           );
         },
       );
-    }
-    else{
+    } else {
       showDialog(
         context: context,
-        builder: (BuildContext  context) {
+        builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Failed!"),
             content: Text("Something went wrong...."),
@@ -110,12 +118,7 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
       return Colors.grey;
     }
   }
-  /*Future<List<dynamic>> fetchFeedbacks() async {
-    var result =
-    await APIService().getMethod('feedbacks/user_history?id=$id');
-    print(json.decode(result.body));
-    return json.decode(result.body);
-  }*/
+
   _attachments() {
     switch (widget.type) {
       case 'Service Attitude Feedback':
@@ -166,6 +169,312 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
     }
   }
 
+  _actionButton() {
+    switch (widget.status.toUpperCase()) {
+      case 'PENDING':
+        return Column(children: [
+          ButtonTheme(
+            minWidth: SizeConfig.blockSizeVertical * 60,
+            child: FlatButton(
+              child: Text(
+                'Dismiss',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              color: Colors.blue[100],
+              onPressed: () {
+                return showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(20))),
+                      title: Text(
+                        'Confirmation',
+                        textAlign: TextAlign.center,
+                      ),
+                      titleTextStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Text(
+                              'Are You Sure to Dismiss?',
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '(Once make decision cannot been change)',
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height:
+                              SizeConfig.blockSizeVertical *
+                                  2,
+                            ),
+                            FlatButton(
+                                child: Text(
+                                  "CONFIRM",
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(6.0),
+                                ),
+                                onPressed: () {
+                                  _action(context, 'dismiss');
+                                }),
+                            FlatButton(
+                                child: Text(
+                                  "CANCEL",
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(6.0),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context,
+                                      ManagementNavigationRoute);
+                                })
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+            ),
+          ),
+          ButtonTheme(
+            minWidth: SizeConfig.blockSizeVertical * 60,
+            child: FlatButton(
+              child: Text(
+                'Approve',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              color: Colors.blue[200],
+              onPressed: () {
+                return showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(20))),
+                      title: Text(
+                        'Confirmation',
+                        textAlign: TextAlign.center,
+                      ),
+                      titleTextStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Text(
+                              'Are You Sure to Approve?',
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '(Once make decision cannot been change)',
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height:
+                              SizeConfig.blockSizeVertical *
+                                  2,
+                            ),
+                            FlatButton(
+                                child: Text(
+                                  "CONFIRM",
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(6.0),
+                                ),
+                                onPressed: () {
+                                  _action(context, 'approve');
+                                }),
+                            FlatButton(
+                                child: Text(
+                                  "CANCEL",
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(6.0),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context,
+                                      ManagementNavigationRoute);
+                                })
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+            ),
+          ),
+          ButtonTheme(
+            minWidth: SizeConfig.blockSizeVertical * 60,
+            child: FlatButton(
+              child: Text(
+                'Urgent',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              color: primaryColor,
+              onPressed: () {
+                return showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(20))),
+                      title: Text(
+                        'Confirmation',
+                        textAlign: TextAlign.center,
+                      ),
+                      titleTextStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Text(
+                              'Are You Sure to Set Urgent?',
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '(Once make decision cannot been change)',
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height:
+                              SizeConfig.blockSizeVertical *
+                                  2,
+                            ),
+                            FlatButton(
+                                child: Text(
+                                  "CONFIRM",
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(6.0),
+                                ),
+                                onPressed: () {
+                                  _action(context, 'urgent');
+                                }),
+                            FlatButton(
+                                child: Text(
+                                  "CANCEL",
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(6.0),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context,
+                                      ManagementNavigationRoute);
+                                })
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+            ),
+          ),
+        ]);
+        break;
+      default:
+        return Container(
+          child: SizedBox(),
+        );
+    }
+  }
 
   _cardType() {
     switch (widget.type) {
@@ -389,8 +698,7 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: _attachments())
+                            Expanded(child: _attachments())
                           ]),
                         ),
                         Positioned(
@@ -403,77 +711,21 @@ class _ManagementFeedbackDetailPage extends State<ManagementFeedbackDetailPage> 
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: new DecorationImage(
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                                 image: new NetworkImage(
-                                    'http://192.168.0.141:8000/images/user/' + widget.attachment
-                                  //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
-                                ),
+                                    'http://192.168.43.203:8000/images/user/' +
+                                        widget.attachment
+                                    //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                                    ),
                               ),
                             ),
                           ),
                         ),
                         Positioned(
-                          top: SizeConfig.blockSizeVertical * 63,
+                          top: SizeConfig.blockSizeVertical * 64,
                           left: SizeConfig.blockSizeVertical * 2,
                           right: SizeConfig.blockSizeVertical * 2,
-                          child: FlatButton(
-                            child: Text(
-                              'Dismiss',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            color: Colors.blue[100],
-                            onPressed: () {
-                              _action(context, 'dismiss');
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: SizeConfig.blockSizeVertical * 69,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
-                          child: FlatButton(
-                            child: Text(
-                              'Approve',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            color: Colors.blue[200],
-                            onPressed: () {
-                              _action(context, 'approve');
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: SizeConfig.blockSizeVertical * 75,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
-                          child: FlatButton(
-                            child: Text(
-                              'Urgent',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            color: primaryColor,
-                            onPressed: () {
-                              _action(context, 'urgent');
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                          ),
+                          child: _actionButton(),
                         ),
                       ],
                     ),
