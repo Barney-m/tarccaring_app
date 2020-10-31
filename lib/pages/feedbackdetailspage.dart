@@ -67,7 +67,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                   alignment: Alignment.centerRight,
                   child: SimpleDialogOption(
                     onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                      Navigator.pop(context);
                     },
                     child: const Text('OK')
                   ),
@@ -245,8 +245,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                       leading: new IconButton(
                         icon:
                             new Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed(UserNavigationRoute),
+                        onPressed: () => Navigator.pop(context),
                       ),
                       backgroundColor: primaryColor.withOpacity(0.3),
                       //You can make this transparent

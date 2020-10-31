@@ -41,7 +41,7 @@ class _Wrapper extends State {
       if (loginState != null) {
         APIService().getMethod('tokenValidation').then((response){
           if(response.statusCode == 200){
-            if(response['error'] != null || response['success'] == true){
+            if(json.decode(response.body)['error'] != null || json.decode(response.body)['success'] == true){
               switch(role){
                 case 2:
                 case 3:

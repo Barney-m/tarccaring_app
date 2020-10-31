@@ -528,8 +528,7 @@ class _ManagementFeedbackDetailPage
                       leading: new IconButton(
                         icon:
                             new Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () => Navigator.of(context)
-                            .pushReplacementNamed(ManagementNavigationRoute),
+                        onPressed: () => Navigator.pop(context),
                       ),
                       backgroundColor: primaryColor.withOpacity(0.3),
                       //You can make this transparent

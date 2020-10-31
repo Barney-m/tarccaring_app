@@ -103,7 +103,7 @@ class _ManagementHomepage extends State<ManagementHomepage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                        new ManagementFeedbackDetailPage(
+                                        ManagementFeedbackDetailPage(
                                           id: snapshot.data[index]['id'],
                                           name: snapshot.data[index]['creator_id'].toString(),
                                           comment: snapshot.data[index]['comment'],
