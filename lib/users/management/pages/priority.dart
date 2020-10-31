@@ -22,12 +22,10 @@ class _PriorityPage extends State<PriorityPage> {
       case 2:
       case 3:
         var result = await APIService().getMethod('feedbacks?priority=' + categories[_selectedIndex].toString().toLowerCase());
-        print (json.decode(result.body));
         return json.decode(result.body);
         break;
       default:
         var result = await APIService().getMethod('feedbacks?priority=1');
-        print (json.decode(result.body));
         return json.decode(result.body);
     }
   }

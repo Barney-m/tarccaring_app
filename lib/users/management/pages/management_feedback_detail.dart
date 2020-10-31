@@ -711,7 +711,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.contain,
                                 image: new NetworkImage(
-                                    'http://192.168.0.141:8000/images/user/' +
+                                    'http://192.168.0.141:8000/images/image_attachment/' +
                                         widget.attachment
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                     ),

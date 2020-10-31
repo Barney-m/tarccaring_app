@@ -23,12 +23,10 @@ class _ManagementHistory extends State<ManagementHistory> {
       case 3:
       case 4:
         var result = await APIService().getMethod('feedbacks/history/' + categories[_selectedIndex].toString().toLowerCase());
-        print (json.decode(result.body));
         return json.decode(result.body);
         break;
       default:
         var result = await APIService().getMethod('feedbacks/history');
-        print (json.decode(result.body));
         return json.decode(result.body);
     }
   }

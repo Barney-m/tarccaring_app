@@ -18,7 +18,6 @@ class _ManagementFeedback extends State<ManagementFeedback> {
 
   Future<List<dynamic>> fetchFeedbacks() async {
         var result = await APIService().getMethod('feedbacks/accepted?action=' + categories[_selectedIndex].toString().toLowerCase());
-        print (json.decode(result.body));
         return json.decode(result.body);
   }
 

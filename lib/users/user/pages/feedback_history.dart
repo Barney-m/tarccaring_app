@@ -41,13 +41,11 @@ class _FeedbackHistory extends State<FeedbackHistory> {
         var result = await APIService().getMethod(
             'feedbacks/user_history?id=$_user&feedback=' +
                 _selectedIndex.toString());
-        print(json.decode(result.body));
         return json.decode(result.body);
         break;
       default:
         var result =
             await APIService().getMethod('feedbacks/user_history?id=$_user');
-        print(json.decode(result.body));
         return json.decode(result.body);
     }
   }
