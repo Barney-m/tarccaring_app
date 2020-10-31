@@ -57,6 +57,8 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       return Colors.green;
     } else if (status == 'DISMISSED') {
       return Colors.red;
+    } else if (status == 'SOLVED') {
+      return Colors.lightGreen[700];
     } else if (status == 'URGENT') {
       return Colors.green[700];
     } else if(status == 'RECALLED'){
