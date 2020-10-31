@@ -232,7 +232,7 @@ class _EducationQuality extends State<EducationQuality> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://192.168.43.203:8000/images/user/'+ widget.image),
+                                            'http://192.168.0.141:8000/images/user/'+ widget.image),
                                       ),
                                     ),
                                   ),

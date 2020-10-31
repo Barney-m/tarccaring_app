@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/shared_prefs.dart';
+import 'dart:io';
 import 'package:tarccaring_app/users/management/management_nav_controller.dart';
 import 'package:tarccaring_app/utils/api.dart';
+import 'package:tarccaring_app/utils/connectivity.dart';
 import 'dart:convert';
 
 class Wrapper extends StatefulWidget {
@@ -16,13 +18,29 @@ class _Wrapper extends State {
   @override
   void initState() {
     super.initState();
-    getRenderPage();
+    Connection().isConnected().then((internet){
+      if(internet){
+        getRenderPage();
+      }
+      else{
+        setLoginState(false).then((_) {
+                              removePublicState();
+                              removeUserState();
+                              Navigator.of(context).pushReplacementNamed(AuthMainRoute);
+                            });
+      }
+    });
   }
 
   Future<void> getRenderPage() async {
     bool loginState = await getLoginState();
+    var result;
+    try{
+      result = await APIService().getMethod('tokenValidation');
+    } finally{
+      //Token Validation Result
+    }
 
-    var result = await APIService().getMethod('tokenValidation');
     var message = json.decode(result.body);
     int role = await getRoleID();
     bool firstTimeState = await getFirstTimeState();
@@ -39,7 +57,6 @@ class _Wrapper extends State {
               Navigator.pushReplacementNamed(context, ManagementNavigationRoute);
               break;
             default:
-              print('try 3');
               setLoginState(false).then((_) {
                               removePublicState();
                               removeUserState();
@@ -49,7 +66,6 @@ class _Wrapper extends State {
           }
         }
         else{
-          print('try 2');
           setLoginState(false).then((_) {
                               removePublicState();
                               removeUserState();
@@ -57,7 +73,6 @@ class _Wrapper extends State {
                             });
         }
       } else {
-        print('try 1');
         Navigator.pushReplacementNamed(context, AuthMainRoute);
       }
     } else {

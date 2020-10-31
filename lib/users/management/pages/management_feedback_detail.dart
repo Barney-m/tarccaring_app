@@ -85,8 +85,7 @@ class _ManagementFeedbackDetailPage
                 alignment: Alignment.centerRight,
                 child: SimpleDialogOption(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(ManagementNavigationRoute);
+                      Navigator.pop(context);
                     },
                     child: const Text('OK')),
               ),
@@ -713,7 +712,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.contain,
                                 image: new NetworkImage(
-                                    'http://192.168.43.203:8000/images/user/' +
+                                    'http://192.168.0.141:8000/images/user/' +
                                         widget.attachment
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                     ),

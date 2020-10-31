@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:tarccaring_app/shared_prefs.dart';
 
 class APIService{
-  final String _url = 'http://192.168.43.203:8000/api/user/';
+  final String _url = 'http://192.168.0.141:8000/api/user/';
 
   postMethod(data, endpoint) async{
     var fullUrl = _url + endpoint;
