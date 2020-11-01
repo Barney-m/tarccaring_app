@@ -21,6 +21,7 @@ class EducationQuality extends StatefulWidget {
 
 class _EducationQuality extends State<EducationQuality> {
   String _user;
+  //final bool autocorrect;
 
   @override
   void initState() {
@@ -34,7 +35,25 @@ class _EducationQuality extends State<EducationQuality> {
       _user = prefs.getString('id') ?? '';
     });
   }
-
+  anonymous(bool isSwitched) {
+    if (isSwitched == false) {
+      return Text(
+        '    $_user',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      );
+    } else if (isSwitched == true) {
+      return Text(
+        '    ' + 'ANONYMOUSLY',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      );
+    }
+  }
   Future<void> _submit(BuildContext context) async{
     if(_comment.text.toString().trim() != null){
       var data = {
@@ -52,6 +71,14 @@ class _EducationQuality extends State<EducationQuality> {
           context: context,
           builder: (BuildContext  context) {
             return SimpleDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
               title: Text("Submit Successful!",
                         style: new TextStyle(
                                 fontSize: 20.0,
@@ -64,8 +91,9 @@ class _EducationQuality extends State<EducationQuality> {
                     onPressed: (){
                       Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
                     },
-                    child: const Text('OK')
+                    child: const Text('OK',style: TextStyle(color: Colors.white),
                   ),
+                ),
                 ),
               ],
             );
@@ -76,6 +104,15 @@ class _EducationQuality extends State<EducationQuality> {
           context: context,
           builder: (BuildContext  context) {
             return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
               title: Text("Submit Failed!"),
               content: Text("Something went wrong...."),
             );
@@ -87,6 +124,13 @@ class _EducationQuality extends State<EducationQuality> {
         context: context,
         builder: (BuildContext  context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            backgroundColor: primaryColor,
+            titleTextStyle: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
             title: Text("Invalid Action."),
             content: Text("Please fill the comment."),
           );
@@ -188,6 +232,7 @@ class _EducationQuality extends State<EducationQuality> {
                           child: Column(children: <Widget>[
                             Expanded(
                               child: TextField(
+                                autocorrect: true,
                                 controller: _comment,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 12,
@@ -307,7 +352,118 @@ class _EducationQuality extends State<EducationQuality> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _submit(context);
+                              return showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    title: Text(
+                                      'Feedback Confirmation',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    titleTextStyle: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: <Widget>[
+                                          Text(
+                                            'By:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          anonymous(isSwitched),
+                                          SizedBox(
+                                            height:
+                                            SizeConfig.blockSizeVertical *
+                                                2,
+                                          ),
+                                          Text(
+                                            'Lecturer:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '    ' + widget.lecturer_id,
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                            SizeConfig.blockSizeVertical *
+                                                2,
+                                          ),
+                                          Text(
+                                            'Comment:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '    ' + _comment.text,
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Colors.white),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                            SizeConfig.blockSizeVertical *
+                                                4,
+                                          ),
+                                          FlatButton(
+                                              child: Text(
+                                                "CONFIRM",
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight:
+                                                    FontWeight.bold),
+                                              ),
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(6.0),
+                                              ),
+                                              onPressed: () {
+                                                _submit(context);
+                                              }),
+                                          FlatButton(
+                                              child: Text(
+                                                "DISCARD",
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight:
+                                                    FontWeight.bold),
+                                              ),
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(6.0),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(
+                                                    context,
+                                                    CanteenFoodRoute);
+                                              })
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
