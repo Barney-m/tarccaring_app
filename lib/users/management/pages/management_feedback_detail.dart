@@ -468,10 +468,112 @@ class _ManagementFeedbackDetailPage
           ),
         ]);
         break;
-      default:
+      case 'DISMISSED':
         return Container(
           child: SizedBox(),
         );
+        break;
+      default:
+        return Column(children: [
+          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+          ButtonTheme(
+            minWidth: SizeConfig.blockSizeVertical * 60,
+            child: FlatButton(
+                child: Text(
+                  'SOLVED',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                color: Colors.blue[300],
+                onPressed: () {
+                  return showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20))),
+                        title: Text(
+                          'Confirmation',
+                          textAlign: TextAlign.center,
+                        ),
+                        titleTextStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text(
+                                'Are You Sure Solved?',
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '(Once make decision cannot been change)',
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height:
+                                SizeConfig.blockSizeVertical *
+                                    2,
+                              ),
+                              FlatButton(
+                                  child: Text(
+                                    "CONFIRM",
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontSize: 16.0,
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  ),
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(6.0),
+                                  ),
+                                  onPressed: () {
+                                    _action(context, 'solve');
+                                  }),
+                              FlatButton(
+                                  child: Text(
+                                    "CANCEL",
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontSize: 16.0,
+                                        fontWeight:
+                                        FontWeight.bold),
+                                  ),
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(6.0),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                        context,
+                                        ManagementNavigationRoute);
+                                  })
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+            ),
+          ),
+        ]);
+
     }
   }
 
@@ -671,28 +773,33 @@ class _ManagementFeedbackDetailPage
                               ),
                             ),
                             Expanded(
-                              child: new SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: TextField(
-                                  enabled: false,
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: 15,
-                                  decoration: new InputDecoration(
-                                      hintText: widget.comment,
-                                      hintStyle: TextStyle(
-                                          color: Colors.black, fontSize: 15),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                        ),
-                                        borderSide: new BorderSide(
-                                            color: Colors.grey[100]),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white),
+                              flex: 1,
+                              child: Container(
+                                width: SizeConfig.blockSizeVertical * 300,
+                                padding: EdgeInsets.only(
+                                  right: SizeConfig.blockSizeVertical * 2,
+                                  top: SizeConfig.blockSizeVertical * 1,
+                                  left: SizeConfig.blockSizeVertical * 2,
+                                  bottom: SizeConfig.blockSizeVertical * 1,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                ),
+                                child: new SingleChildScrollView(
+                                  scrollDirection: Axis.vertical, //.horizontal
+                                  child: new Text(
+                                    widget.comment,
+                                    style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -703,18 +810,47 @@ class _ManagementFeedbackDetailPage
                           top: SizeConfig.blockSizeVertical * 50,
                           left: SizeConfig.blockSizeVertical * 10,
                           right: SizeConfig.blockSizeVertical * 10,
-                          child: Container(
-                            width: SizeConfig.blockSizeVertical * 1,
-                            height: SizeConfig.blockSizeVertical * 12,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: new DecorationImage(
-                                fit: BoxFit.contain,
-                                image: new NetworkImage(
-                                    'http://192.168.0.141:8000/images/image_attachment/' +
-                                        widget.attachment
-                                    //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                          child: InkWell(
+                            onTap: () =>
+                             showDialog(
+                              context: context,
+                              builder: (BuildContext  context) {
+                                return AlertDialog(
+                                  backgroundColor: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  content: Container(
+                                    width: SizeConfig.blockSizeVertical * 30,
+                                    height: SizeConfig.blockSizeVertical * 30,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      image: new DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: new NetworkImage(
+                                            'http://192.168.43.203:8000/images/image_attachment/' +
+                                                widget.attachment
+                                          //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                                        ),
+                                      ),
                                     ),
+                                  ),
+                                );
+                              },
+                            ),
+                            child: Container(
+                              width: SizeConfig.blockSizeVertical * 1,
+                              height: SizeConfig.blockSizeVertical * 12,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                image: new DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image: new NetworkImage(
+                                      'http://192.168.43.203:8000/images/image_attachment/' +
+                                          widget.attachment
+                                    //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                                  ),
+                                ),
                               ),
                             ),
                           ),

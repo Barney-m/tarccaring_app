@@ -26,6 +26,7 @@ class FeedbackDetailPage extends StatefulWidget {
     this.pendingDate,
     this.choice,
   });
+
   final int id;
   final String name;
   final String comment;
@@ -42,45 +43,44 @@ class FeedbackDetailPage extends StatefulWidget {
 }
 
 class _FeedbackDetailPage extends State<FeedbackDetailPage> {
-  Future<void> _recall(BuildContext context) async{
+  Future<void> _recall(BuildContext context) async {
     var data = {
-      'id' : widget.id.toInt(),
-      'action' : 'recall',
+      'id': widget.id.toInt(),
+      'action': 'recall',
     };
 
-    var result = await APIService().postMethod(data,'manage/action');
+    var result = await APIService().postMethod(data, 'manage/action');
     var message = json.decode(result.body);
 
-    if(message['message'] != null && message['success'] == true){
+    if (message['message'] != null && message['success'] == true) {
       showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (BuildContext  context) {
-            return SimpleDialog(
-              title: Text("Recall Successful!",
-                        style: new TextStyle(
-                                fontSize: 20.0,
-                              ),
-                        ),
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: SimpleDialogOption(
-                    onPressed: (){
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Text(
+              "Recall Successful!",
+              style: new TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+            children: <Widget>[
+              Align(
+                alignment: Alignment.centerRight,
+                child: SimpleDialogOption(
+                    onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('OK')
-                  ),
-                ),
-              ],
-            );
-          },
-        );
-    }
-    else{
+                    child: const Text('OK')),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
       showDialog(
         context: context,
-        builder: (BuildContext  context) {
+        builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Recall Failed!"),
             content: Text("Something went wrong...."),
@@ -89,6 +89,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
       );
     }
   }
+
   String _user;
   @override
   String todo = '';
@@ -120,7 +121,9 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
         );
         break;
       default:
-        return Container(child: SizedBox(),);
+        return Container(
+          child: SizedBox(),
+        );
     }
   }
 
@@ -385,28 +388,33 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                               ),
                             ),
                             Expanded(
-                              child: new SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: TextField(
-                                  enabled: false,
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: 15,
-                                  decoration: new InputDecoration(
-                                      hintText: widget.comment,
-                                      hintStyle: TextStyle(
-                                          color: Colors.black, fontSize: 15),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                        ),
-                                        borderSide: new BorderSide(
-                                            color: Colors.grey[100]),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white),
+                              flex: 1,
+                              child: Container(
+                                width: SizeConfig.blockSizeVertical * 300,
+                                padding: EdgeInsets.only(
+                                  right: SizeConfig.blockSizeVertical * 2,
+                                  top: SizeConfig.blockSizeVertical * 1,
+                                  left: SizeConfig.blockSizeVertical * 2,
+                                  bottom: SizeConfig.blockSizeVertical * 1,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                ),
+                                child: new SingleChildScrollView(
+                                  scrollDirection: Axis.vertical, //.horizontal
+                                  child: new Text(
+                                    widget.comment,
+                                    style: new TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -419,17 +427,45 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                           top: SizeConfig.blockSizeVertical * 50,
                           left: SizeConfig.blockSizeVertical * 10,
                           right: SizeConfig.blockSizeVertical * 10,
-                          child: Container(
-                            width: SizeConfig.blockSizeVertical * 1,
-                            height: SizeConfig.blockSizeVertical * 14,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: new DecorationImage(
-                                fit: BoxFit.cover,
-                                image: new NetworkImage(
-                                    'http://192.168.0.141:8000/images/user/' + widget.attachment
-                                    //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                          child: InkWell(
+                            onTap: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  content: Container(
+                                    width: SizeConfig.blockSizeVertical * 30,
+                                    height: SizeConfig.blockSizeVertical * 30,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      image: new DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: new NetworkImage(
+                                            'http://192.168.43.203:8000/images/image_attachment/' +
+                                                widget.attachment
+                                            //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                                            ),
+                                      ),
+                                    ),
                                   ),
+                                );
+                              },
+                            ),
+                            child: Container(
+                              width: SizeConfig.blockSizeVertical * 1,
+                              height: SizeConfig.blockSizeVertical * 12,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                image: new DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image: new NetworkImage(
+                                      'http://192.168.43.203:8000/images/image_attachment/' +
+                                          widget.attachment
+                                      //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
+                                      ),
+                                ),
                               ),
                             ),
                           ),
