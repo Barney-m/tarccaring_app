@@ -91,6 +91,17 @@ class _Login extends State {
           context: context,
           builder: (BuildContext  context) {
             return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              contentTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20),
               title: Text("Invalid Credentials."),
               content: Text(res['message']),
             );

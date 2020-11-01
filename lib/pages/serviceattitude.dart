@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,8 +20,7 @@ class ServiceAttitude extends StatefulWidget {
 
 class _ServicesAttitude extends State<ServiceAttitude>
     with TickerProviderStateMixin {
-  Future<void> _logoutUser(BuildContext context) {}
-  final myController = TextEditingController();
+  final _comment = TextEditingController();
   bool isSwitched = false;
   String _user;
 
@@ -28,12 +29,96 @@ class _ServicesAttitude extends State<ServiceAttitude>
     super.initState();
     getID();
   }
-
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
+  Future<void> _submit(BuildContext context) async{
+    if(_comment.text.toString().trim() != null){
+      var data = {
+        'user_id': _user,
+        'action': selectService,
+        'anonymous': isSwitched,
+        'comment': _comment.text.toString(),
+        'feedback_type': 4,
+      };
+      var result = await APIService().postMethod(data,'submit');
+      var message = json.decode(result.body);
+      if(message['success'] == true){
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext  context) {
+            return SimpleDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              title: Text("Submit Successful!",
+                style: new TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SimpleDialogOption(
+                    onPressed: (){
+                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                    },
+                    child: const Text('OK',style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      } else{
+        showDialog(
+          context: context,
+          builder: (BuildContext  context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+              title: Text("Submit Failed!"),
+              content: Text("Something went wrong...."),
+            );
+          },
+        );
+      }
+    } else{
+      showDialog(
+        context: context,
+        builder: (BuildContext  context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            backgroundColor: primaryColor,
+            titleTextStyle: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+            title: Text("Invalid Action."),
+            content: Text("Please fill the comment."),
+          );
+        },
+      );
+    }
   }
+
+    void dispose() {
+      // Clean up the controller when the widget is disposed.
+      _comment.dispose();
+      super.dispose();
+    }
 
   anonymous(bool isSwitched) {
     if (isSwitched == false) {
@@ -154,7 +239,7 @@ class _ServicesAttitude extends State<ServiceAttitude>
                                 },
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 18,
-                                controller: myController,
+                                controller: _comment,
                                 style: TextStyle(fontSize: 15),
                                 decoration: new InputDecoration(
                                     hintText: "Type your comment here....",
@@ -275,7 +360,7 @@ class _ServicesAttitude extends State<ServiceAttitude>
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            '    ' + myController.text,
+                                            '    ' + _comment.text,
                                             style: TextStyle(
                                                 fontSize: 17,
                                                 color: Colors.white),
@@ -300,9 +385,7 @@ class _ServicesAttitude extends State<ServiceAttitude>
                                                     BorderRadius.circular(6.0),
                                               ),
                                               onPressed: () {
-                                                Navigator.pushReplacementNamed(
-                                                    context,
-                                                    UserNavigationRoute);
+                                                _submit(context);
                                               }),
                                           FlatButton(
                                               child: Text(
@@ -319,9 +402,9 @@ class _ServicesAttitude extends State<ServiceAttitude>
                                                     BorderRadius.circular(6.0),
                                               ),
                                               onPressed: () {
-                                                Navigator.pushReplacementNamed(
+                                                Navigator.pop(
                                                     context,
-                                                    UserNavigationRoute);
+                                                    ServiceAttitudeRoute);
                                               })
                                         ],
                                       ),

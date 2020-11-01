@@ -1,4 +1,5 @@
 import 'package:dropdownfield/dropdownfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'dart:convert';
@@ -14,14 +15,11 @@ class CampusFacilities extends StatefulWidget {
   _CampusFacilities createState() => _CampusFacilities();
 }
 
-class _CampusFacilities extends State<CampusFacilities> {
-
+class _CampusFacilities extends State<CampusFacilities> with TickerProviderStateMixin{
   String _user;
-
   bool isSwitched = false;
 
   File _image;
-
 
   Future getImage(bool isCamera) async {
     var image;
@@ -42,7 +40,6 @@ class _CampusFacilities extends State<CampusFacilities> {
     getID();
   }
 
-
   getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -50,73 +47,101 @@ class _CampusFacilities extends State<CampusFacilities> {
     });
   }
 
-  Future<void> _submit(BuildContext context) async{
-    if(_comment.text.toString().trim() != null && selectLocation != ''){
+  Future<void> _submit(BuildContext context) async {
+    if (_comment.text.toString().trim() != null && selectLocation != '') {
       var data = {};
-      if(_image != null){
+      if (_image != null) {
         List<int> imageBytes = _image.readAsBytesSync();
         String base64Image = base64.encode(imageBytes);
         data = {
-          'user_id' : _user,
-          'action' : selectLocation,
-          'anonymous' : isSwitched,
-          'comment' : _comment.text.toString(),
-          'attachment' : base64Image,
-          'feedback_type' : 1,
+          'user_id': _user,
+          'action': selectLocation,
+          'anonymous': isSwitched,
+          'comment': _comment.text.toString(),
+          'attachment': base64Image,
+          'feedback_type': 1,
         };
-      }
-      else{
+      } else {
         data = {
-          'user_id' : _user,
-          'action' : selectLocation,
-          'anonymous' : isSwitched,
-          'comment' : _comment.text.toString(),
-          'feedback_type' : 1,
+          'user_id': _user,
+          'action': selectLocation,
+          'anonymous': isSwitched,
+          'comment': _comment.text.toString(),
+          'feedback_type': 1,
         };
       }
-      var result = await APIService().postMethod(data,'submit');
+      var result = await APIService().postMethod(data, 'submit');
       var message = json.decode(result.body);
-      if(message['success'] == true){
+      if (message['success'] == true) {
         showDialog(
           barrierDismissible: false,
           context: context,
-          builder: (BuildContext  context) {
+          builder: (BuildContext context) {
             return SimpleDialog(
-              title: Text("Submit Successful!",
-                        style: new TextStyle(
-                                fontSize: 20.0,
-                              ),
-                        ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              title: Text(
+                "Submit Successful!",
+                style: new TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
               children: <Widget>[
                 Align(
                   alignment: Alignment.centerRight,
                   child: SimpleDialogOption(
-                    onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
-                    },
-                    child: const Text('OK')
-                  ),
+                      onPressed: () {
+                        Navigator.pop(
+                            context,
+                            CanteenFoodRoute);
+                      },
+                      child: const Text(
+                        'OK',
+                        style: TextStyle(color: Colors.white),
+                      )),
                 ),
               ],
             );
           },
         );
-      } else{
+      } else {
         showDialog(
           context: context,
-          builder: (BuildContext  context) {
+          builder: (BuildContext context) {
             return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
               title: Text("Submit Failed!"),
               content: Text("Something went wrong...."),
             );
           },
         );
       }
-    } else{
+    } else {
       showDialog(
         context: context,
-        builder: (BuildContext  context) {
+        builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            backgroundColor: primaryColor,
+            titleTextStyle: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
             title: Text("Invalid Action."),
             content: Text("Please fill up the form."),
           );
@@ -126,9 +151,28 @@ class _CampusFacilities extends State<CampusFacilities> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _comment.dispose();
     super.dispose();
+  }
+  anonymous(bool isSwitched) {
+    if (isSwitched == false) {
+      return Text(
+        '    $_user',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      );
+    } else if (isSwitched == true) {
+      return Text(
+        '    ' + 'ANONYMOUSLY',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+        ),
+      );
+    }
   }
 
   final _comment = TextEditingController();
@@ -152,7 +196,9 @@ class _CampusFacilities extends State<CampusFacilities> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top:SizeConfig.blockSizeVertical * 0.5,),
+                    margin: EdgeInsets.only(
+                      top: SizeConfig.blockSizeVertical * 0.5,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -162,7 +208,8 @@ class _CampusFacilities extends State<CampusFacilities> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1),
+                    margin:
+                        EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1),
                     child: Row(
                       children: [
                         Expanded(
@@ -200,7 +247,10 @@ class _CampusFacilities extends State<CampusFacilities> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        defaultPadding * 1.5, SizeConfig.blockSizeVertical * 6, defaultPadding * 1.5, 0),
+                        defaultPadding * 1.5,
+                        SizeConfig.blockSizeVertical * 6,
+                        defaultPadding * 1.5,
+                        0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(),
                     ),
@@ -208,7 +258,10 @@ class _CampusFacilities extends State<CampusFacilities> {
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.fromLTRB(
-                              defaultPadding / 2, SizeConfig.blockSizeVertical * 19, defaultPadding / 2, 0),
+                              defaultPadding / 2,
+                              SizeConfig.blockSizeVertical * 19,
+                              defaultPadding / 2,
+                              0),
                           //margin: EdgeInsets.all(defaultPadding / 2),
                           child: Column(children: <Widget>[
                             Expanded(
@@ -220,7 +273,8 @@ class _CampusFacilities extends State<CampusFacilities> {
                                 decoration: new InputDecoration(
                                     hintText: "Type your comment here....",
                                     hintStyle: TextStyle(fontSize: 15),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 15, horizontal: 10),
                                     border: new OutlineInputBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(20),
@@ -238,9 +292,9 @@ class _CampusFacilities extends State<CampusFacilities> {
                           ]),
                         ),
                         Positioned(
-                            top: SizeConfig.blockSizeVertical * 3,
-                            left: SizeConfig.blockSizeVertical * 2,
-                            right: SizeConfig.blockSizeVertical * 2,
+                          top: SizeConfig.blockSizeVertical * 3,
+                          left: SizeConfig.blockSizeVertical * 2,
+                          right: SizeConfig.blockSizeVertical * 2,
                           child: DropDownField(
                             itemsVisibleInDropdown: 3,
                             required: true,
@@ -267,17 +321,17 @@ class _CampusFacilities extends State<CampusFacilities> {
                           right: SizeConfig.blockSizeVertical * 5,
                           child: _image == null
                               ? Container(
-                            height: SizeConfig.blockSizeVertical * 15,
-                            width: SizeConfig.blockSizeVertical * 5,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                            ),
-                          )
+                                  height: SizeConfig.blockSizeVertical * 15,
+                                  width: SizeConfig.blockSizeVertical * 5,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                  ),
+                                )
                               : Image.file(
-                            _image,
-                            height: SizeConfig.blockSizeVertical * 15,
-                            width: SizeConfig.blockSizeVertical * 15,
-                          ),
+                                  _image,
+                                  height: SizeConfig.blockSizeVertical * 15,
+                                  width: SizeConfig.blockSizeVertical * 15,
+                                ),
                         ),
                         Positioned(
                             top: SizeConfig.blockSizeVertical * 60,
@@ -324,7 +378,143 @@ class _CampusFacilities extends State<CampusFacilities> {
                             ),
                             color: primaryColor,
                             onPressed: () {
-                              _submit(context);
+                              return showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    title: Text(
+                                      'Feedback Confirmation',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    titleTextStyle: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: <Widget>[
+                                          Text(
+                                            'By:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          anonymous(isSwitched),
+                                          SizedBox(
+                                            height:
+                                                SizeConfig.blockSizeVertical *
+                                                    2,
+                                          ),
+                                          Text(
+                                            'Location:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '    ' + selectLocation,
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                SizeConfig.blockSizeVertical *
+                                                    2,
+                                          ),
+                                          Text(
+                                            'Comment:',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '    ' + _comment.text,
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Colors.white),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                SizeConfig.blockSizeVertical *
+                                                    4,
+                                          ),
+                                          Text(
+                                            'ATTACHMENT:',
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          _image == null
+                                              ? Container(
+                                            height: SizeConfig.blockSizeVertical * 15,
+                                            width: SizeConfig.blockSizeVertical * 5,
+                                            decoration: BoxDecoration(
+                                              color: primaryColor,
+                                            ),
+                                          )
+                                              : Image.file(
+                                            _image,
+                                            height: SizeConfig.blockSizeVertical * 15,
+                                            width: SizeConfig.blockSizeVertical * 15,
+                                          ),
+                                          SizedBox(
+                                            height:
+                                            SizeConfig.blockSizeVertical *
+                                                4,
+                                          ),
+                                          FlatButton(
+                                              child: Text(
+                                                "CONFIRM",
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                              ),
+                                              onPressed: () {
+                                                _submit(context);
+                                              }),
+                                          FlatButton(
+                                              child: Text(
+                                                "DISCARD",
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(
+                                                    context,
+                                                    CampusFacilitiesRoute);
+                                              })
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6.0),
