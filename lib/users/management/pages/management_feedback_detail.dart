@@ -99,9 +99,9 @@ class _ManagementFeedbackDetailPage
                 child: SimpleDialogOption(
                     onPressed: () {
                       Navigator.pop(context);
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                      Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
                     },
-                    child: const Text('OK')),
+                    child: const Text('OK',style: TextStyle(color: Colors.white),)),
               ),
             ],
           );
@@ -269,9 +269,9 @@ class _ManagementFeedbackDetailPage
                                   BorderRadius.circular(6.0),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
+                                  Navigator.pop(
                                       context,
-                                      ManagementNavigationRoute);
+                                        ManagementFeedbackDetailPage);
                                 })
                           ],
                         ),
@@ -365,9 +365,9 @@ class _ManagementFeedbackDetailPage
                                   BorderRadius.circular(6.0),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
+                                  Navigator.pop(
                                       context,
-                                      ManagementNavigationRoute);
+                                      ManagementFeedbackDetailPage);
                                 })
                           ],
                         ),
@@ -464,9 +464,9 @@ class _ManagementFeedbackDetailPage
                                   BorderRadius.circular(6.0),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
+                                  Navigator.pop(
                                       context,
-                                      ManagementNavigationRoute);
+                                      ManagementFeedbackDetailPage);
                                 })
                           ],
                         ),
@@ -842,7 +842,7 @@ class _ManagementFeedbackDetailPage
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://10.0.2.2:8000/images/image_attachment/' +
+                                            'http://192.168.43.203:8000/images/image_attachment/' +
                                                 widget.attachment
                                           //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                         ),
@@ -860,7 +860,7 @@ class _ManagementFeedbackDetailPage
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      'http://10.0.2.2:8000/images/image_attachment/' +
+                                      'http://192.168.43.203:8000/images/image_attachment/' +
                                           widget.attachment
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                   ),

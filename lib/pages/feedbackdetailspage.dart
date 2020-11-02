@@ -58,10 +58,15 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            backgroundColor: primaryColor,
             title: Text(
               "Recall Successful!",
               style: new TextStyle(
                 fontSize: 20.0,
+                color: Colors.white,
               ),
             ),
             children: <Widget>[
@@ -69,9 +74,9 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                 alignment: Alignment.centerRight,
                 child: SimpleDialogOption(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
                     },
-                    child: const Text('OK')),
+                    child: const Text('OK',style: TextStyle(color:Colors.white),)),
               ),
             ],
           );
@@ -82,8 +87,12 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Recall Failed!"),
-            content: Text("Something went wrong...."),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            backgroundColor: primaryColor,
+            title: Text("Recall Failed!",style: TextStyle(color: Colors.white),),
+            content: Text("Something went wrong....",style: TextStyle(color: Colors.white)),
           );
         },
       );
@@ -95,11 +104,10 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
   String todo = '';
 
   /*Future<List<dynamic>> fetchFeedbacks() async {
-    var result =
-    await APIService().getMethod('users?id=$_user');
-    print(json.decode(result.body));
+    var result = await APIService().getMethod('lecturer?faculty=' + categories[_selectedIndex].toString());
     return json.decode(result.body);
   }*/
+
   _recallButton() {
     switch (widget.status.toUpperCase()) {
       case 'PENDING':
