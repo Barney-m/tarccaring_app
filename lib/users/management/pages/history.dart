@@ -23,6 +23,17 @@ class _ManagementHistory extends State<ManagementHistory> {
     super.initState();
     getID();
   }
+  Color statusColor(String status) {
+    if (status == 'APPROVED') {
+      return Colors.green;
+    } else if (status == 'DISMISSED') {
+      return Colors.red;
+    } else if (status == 'URGENT') {
+      return Colors.green[700];
+    } else {
+      return Colors.grey;
+    }
+  }
 
   getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -111,7 +122,10 @@ class _ManagementHistory extends State<ManagementHistory> {
                                   title: Text(snapshot.data[index]['type']),
                                   subtitle:Text(snapshot.data[index]['comment']),
                                   isThreeLine: true,
-                                  trailing: Text(snapshot.data[index]['status'].toString().toUpperCase()),
+                                  trailing: Text(snapshot.data[index]['status'].toString().toUpperCase(),style: TextStyle(color: statusColor(snapshot
+                                      .data[index]['status']
+                                      .toString()
+                                      .toUpperCase()),),),
                                   onTap: () {
                                     Navigator.push(
                                       context,

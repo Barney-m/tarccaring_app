@@ -484,48 +484,6 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                           right: SizeConfig.blockSizeVertical * 2,
                           child: _recallButton(),
                         ),
-                        /*Positioned(
-                          top: SizeConfig.blockSizeVertical * 69,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
-                          child: FlatButton(
-                            child: Text(
-                              'Approve',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            color: Colors.blue[200],
-                            onPressed: () {
-                              _logoutUser(context);
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: SizeConfig.blockSizeVertical * 75,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
-                          child: FlatButton(
-                            child: Text(
-                              'Urgent',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            color: primaryColor,
-                            onPressed: () {
-                              _logoutUser(context);
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                          ),
-                        ),*/
                       ],
                     ),
                   ),
