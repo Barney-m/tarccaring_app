@@ -43,7 +43,7 @@ class _CampusFacilities extends State<CampusFacilities> with TickerProviderState
   getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _user = prefs.getString('id') ?? '';
+      _user = prefs.getString('id') ?? null;
     });
   }
 

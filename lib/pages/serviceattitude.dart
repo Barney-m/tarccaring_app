@@ -29,6 +29,7 @@ class _ServicesAttitude extends State<ServiceAttitude>
     super.initState();
     getID();
   }
+
   Future<void> _submit(BuildContext context) async{
     if(_comment.text.toString().trim() != null){
       var data = {
@@ -143,7 +144,7 @@ class _ServicesAttitude extends State<ServiceAttitude>
   getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _user = prefs.getString('id') ?? '';
+      _user = prefs.getString('id') ?? null;
     });
   }
 

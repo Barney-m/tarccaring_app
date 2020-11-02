@@ -1,18 +1,14 @@
 import 'dart:convert';
 import 'package:tarccaring_app/utils/api.dart';
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:tarccaring_app/pages/canteenfood.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:tarccaring_app/widgets/campus_feedback_details_card.dart';
 import 'package:tarccaring_app/widgets/canteen_food_details_card.dart';
 import 'package:tarccaring_app/widgets/service_attitude_details_card.dart';
 import 'package:tarccaring_app/widgets/education_quality_details_card.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ManagementFeedbackDetailPage extends StatefulWidget {
   ManagementFeedbackDetailPage({
@@ -46,17 +42,34 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
 
 class _ManagementFeedbackDetailPage
     extends State<ManagementFeedbackDetailPage> {
+
+  String _user;
+
+  @override
+  void initState() {
+    super.initState();
+    getID();
+  }
+
+  getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _user = prefs.getString('id') ?? '';
+    });
+  }
+
   @override
   String todo = '';
 
   int id;
 
   Future<void> _action(BuildContext context, String action) async {
+    print(_user);
     var data = {
       'id': widget.id.toInt(),
+      'user_id' : _user,
       'action': action,
     };
-
     var result = await APIService().postMethod(data, 'manage/action');
     var message = json.decode(result.body);
 
@@ -86,6 +99,7 @@ class _ManagementFeedbackDetailPage
                 child: SimpleDialogOption(
                     onPressed: () {
                       Navigator.pop(context);
+                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
                     },
                     child: const Text('OK')),
               ),
@@ -828,7 +842,7 @@ class _ManagementFeedbackDetailPage
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://192.168.43.203:8000/images/image_attachment/' +
+                                            'http://10.0.2.2:8000/images/image_attachment/' +
                                                 widget.attachment
                                           //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                         ),
@@ -846,7 +860,7 @@ class _ManagementFeedbackDetailPage
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      'http://192.168.43.203:8000/images/image_attachment/' +
+                                      'http://10.0.2.2:8000/images/image_attachment/' +
                                           widget.attachment
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                   ),

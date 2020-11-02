@@ -62,7 +62,7 @@ class _CanteenFood extends State<CanteenFood> {
   getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _user = prefs.getString('id') ?? '';
+      _user = prefs.getString('id') ?? null;
     });
   }
 

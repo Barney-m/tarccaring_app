@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:tarccaring_app/utils/api.dart';
 import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'management_feedback_detail.dart';
 
 class ManagementFeedback extends StatefulWidget {
@@ -13,11 +13,26 @@ class ManagementFeedback extends StatefulWidget {
 }
 
 class _ManagementFeedback extends State<ManagementFeedback> {
+  String _user;
+
+  @override
+  void initState() {
+    super.initState();
+    getID();
+  }
+
+  getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _user = prefs.getString('id') ?? '';
+    });
+  }
+
   int _selectedIndex = 0;
   List categories = ['Approved', 'Urgent'];
 
   Future<List<dynamic>> fetchFeedbacks() async {
-        var result = await APIService().getMethod('feedbacks/accepted?action=' + categories[_selectedIndex].toString().toLowerCase());
+        var result = await APIService().getMethod('feedbacks/accepted?action=' + categories[_selectedIndex].toString().toLowerCase() + '&id=$_user');
         return json.decode(result.body);
   }
 
@@ -34,7 +49,7 @@ class _ManagementFeedback extends State<ManagementFeedback> {
       bottom: false,
       child: Column(
         children: <Widget>[
-          SearchBox(onChanged: (value) {}),
+          // SearchBox(onChanged: (value) {}),
           Container(
             margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
             height: 30,
@@ -102,6 +117,7 @@ class _ManagementFeedback extends State<ManagementFeedback> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                         new ManagementFeedbackDetailPage(
+                                          id: snapshot.data[index]['id'],
                                           name: snapshot.data[index]['creator_id'].toString(),
                                           comment: snapshot.data[index]['comment'],
                                           type: snapshot.data[index]['type'],

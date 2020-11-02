@@ -79,7 +79,7 @@ class _FeedbackHistory extends State<FeedbackHistory> {
       bottom: false,
       child: Column(
         children: <Widget>[
-          SearchBox(onChanged: (value) {}),
+          // SearchBox(onChanged: (value) {}),
           Container(
             margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
             height: 30,

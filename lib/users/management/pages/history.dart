@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:tarccaring_app/utils/api.dart';
 import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'management_feedback_detail.dart';
 
 class ManagementHistory extends StatefulWidget {
@@ -16,19 +16,24 @@ class _ManagementHistory extends State<ManagementHistory> {
   int _selectedIndex = 0;
   List categories = ['All', 'Facilities', 'Foods', 'Educations', 'Services'];
 
+  String _user;
+
+  @override
+  void initState() {
+    super.initState();
+    getID();
+  }
+
+  getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _user = prefs.getString('id') ?? '';
+    });
+  }
+
   Future<List<dynamic>> fetchFeedbacks() async {
-    switch (_selectedIndex) {
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-        var result = await APIService().getMethod('feedbacks/history/' + categories[_selectedIndex].toString().toLowerCase());
-        return json.decode(result.body);
-        break;
-      default:
-        var result = await APIService().getMethod('feedbacks/history');
-        return json.decode(result.body);
-    }
+    var result = await APIService().getMethod('feedbacks/history?type=' + _selectedIndex.toString() + '&id=$_user');
+    return json.decode(result.body);
   }
 
   final _type = [
@@ -44,7 +49,7 @@ class _ManagementHistory extends State<ManagementHistory> {
       bottom: false,
       child: Column(
         children: <Widget>[
-          SearchBox(onChanged: (value) {}),
+          // SearchBox(onChanged: (value) {}),
           Container(
             margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
             height: 30,

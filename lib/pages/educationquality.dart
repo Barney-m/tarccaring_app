@@ -32,7 +32,7 @@ class _EducationQuality extends State<EducationQuality> {
   getID() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _user = prefs.getString('id') ?? '';
+      _user = prefs.getString('id') ?? null;
     });
   }
   anonymous(bool isSwitched) {
@@ -277,7 +277,7 @@ class _EducationQuality extends State<EducationQuality> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://192.168.0.141:8000/images/user/'+ widget.image),
+                                            'http://10.0.2.2:8000/images/user/'+ widget.image),
                                       ),
                                     ),
                                   ),
