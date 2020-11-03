@@ -14,7 +14,7 @@ class PriorityPage extends StatefulWidget {
 
 class _PriorityPage extends State<PriorityPage> {
   int _selectedIndex = 0;
-  List categories = ['1', '2', '3', '4'];
+  List categories = ['1', '2', '3', '4', '5'];
 
   Future<List<dynamic>> fetchFeedbacks() async {
     switch (_selectedIndex) {
@@ -135,7 +135,8 @@ class _PriorityPage extends State<PriorityPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                         new ManagementFeedbackDetailPage(
-                                          name: snapshot.data[index]['creator_id'].toString(),
+                                          id: snapshot.data[index]['id'],
+                                          creator: snapshot.data[index]['creator_id'].toString(),
                                           comment: snapshot.data[index]['comment'],
                                           type: snapshot.data[index]['type'],
                                           attachment: snapshot.data[index]['attachment'].toString(),

@@ -14,10 +14,10 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
   ManagementFeedbackDetailPage({
     this.id,
     this.creator,
-    this.name,
     this.comment,
     this.type,
     this.attachment,
+    this.anonymous,
     this.choice,
     this.status,
     this.pendingDate,
@@ -25,10 +25,10 @@ class ManagementFeedbackDetailPage extends StatefulWidget {
 
   final int id;
   final String creator;
-  final String name;
   final String comment;
   final String type;
   final String attachment;
+  final bool anonymous;
   final String choice;
   final String status;
   final String pendingDate;
@@ -44,11 +44,30 @@ class _ManagementFeedbackDetailPage
     extends State<ManagementFeedbackDetailPage> {
 
   String _user;
-
+  String _name;
+  String _image;
   @override
   void initState() {
     super.initState();
     getID();
+    _getUser(context);
+  }
+
+  Future<void> _getUser(BuildContext context) async {
+    print(widget.creator);
+    var result = await APIService().getMethod('feedbacks/user?id=' + widget.creator);
+    var message = json.decode(result.body);
+    if(widget.anonymous){
+      setState(() {
+        _image = 'default.png';
+      });
+    }
+    else{
+      setState(() {
+        _name = widget.creator == message['user_id'] ? message['name'] : '';
+        _image = widget.creator == message['user_id'] ? message['image'] : null;
+      });
+    }
   }
 
   getID() async {
@@ -667,7 +686,9 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                    "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
+                                  _image == null ? 'http://10.0.2.2:8000/images/user/default.png' : 'http://10.0.2.2:8000/images/user/' + _image,
+                                ),
+                                    // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),
                             ),
                           ),
@@ -680,7 +701,7 @@ class _ManagementFeedbackDetailPage
                           child: Column(
                             children: [
                               Text(
-                                widget.name,
+                                widget.anonymous == true ? 'Anonymous' : (widget.creator != null ? widget.creator : 'Guest'),
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -688,7 +709,7 @@ class _ManagementFeedbackDetailPage
                                 textAlign: TextAlign.left,
                               ),
                               Text(
-                                widget.name,
+                                _name ?? '',
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -842,8 +863,7 @@ class _ManagementFeedbackDetailPage
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://192.168.43.203:8000/images/image_attachment/' +
-                                                widget.attachment
+                                            widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment,
                                           //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                         ),
                                       ),
@@ -860,8 +880,7 @@ class _ManagementFeedbackDetailPage
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      'http://192.168.43.203:8000/images/image_attachment/' +
-                                          widget.attachment
+                                      widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment,
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                   ),
                                 ),

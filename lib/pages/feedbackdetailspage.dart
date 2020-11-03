@@ -19,6 +19,8 @@ class FeedbackDetailPage extends StatefulWidget {
   FeedbackDetailPage({
     this.id,
     this.name,
+    this.image,
+    this.creator,
     this.comment,
     this.type,
     this.attachment,
@@ -28,6 +30,8 @@ class FeedbackDetailPage extends StatefulWidget {
   });
 
   final int id;
+  final String creator;
+  final String image;
   final String name;
   final String comment;
   final String type;
@@ -279,7 +283,9 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                    "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
+                                  "http://10.0.2.2:8000/images/user/" + widget.image,
+                                  ),
+                                    // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),
                             ),
                           ),
@@ -292,7 +298,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                           child: Column(
                             children: [
                               Text(
-                                widget.name,
+                                widget.creator,
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -451,8 +457,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://192.168.43.203:8000/images/image_attachment/' +
-                                                widget.attachment
+                                            widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment
                                             //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                             ),
                                       ),
@@ -469,8 +474,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      'http://192.168.43.203:8000/images/image_attachment/' +
-                                          widget.attachment
+                                      widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment
                                       //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                       ),
                                 ),

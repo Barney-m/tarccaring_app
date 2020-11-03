@@ -141,7 +141,9 @@ class _FeedbackHistory extends State<FeedbackHistory> {
                                           builder: (context) =>
                                               FeedbackDetailPage(
                                             id: snapshot.data[index]['id'],
-                                            name: snapshot.data[index]['creator_id'].toString(),
+                                            name: snapshot.data[index]['name'].toString(),
+                                            image: snapshot.data[index]['image'].toString(),
+                                            creator: snapshot.data[index]['creator_id'].toString(),
                                             comment: snapshot.data[index]['comment'],
                                             type: snapshot.data[index]['type'],
                                             attachment: snapshot.data[index]['attachment'].toString(),
