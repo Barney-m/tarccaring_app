@@ -94,13 +94,13 @@ class _Login extends State {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              backgroundColor: primaryColor,
+              backgroundColor: Colors.white,
               titleTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
               contentTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 20),
               title: Text("Invalid Credentials."),
               content: Text(res['message']),

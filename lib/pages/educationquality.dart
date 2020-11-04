@@ -41,7 +41,7 @@ class _EducationQuality extends State<EducationQuality> {
         '    $_user',
         style: TextStyle(
           fontSize: 17,
-          color: Colors.white,
+          color: Colors.black,
         ),
       );
     } else if (isSwitched == true) {
@@ -49,7 +49,7 @@ class _EducationQuality extends State<EducationQuality> {
         '    ' + 'ANONYMOUSLY',
         style: TextStyle(
           fontSize: 17,
-          color: Colors.white,
+          color: Colors.black,
         ),
       );
     }
@@ -74,9 +74,9 @@ class _EducationQuality extends State<EducationQuality> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              backgroundColor: primaryColor,
+              backgroundColor: Colors.white,
               titleTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
               title: Text("Submit Successful!",
@@ -91,7 +91,7 @@ class _EducationQuality extends State<EducationQuality> {
                     onPressed: (){
                       Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
                     },
-                    child: const Text('OK',style: TextStyle(color: Colors.white),
+                    child: const Text('OK',style: TextStyle(color: Colors.black),
                   ),
                 ),
                 ),
@@ -107,12 +107,12 @@ class _EducationQuality extends State<EducationQuality> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              backgroundColor: primaryColor,
+              backgroundColor: Colors.white,
               titleTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
-              contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+              contentTextStyle: TextStyle(color: Colors.black, fontSize: 18),
               title: Text("Submit Failed!"),
               content: Text("Something went wrong...."),
             );
@@ -127,10 +127,10 @@ class _EducationQuality extends State<EducationQuality> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6.0),
             ),
-            backgroundColor: primaryColor,
+            backgroundColor: Colors.white,
             titleTextStyle: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-            contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+            contentTextStyle: TextStyle(color: Colors.black, fontSize: 18),
             title: Text("Invalid Action."),
             content: Text("Please fill the comment."),
           );
@@ -277,7 +277,7 @@ class _EducationQuality extends State<EducationQuality> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            'http://10.0.2.2:8000/images/user/'+ widget.image),
+                                            'http://192.168.43.203:8000/images/user/'+ widget.image),
                                       ),
                                     ),
                                   ),
@@ -305,39 +305,6 @@ class _EducationQuality extends State<EducationQuality> {
                           right: SizeConfig.blockSizeVertical * 2,
                           child: Text('Comment:'),
                         ),
-                        /*Positioned(
-                          top: SizeConfig.blockSizeVertical * 42.5,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
-                          child: Text('Attachment:'),
-                        ),
-                        Positioned(
-                          top: SizeConfig.blockSizeVertical * 44.5,
-                          left: SizeConfig.blockSizeVertical * 2,
-                          right: SizeConfig.blockSizeVertical * 2,
-                          child: Text(
-                              '(optional)',
-                            style: TextStyle(color: Colors.grey[500]),
-                          ),
-                        ),
-                        Positioned(
-                            top: SizeConfig.blockSizeVertical * 48,
-                            left: SizeConfig.blockSizeVertical * 2,
-                            right: SizeConfig.blockSizeVertical * 2,
-                            child: FlatButton(
-                              child: Text(
-                                'UPLOAD VIDEO',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              color: primaryColor,
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            )),*/
                         Positioned(
                           bottom: 50.0,
                           left: 10.0,
@@ -357,7 +324,7 @@ class _EducationQuality extends State<EducationQuality> {
                                 barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
-                                    backgroundColor: primaryColor,
+                                    backgroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
@@ -367,7 +334,7 @@ class _EducationQuality extends State<EducationQuality> {
                                     ),
                                     titleTextStyle: TextStyle(
                                         fontSize: 20,
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                     content: SingleChildScrollView(
                                       child: ListBody(
@@ -376,7 +343,7 @@ class _EducationQuality extends State<EducationQuality> {
                                             'By:',
                                             style: TextStyle(
                                                 fontSize: 19,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           anonymous(isSwitched),
@@ -389,14 +356,14 @@ class _EducationQuality extends State<EducationQuality> {
                                             'Lecturer:',
                                             style: TextStyle(
                                                 fontSize: 19,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             '    ' + widget.lecturer_id,
                                             style: TextStyle(
                                               fontSize: 17,
-                                              color: Colors.white,
+                                              color: Colors.black,
                                             ),
                                           ),
                                           SizedBox(
@@ -408,14 +375,14 @@ class _EducationQuality extends State<EducationQuality> {
                                             'Comment:',
                                             style: TextStyle(
                                                 fontSize: 19,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             '    ' + _comment.text,
                                             style: TextStyle(
                                                 fontSize: 17,
-                                                color: Colors.white),
+                                                color: Colors.black),
                                           ),
                                           SizedBox(
                                             height:
@@ -426,12 +393,12 @@ class _EducationQuality extends State<EducationQuality> {
                                               child: Text(
                                                 "CONFIRM",
                                                 style: TextStyle(
-                                                    color: primaryColor,
+                                                    color: Colors.white,
                                                     fontSize: 16.0,
                                                     fontWeight:
                                                     FontWeight.bold),
                                               ),
-                                              color: Colors.white,
+                                              color: primaryColor,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(6.0),
@@ -443,12 +410,12 @@ class _EducationQuality extends State<EducationQuality> {
                                               child: Text(
                                                 "DISCARD",
                                                 style: TextStyle(
-                                                    color: primaryColor,
+                                                    color: Colors.white,
                                                     fontSize: 16.0,
                                                     fontWeight:
                                                     FontWeight.bold),
                                               ),
-                                              color: Colors.white,
+                                              color: primaryColor,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(6.0),

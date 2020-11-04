@@ -65,12 +65,12 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6.0),
             ),
-            backgroundColor: primaryColor,
+            backgroundColor: Colors.white,
             title: Text(
               "Recall Successful!",
               style: new TextStyle(
                 fontSize: 20.0,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             children: <Widget>[
@@ -80,7 +80,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil('user/user_nav', (Route<dynamic> route) => false);
                     },
-                    child: const Text('OK',style: TextStyle(color:Colors.white),)),
+                    child: const Text('OK',style: TextStyle(color:Colors.black),)),
               ),
             ],
           );
@@ -283,7 +283,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                  "http://10.0.2.2:8000/images/user/" + widget.image,
+                                  "http://192.168.43.203:8000/images/user/" + widget.image,
                                   ),
                                     // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),
@@ -373,22 +373,6 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                             ),
                             Expanded(
                               child: _cardType(),
-                              /*child: Row(
-                                children: <Widget>[
-                                  Expanded(flex: 1, child: SizedBox(),),
-                                  Container(
-                                    height: SizeConfig.blockSizeVertical * 10,
-                                    width: SizeConfig.blockSizeVertical * 10,
-                                    child: SvgPicture.asset(
-                                      'assets/images/svg/campusfacilities.svg',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Expanded(flex: 1, child: SizedBox(),),
-                                  Text(todo),
-                                  Expanded(flex: 1, child: SizedBox(),),
-                                ],
-                              ),*/
                             ),
                             Expanded(
                               child: Row(
@@ -457,7 +441,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment
+                                            widget.attachment == null ? '' : 'http://192.168.43.203:8000/images/image_attachment/' + widget.attachment
                                             //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                             ),
                                       ),
@@ -474,7 +458,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment
+                                      widget.attachment == null ? '' : 'http://192.168.43.203:8000/images/image_attachment/' + widget.attachment
                                       //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                       ),
                                 ),

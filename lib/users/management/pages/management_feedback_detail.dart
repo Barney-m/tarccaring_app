@@ -98,13 +98,13 @@ class _ManagementFeedbackDetailPage
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            backgroundColor: primaryColor,
+            backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                     Radius.circular(20))),
             titleTextStyle: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold),
             title: Text(
               message['message'],
@@ -119,7 +119,7 @@ class _ManagementFeedbackDetailPage
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil('user/management_nav', (Route<dynamic> route) => false);
                     },
-                    child: const Text('OK',style: TextStyle(color: Colors.white),)),
+                    child: const Text('OK',style: TextStyle(color: Colors.black),)),
               ),
             ],
           );
@@ -221,7 +221,7 @@ class _ManagementFeedbackDetailPage
                   barrierDismissible: false,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: primaryColor,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                               Radius.circular(20))),
@@ -231,7 +231,7 @@ class _ManagementFeedbackDetailPage
                       ),
                       titleTextStyle: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold),
                       content: SingleChildScrollView(
                         child: ListBody(
@@ -240,7 +240,7 @@ class _ManagementFeedbackDetailPage
                               'Are You Sure to Dismiss?',
                               style: TextStyle(
                                   fontSize: 19,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
@@ -259,12 +259,12 @@ class _ManagementFeedbackDetailPage
                                 child: Text(
                                   "CONFIRM",
                                   style: TextStyle(
-                                      color: primaryColor,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight:
                                       FontWeight.bold),
                                 ),
-                                color: Colors.white,
+                                color: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(6.0),
@@ -276,12 +276,12 @@ class _ManagementFeedbackDetailPage
                                 child: Text(
                                   "CANCEL",
                                   style: TextStyle(
-                                      color: primaryColor,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight:
                                       FontWeight.bold),
                                 ),
-                                color: Colors.white,
+                                color: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(6.0),
@@ -317,7 +317,7 @@ class _ManagementFeedbackDetailPage
                   barrierDismissible: false,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: primaryColor,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                               Radius.circular(20))),
@@ -327,7 +327,7 @@ class _ManagementFeedbackDetailPage
                       ),
                       titleTextStyle: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold),
                       content: SingleChildScrollView(
                         child: ListBody(
@@ -336,7 +336,7 @@ class _ManagementFeedbackDetailPage
                               'Are You Sure to Approve?',
                               style: TextStyle(
                                   fontSize: 19,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
@@ -355,12 +355,12 @@ class _ManagementFeedbackDetailPage
                                 child: Text(
                                   "CONFIRM",
                                   style: TextStyle(
-                                      color: primaryColor,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight:
                                       FontWeight.bold),
                                 ),
-                                color: Colors.white,
+                                color: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(6.0),
@@ -372,12 +372,12 @@ class _ManagementFeedbackDetailPage
                                 child: Text(
                                   "CANCEL",
                                   style: TextStyle(
-                                      color: primaryColor,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight:
                                       FontWeight.bold),
                                 ),
-                                color: Colors.white,
+                                color: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(6.0),
@@ -416,7 +416,7 @@ class _ManagementFeedbackDetailPage
                   barrierDismissible: false,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: primaryColor,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                               Radius.circular(20))),
@@ -426,7 +426,7 @@ class _ManagementFeedbackDetailPage
                       ),
                       titleTextStyle: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold),
                       content: SingleChildScrollView(
                         child: ListBody(
@@ -435,7 +435,7 @@ class _ManagementFeedbackDetailPage
                               'Are You Sure to Set Urgent?',
                               style: TextStyle(
                                   fontSize: 19,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
@@ -454,12 +454,12 @@ class _ManagementFeedbackDetailPage
                                 child: Text(
                                   "CONFIRM",
                                   style: TextStyle(
-                                      color: primaryColor,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight:
                                       FontWeight.bold),
                                 ),
-                                color: Colors.white,
+                                color: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(6.0),
@@ -471,12 +471,12 @@ class _ManagementFeedbackDetailPage
                                 child: Text(
                                   "CANCEL",
                                   style: TextStyle(
-                                      color: primaryColor,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight:
                                       FontWeight.bold),
                                 ),
-                                color: Colors.white,
+                                color: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(6.0),
@@ -505,6 +505,11 @@ class _ManagementFeedbackDetailPage
           child: SizedBox(),
         );
         break;
+      case 'SOLVED':
+        return Container(
+          child: SizedBox(),
+        );
+        break;
       default:
         return Column(children: [
           SizedBox(height: SizeConfig.blockSizeVertical * 5,),
@@ -525,7 +530,7 @@ class _ManagementFeedbackDetailPage
                     barrierDismissible: false,
                     builder: (context) {
                       return AlertDialog(
-                        backgroundColor: primaryColor,
+                        backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                                 Radius.circular(20))),
@@ -535,7 +540,7 @@ class _ManagementFeedbackDetailPage
                         ),
                         titleTextStyle: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold),
                         content: SingleChildScrollView(
                           child: ListBody(
@@ -544,7 +549,7 @@ class _ManagementFeedbackDetailPage
                                 'Are You Sure Solved?',
                                 style: TextStyle(
                                     fontSize: 19,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
@@ -563,12 +568,12 @@ class _ManagementFeedbackDetailPage
                                   child: Text(
                                     "CONFIRM",
                                     style: TextStyle(
-                                        color: primaryColor,
+                                        color: Colors.white,
                                         fontSize: 16.0,
                                         fontWeight:
                                         FontWeight.bold),
                                   ),
-                                  color: Colors.white,
+                                  color: primaryColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
                                     BorderRadius.circular(6.0),
@@ -580,12 +585,12 @@ class _ManagementFeedbackDetailPage
                                   child: Text(
                                     "CANCEL",
                                     style: TextStyle(
-                                        color: primaryColor,
+                                        color: Colors.white,
                                         fontSize: 16.0,
                                         fontWeight:
                                         FontWeight.bold),
                                   ),
-                                  color: Colors.white,
+                                  color: primaryColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
                                     BorderRadius.circular(6.0),
@@ -685,7 +690,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                  _image == null ? 'http://10.0.2.2:8000/images/user/default.png' : 'http://10.0.2.2:8000/images/user/' + _image,
+                                  _image == null ? 'http://192.168.43.203:8000/images/user/default.png' : 'http://192.168.43.203:8000/images/user/' + _image,
                                 ),
                                     // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),
@@ -778,22 +783,6 @@ class _ManagementFeedbackDetailPage
                             ),
                             Expanded(
                               child: _cardType(),
-                              /*child: Row(
-                                children: <Widget>[
-                                  Expanded(flex: 1, child: SizedBox(),),
-                                  Container(
-                                    height: SizeConfig.blockSizeVertical * 10,
-                                    width: SizeConfig.blockSizeVertical * 10,
-                                    child: SvgPicture.asset(
-                                      'assets/images/svg/campusfacilities.svg',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Expanded(flex: 1, child: SizedBox(),),
-                                  Text(todo),
-                                  Expanded(flex: 1, child: SizedBox(),),
-                                ],
-                              ),*/
                             ),
                             Expanded(
                               child: Row(
@@ -850,7 +839,7 @@ class _ManagementFeedbackDetailPage
                               context: context,
                               builder: (BuildContext  context) {
                                 return AlertDialog(
-                                  backgroundColor: primaryColor,
+                                  backgroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
