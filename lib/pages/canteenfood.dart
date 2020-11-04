@@ -24,7 +24,7 @@ class _CanteenFood extends State<CanteenFood> {
         '    $_user',
         style: TextStyle(
           fontSize: 17,
-          color: Colors.white,
+          color: Colors.black,
         ),
       );
     } else if (isSwitched == true) {
@@ -32,7 +32,7 @@ class _CanteenFood extends State<CanteenFood> {
         '    ' + 'ANONYMOUSLY',
         style: TextStyle(
           fontSize: 17,
-          color: Colors.white,
+          color: Colors.black,
         ),
       );
     }
@@ -101,9 +101,9 @@ class _CanteenFood extends State<CanteenFood> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              backgroundColor: primaryColor,
+              backgroundColor: Colors.white,
               titleTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
               title: Text("Submit Successful!",
@@ -118,7 +118,7 @@ class _CanteenFood extends State<CanteenFood> {
                     onPressed: (){
                       Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
                     },
-                    child: const Text('OK',style: TextStyle(color: Colors.white),
+                    child: const Text('OK',style: TextStyle(color: Colors.black),
                   )
                   ),
                 ),
@@ -134,12 +134,12 @@ class _CanteenFood extends State<CanteenFood> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              backgroundColor: primaryColor,
+              backgroundColor: Colors.white,
               titleTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
-              contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+              contentTextStyle: TextStyle(color: Colors.black, fontSize: 18),
               title: Text("Submit Failed!"),
               content: Text("Something went wrong...."),
             );
@@ -154,10 +154,10 @@ class _CanteenFood extends State<CanteenFood> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6.0),
             ),
-            backgroundColor: primaryColor,
+            backgroundColor: Colors.white,
             titleTextStyle: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-            contentTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+            contentTextStyle: TextStyle(color: Colors.black, fontSize: 18),
             title: Text("Invalid Action."),
             content: Text("Please fill up the form."),
           );
@@ -371,7 +371,7 @@ class _CanteenFood extends State<CanteenFood> {
                                 barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
-                                    backgroundColor: primaryColor,
+                                    backgroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
@@ -381,7 +381,7 @@ class _CanteenFood extends State<CanteenFood> {
                                     ),
                                     titleTextStyle: TextStyle(
                                         fontSize: 20,
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                     content: SingleChildScrollView(
                                       child: ListBody(
@@ -390,7 +390,7 @@ class _CanteenFood extends State<CanteenFood> {
                                             'By:',
                                             style: TextStyle(
                                                 fontSize: 19,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           anonymous(isSwitched),
@@ -403,14 +403,14 @@ class _CanteenFood extends State<CanteenFood> {
                                             'Location:',
                                             style: TextStyle(
                                                 fontSize: 19,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             '    ' + selectCanteen,
                                             style: TextStyle(
                                               fontSize: 17,
-                                              color: Colors.white,
+                                              color: Colors.black,
                                             ),
                                           ),
                                           SizedBox(
@@ -422,14 +422,14 @@ class _CanteenFood extends State<CanteenFood> {
                                             'Comment:',
                                             style: TextStyle(
                                                 fontSize: 19,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             '    ' + _comment.text,
                                             style: TextStyle(
                                                 fontSize: 17,
-                                                color: Colors.white),
+                                                color: Colors.black),
                                           ),
                                           SizedBox(
                                             height:
@@ -440,7 +440,7 @@ class _CanteenFood extends State<CanteenFood> {
                                             'ATTACHMENT:',
                                             style: TextStyle(
                                                 fontSize: 17,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           _image == null
@@ -448,7 +448,7 @@ class _CanteenFood extends State<CanteenFood> {
                                             height: SizeConfig.blockSizeVertical * 15,
                                             width: SizeConfig.blockSizeVertical * 5,
                                             decoration: BoxDecoration(
-                                              color: primaryColor,
+                                              color: Colors.white,
                                             ),
                                           )
                                               : Image.file(
@@ -465,12 +465,12 @@ class _CanteenFood extends State<CanteenFood> {
                                               child: Text(
                                                 "CONFIRM",
                                                 style: TextStyle(
-                                                    color: primaryColor,
+                                                    color: Colors.white,
                                                     fontSize: 16.0,
                                                     fontWeight:
                                                     FontWeight.bold),
                                               ),
-                                              color: Colors.white,
+                                              color: primaryColor,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(6.0),
@@ -482,12 +482,12 @@ class _CanteenFood extends State<CanteenFood> {
                                               child: Text(
                                                 "DISCARD",
                                                 style: TextStyle(
-                                                    color: primaryColor,
+                                                    color: Colors.white,
                                                     fontSize: 16.0,
                                                     fontWeight:
                                                     FontWeight.bold),
                                               ),
-                                              color: Colors.white,
+                                              color: primaryColor,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(6.0),
