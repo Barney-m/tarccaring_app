@@ -119,7 +119,7 @@ class _ManagementHomepage extends State<ManagementHomepage> {
                                         builder: (context) =>
                                         ManagementFeedbackDetailPage(
                                           id: snapshot.data[index]['id'],
-                                          creator: snapshot.data[index]['creator_id'] ?? '',
+                                          creator: snapshot.data[index]['creator_id'],
                                           comment: snapshot.data[index]['comment'],
                                           type: snapshot.data[index]['type'],
                                           attachment: snapshot.data[index]['attachment'].toString(),

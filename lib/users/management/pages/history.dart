@@ -133,7 +133,7 @@ class _ManagementHistory extends State<ManagementHistory> {
                                         builder: (context) =>
                                         new ManagementFeedbackDetailPage(
                                           id: snapshot.data[index]['id'],
-                                          creator: snapshot.data[index]['creator_id'].toString() ?? '',
+                                          creator: snapshot.data[index]['creator_id'].toString(),
                                           comment: snapshot.data[index]['comment'],
                                           type: snapshot.data[index]['type'],
                                           attachment: snapshot.data[index]['attachment'].toString(),

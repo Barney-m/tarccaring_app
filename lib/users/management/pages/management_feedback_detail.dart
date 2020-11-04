@@ -54,9 +54,9 @@ class _ManagementFeedbackDetailPage
   }
 
   Future<void> _getUser(BuildContext context) async {
-    print(widget.creator);
     var result = await APIService().getMethod('feedbacks/user?id=' + widget.creator);
     var message = json.decode(result.body);
+    print(widget.creator);
     if(widget.anonymous){
       setState(() {
         _image = 'default.png';
@@ -117,8 +117,7 @@ class _ManagementFeedbackDetailPage
                 alignment: Alignment.centerRight,
                 child: SimpleDialogOption(
                     onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.of(context).pushReplacementNamed(ManagementNavigationRoute);
+                      Navigator.of(context).pushNamedAndRemoveUntil('user/management_nav', (Route<dynamic> route) => false);
                     },
                     child: const Text('OK',style: TextStyle(color: Colors.white),)),
               ),
@@ -701,7 +700,7 @@ class _ManagementFeedbackDetailPage
                           child: Column(
                             children: [
                               Text(
-                                widget.anonymous == true ? 'Anonymous' : (widget.creator != null ? widget.creator : 'Guest'),
+                                widget.anonymous == true ? 'Anonymous' : (widget.creator ?? 'Guest'),
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,

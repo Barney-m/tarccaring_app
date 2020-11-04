@@ -78,7 +78,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                 alignment: Alignment.centerRight,
                 child: SimpleDialogOption(
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                      Navigator.of(context).pushNamedAndRemoveUntil('user/user_nav', (Route<dynamic> route) => false);
                     },
                     child: const Text('OK',style: TextStyle(color:Colors.white),)),
               ),
