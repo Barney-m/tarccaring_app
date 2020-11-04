@@ -27,10 +27,10 @@ class _LecturerList extends State {
   }
 
   final _type = [
-    Icons.home,
-    Icons.home,
-    Icons.home,
-    Icons.home,
+    Icons.event_seat_rounded,
+    Icons.fastfood_rounded,
+    Icons.menu_book_rounded,
+    Icons.headset_mic_rounded,
   ];
 
   @override
@@ -108,7 +108,7 @@ class _LecturerList extends State {
                                 ListTile(
                                   leading: CircleAvatar(
                                             radius:30,
-                                            backgroundImage: NetworkImage('http://192.168.43.203:8000/images/user/' + snapshot.data[index]['image']),
+                                            backgroundImage: NetworkImage('http://10.0.2.2:8000/images/user/' + snapshot.data[index]['image']),
                                           ),
                                   title: Text(snapshot.data[index]['name']),
                                   subtitle:Text(snapshot.data[index]['email']),

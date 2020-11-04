@@ -62,7 +62,7 @@ class _ManagementNavController extends State<ManagementNavController> {
           },
           items: <Widget>[
             Icon(Icons.home, size: 20, color: Colors.black),
-            Icon(Icons.home, size: 20, color: Colors.black),
+            Icon(Icons.list, size: 20, color: Colors.black),
             Icon(Icons.settings_ethernet, size: 20, color: Colors.black),
             Icon(Icons.history, size: 20, color: Colors.black),
             Icon(Icons.settings, size: 20, color: Colors.black),

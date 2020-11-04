@@ -690,7 +690,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                  _image == null ? 'http://192.168.43.203:8000/images/user/default.png' : 'http://192.168.43.203:8000/images/user/' + _image,
+                                  _image == null ? 'http://10.0.2.2:8000/images/user/default.png' : 'http://10.0.2.2:8000/images/user/' + _image,
                                 ),
                                     // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),

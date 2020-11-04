@@ -42,10 +42,10 @@ class _PriorityPage extends State<PriorityPage> {
   }
 
   final _type = [
-    Icons.home,
-    Icons.home,
-    Icons.home,
-    Icons.home,
+    Icons.event_seat_rounded,
+    Icons.fastfood_rounded,
+    Icons.menu_book_rounded,
+    Icons.headset_mic_rounded,
   ];
 
   @override
