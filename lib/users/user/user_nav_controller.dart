@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/users/user/pages/homepage.dart';
 import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
@@ -33,12 +32,12 @@ class _UserNavController extends State<UserNavController> {
         elevation: 0,
         centerTitle: false,
         title: _title[_optionIndex],
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(Icons.notifications),
+        //     onPressed: () {},
+        //   )
+        // ],
         backgroundColor: primaryColor,
       ),
       backgroundColor: primaryColor,

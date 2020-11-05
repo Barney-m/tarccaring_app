@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tarccaring_app/shared_prefs.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/widgets/campus_facilities_card.dart';
 import 'package:tarccaring_app/widgets/canteen_food_card.dart';
 import 'package:tarccaring_app/widgets/education_quality_card.dart';
 import 'package:tarccaring_app/widgets/service_attitude_card.dart';
-import 'package:tarccaring_app/widgets/search_box.dart';
 
 class Homepage extends StatefulWidget {
   @override

@@ -1,14 +1,8 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tarccaring_app/utils/api.dart';
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:tarccaring_app/pages/canteenfood.dart';
-import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:tarccaring_app/widgets/campus_feedback_details_card.dart';
 import 'package:tarccaring_app/widgets/canteen_food_details_card.dart';
 import 'package:tarccaring_app/widgets/service_attitude_details_card.dart';
@@ -441,7 +435,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            widget.attachment == null ? '' : 'http://192.168.43.203:8000/images/image_attachment/' + widget.attachment
+                                            widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment
                                             //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                             ),
                                       ),
@@ -458,7 +452,7 @@ class _FeedbackDetailPage extends State<FeedbackDetailPage> {
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      widget.attachment == null ? '' : 'http://192.168.43.203:8000/images/image_attachment/' + widget.attachment
+                                      widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment
                                       //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                       ),
                                 ),

@@ -48,7 +48,7 @@ class _CampusFacilities extends State<CampusFacilities> with TickerProviderState
   }
 
   Future<void> _submit(BuildContext context) async {
-    if (_comment.text.toString().trim() != null && selectLocation != '') {
+    if (_comment.text.toString().trim() != '' && selectLocation != '') {
       var data = {};
       if (_image != null) {
         List<int> imageBytes = _image.readAsBytesSync();
@@ -98,8 +98,7 @@ class _CampusFacilities extends State<CampusFacilities> with TickerProviderState
                   child: SimpleDialogOption(
                       onPressed: () {
                         Navigator.pop(
-                            context,
-                            CanteenFoodRoute);
+                            context);
                       },
                       child: const Text(
                         'OK',
@@ -155,6 +154,7 @@ class _CampusFacilities extends State<CampusFacilities> with TickerProviderState
     _comment.dispose();
     super.dispose();
   }
+  
   anonymous(bool isSwitched) {
     if (isSwitched == false) {
       return Text(
@@ -380,7 +380,6 @@ class _CampusFacilities extends State<CampusFacilities> with TickerProviderState
                             onPressed: () {
                               return showDialog(
                                 context: context,
-                                barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
                                     backgroundColor: Colors.white,

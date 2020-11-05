@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tarccaring_app/router/constant_route.dart';
 
 class Registration extends StatefulWidget {
   @override

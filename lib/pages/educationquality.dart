@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tarccaring_app/pages/lecturerlist.dart';
-import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 import 'package:tarccaring_app/widgets/size_config.dart';
@@ -55,7 +52,7 @@ class _EducationQuality extends State<EducationQuality> {
     }
   }
   Future<void> _submit(BuildContext context) async{
-    if(_comment.text.toString().trim() != null){
+    if(_comment.text.toString().trim() != ''){
       var data = {
         'user_id' : _user,
         'lecturer_id' : widget.lecturer_id,
@@ -89,7 +86,8 @@ class _EducationQuality extends State<EducationQuality> {
                   alignment: Alignment.centerRight,
                   child: SimpleDialogOption(
                     onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                      Navigator.pop(
+                            context);
                     },
                     child: const Text('OK',style: TextStyle(color: Colors.black),
                   ),
@@ -321,7 +319,6 @@ class _EducationQuality extends State<EducationQuality> {
                             onPressed: () {
                               return showDialog(
                                 context: context,
-                                barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
                                     backgroundColor: Colors.white,

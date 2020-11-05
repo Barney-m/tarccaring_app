@@ -3,15 +3,10 @@ import 'dart:convert';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tarccaring_app/pages/canteenfood.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/utils/api.dart';
-import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
-import 'dart:math' as math;
 
 class ServiceAttitude extends StatefulWidget {
   @override
@@ -31,7 +26,7 @@ class _ServicesAttitude extends State<ServiceAttitude>
   }
 
   Future<void> _submit(BuildContext context) async{
-    if(_comment.text.toString().trim() != null){
+    if(_comment.text.toString().trim() != ''){
       var data = {
         'user_id': _user,
         'action': selectService,
@@ -65,7 +60,8 @@ class _ServicesAttitude extends State<ServiceAttitude>
                   alignment: Alignment.centerRight,
                   child: SimpleDialogOption(
                     onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                      Navigator.pop(
+                            context);
                     },
                     child: const Text('OK',style: TextStyle(color: Colors.black),
                     ),
@@ -303,7 +299,6 @@ class _ServicesAttitude extends State<ServiceAttitude>
                             onPressed: () {
                               return showDialog(
                                 context: context,
-                                barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
                                     backgroundColor: Colors.white,

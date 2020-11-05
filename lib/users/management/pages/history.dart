@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:http/http.dart' as http;
 import 'package:tarccaring_app/utils/api.dart';
 import 'dart:convert';
-import 'package:tarccaring_app/widgets/search_box.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'management_feedback_detail.dart';
 
@@ -24,12 +22,10 @@ class _ManagementHistory extends State<ManagementHistory> {
     getID();
   }
   Color statusColor(String status) {
-    if (status == 'APPROVED') {
+    if (status == 'SOLVED') {
       return Colors.green;
     } else if (status == 'DISMISSED') {
       return Colors.red;
-    } else if (status == 'URGENT') {
-      return Colors.green[700];
     } else {
       return Colors.grey;
     }

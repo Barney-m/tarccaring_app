@@ -56,7 +56,6 @@ class _ManagementFeedbackDetailPage
   Future<void> _getUser(BuildContext context) async {
     var result = await APIService().getMethod('feedbacks/user?id=' + widget.creator);
     var message = json.decode(result.body);
-    print(widget.creator);
     if(widget.anonymous){
       setState(() {
         _image = 'default.png';
@@ -83,7 +82,6 @@ class _ManagementFeedbackDetailPage
   int id;
 
   Future<void> _action(BuildContext context, String action) async {
-    print(_user);
     var data = {
       'id': widget.id.toInt(),
       'user_id' : _user,
@@ -287,9 +285,7 @@ class _ManagementFeedbackDetailPage
                                   BorderRadius.circular(6.0),
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(
-                                      context,
-                                        ManagementFeedbackDetailPage);
+                                  Navigator.pop(context);
                                 })
                           ],
                         ),
@@ -383,9 +379,7 @@ class _ManagementFeedbackDetailPage
                                   BorderRadius.circular(6.0),
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(
-                                      context,
-                                      ManagementFeedbackDetailPage);
+                                  Navigator.pop(context);
                                 })
                           ],
                         ),
@@ -482,9 +476,7 @@ class _ManagementFeedbackDetailPage
                                   BorderRadius.circular(6.0),
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(
-                                      context,
-                                      ManagementFeedbackDetailPage);
+                                  Navigator.pop(context);
                                 })
                           ],
                         ),
@@ -596,9 +588,7 @@ class _ManagementFeedbackDetailPage
                                     BorderRadius.circular(6.0),
                                   ),
                                   onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context,
-                                        ManagementNavigationRoute);
+                                    Navigator.pop(context);
                                   })
                             ],
                           ),
@@ -690,7 +680,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                  _image == null ? 'http://10.0.2.2:8000/images/user/default.png' : 'http://10.0.2.2:8000/images/user/' + _image,
+                                  _image == null ? 'http://10.0.2.2:8000/images/image_attachment/default.png' : 'http://10.0.2.2:8000/images/image_attachment/' + _image,
                                 ),
                                     // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),
@@ -705,7 +695,7 @@ class _ManagementFeedbackDetailPage
                           child: Column(
                             children: [
                               Text(
-                                widget.anonymous == true ? 'Anonymous' : (widget.creator ?? 'Guest'),
+                                widget.anonymous == true ? 'Anonymous' : (widget.creator != null ? widget.creator : 'Guest'),
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,

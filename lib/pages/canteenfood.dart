@@ -67,7 +67,7 @@ class _CanteenFood extends State<CanteenFood> {
   }
 
   Future<void> _submit(BuildContext context) async{
-    if(_comment.text.toString().trim() != null && selectCanteen != ''){
+    if(_comment.text.toString().trim() != '' && selectCanteen != ''){
       var data = {};
       if(_image != null){
         List<int> imageBytes = _image.readAsBytesSync();
@@ -116,7 +116,8 @@ class _CanteenFood extends State<CanteenFood> {
                   alignment: Alignment.centerRight,
                   child: SimpleDialogOption(
                     onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(UserNavigationRoute);
+                      Navigator.pop(
+                            context);
                     },
                     child: const Text('OK',style: TextStyle(color: Colors.black),
                   )
@@ -368,7 +369,6 @@ class _CanteenFood extends State<CanteenFood> {
                             onPressed: () {
                               return showDialog(
                                 context: context,
-                                barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
                                     backgroundColor: Colors.white,

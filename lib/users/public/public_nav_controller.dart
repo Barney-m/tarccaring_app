@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
 import 'package:tarccaring_app/users/public/pages/homepage.dart';
-import 'package:tarccaring_app/users/user/pages/feedback_history.dart';
 import 'package:tarccaring_app/users/user/pages/user_setting.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 

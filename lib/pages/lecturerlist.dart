@@ -1,11 +1,8 @@
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:tarccaring_app/widgets/search_box.dart';
-import 'package:tarccaring_app/widgets/custom_dropdown.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
 
 import 'educationquality.dart';
@@ -49,7 +46,7 @@ class _LecturerList extends State {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            SearchBox(onChanged: (value) {}),
+            // SearchBox(onChanged: (value) {}),
               Container(
               margin: EdgeInsets.symmetric(vertical: defaultPadding / 2),
               height: 30,

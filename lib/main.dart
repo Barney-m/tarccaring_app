@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/router/router.dart';
-import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/controller/wrapper.dart';
 
 void main() {

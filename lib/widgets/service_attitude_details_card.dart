@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tarccaring_app/router/constant_route.dart';
-import 'package:tarccaring_app/utils/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tarccaring_app/widgets/size_config.dart';
 

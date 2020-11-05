@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tarccaring_app/users/management/pages/feedback.dart';
 import 'package:tarccaring_app/users/management/pages/history.dart';
 import 'package:tarccaring_app/users/management/pages/homepage.dart';
@@ -39,12 +38,12 @@ class _ManagementNavController extends State<ManagementNavController> {
         elevation: 0,
         centerTitle: false,
         title: _title[_optionIndex],
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(Icons.notifications),
+        //     onPressed: () {},
+        //   )
+        // ],
         backgroundColor: primaryColor,
       ),
       backgroundColor: primaryColor,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/router/constant_route.dart';
 import 'package:tarccaring_app/shared_prefs.dart';
-import 'dart:io';
-import 'package:tarccaring_app/users/management/management_nav_controller.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:tarccaring_app/utils/connectivity.dart';
 import 'dart:convert';

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/api.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:tarccaring_app/model/feedbacks.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:tarccaring_app/widgets/search_box.dart';
 
 import 'management_feedback_detail.dart';
 

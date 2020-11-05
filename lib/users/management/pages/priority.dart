@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarccaring_app/utils/constants.dart';
-import 'package:http/http.dart' as http;
 import 'package:tarccaring_app/utils/api.dart';
 import 'dart:convert';
-import 'package:tarccaring_app/widgets/search_box.dart';
 
 import 'management_feedback_detail.dart';
 
@@ -21,6 +19,7 @@ class _PriorityPage extends State<PriorityPage> {
       case 1:
       case 2:
       case 3:
+      case 4:
         var result = await APIService().getMethod('feedbacks?priority=' + categories[_selectedIndex].toString().toLowerCase());
         return json.decode(result.body);
         break;
