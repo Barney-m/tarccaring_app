@@ -55,7 +55,7 @@ class _ManagementFeedbackDetailPage
 
 
   Future<void> _getUser(BuildContext context) async {
-    
+
     var result = await APIService().getMethod('feedbacks/user?id=' + widget.creator);
     var message = json.decode(result.body);
     if(widget.anonymous){
@@ -144,7 +144,7 @@ class _ManagementFeedbackDetailPage
       return 'Anonymous';
     }
     else{
-      if(widget.creator != 'null' && widget.creator != ''){
+      if(widget.creator != null && widget.creator != ''){
         print(widget.creator);
         return widget.creator;
       }
@@ -696,7 +696,7 @@ class _ManagementFeedbackDetailPage
                               image: new DecorationImage(
                                 fit: BoxFit.cover,
                                 image: new NetworkImage(
-                                  _image == null ? 'http://10.0.2.2:8000/images/image_attachment/default.png' : 'http://10.0.2.2:8000/images/image_attachment/' + _image,
+                                  _image == null ? 'http://192.168.0.141:8000/images/image_attachment/default.png' : 'http://192.168.0.141:8000/images/image_attachment/' + _image,
                                 ),
                                     // "https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"),
                               ),
@@ -857,7 +857,7 @@ class _ManagementFeedbackDetailPage
                                       image: new DecorationImage(
                                         fit: BoxFit.cover,
                                         image: new NetworkImage(
-                                            widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment,
+                                            widget.attachment == null ? '' : 'http://192.168.0.141:8000/images/image_attachment/' + widget.attachment,
                                           //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                         ),
                                       ),
@@ -874,7 +874,7 @@ class _ManagementFeedbackDetailPage
                                 image: new DecorationImage(
                                   fit: BoxFit.contain,
                                   image: new NetworkImage(
-                                      widget.attachment == null ? '' : 'http://10.0.2.2:8000/images/image_attachment/' + widget.attachment,
+                                      widget.attachment == null ? '' : 'http://192.168.0.141:8000/images/image_attachment/' + widget.attachment,
                                     //"https://i.pinimg.com/originals/45/e6/49/45e64948063fcee9fed27800800e47ca.jpg"
                                   ),
                                 ),
