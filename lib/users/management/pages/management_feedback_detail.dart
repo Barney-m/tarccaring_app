@@ -145,8 +145,10 @@ class _ManagementFeedbackDetailPage
     }
     else{
       if(widget.creator != null && widget.creator != ''){
-        print(widget.creator);
-        return widget.creator;
+        if(widget.creator != 'null'){
+          print(widget.creator);
+          return widget.creator;
+        }
       }
       return 'Guest';
     }
