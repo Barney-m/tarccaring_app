@@ -53,10 +53,13 @@ class _ManagementFeedbackDetailPage
     _getUser(context);
   }
 
+
   Future<void> _getUser(BuildContext context) async {
+    
     var result = await APIService().getMethod('feedbacks/user?id=' + widget.creator);
     var message = json.decode(result.body);
     if(widget.anonymous){
+      
       setState(() {
         _image = 'default.png';
       });
@@ -133,6 +136,19 @@ class _ManagementFeedbackDetailPage
           );
         },
       );
+    }
+  }
+
+  String validateID(){
+    if(widget.anonymous){
+      return 'Anonymous';
+    }
+    else{
+      if(widget.creator != 'null' && widget.creator != ''){
+        print(widget.creator);
+        return widget.creator;
+      }
+      return 'Guest';
     }
   }
 
@@ -695,7 +711,7 @@ class _ManagementFeedbackDetailPage
                           child: Column(
                             children: [
                               Text(
-                                widget.anonymous == true ? 'Anonymous' : (widget.creator != null ? widget.creator : 'Guest'),
+                                validateID(),
                                 style: new TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
